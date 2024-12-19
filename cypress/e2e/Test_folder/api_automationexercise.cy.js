@@ -70,7 +70,7 @@ describe('API tests for the site automationexercise.com', ()=> {
         method: 'POST',
         url: '/api/searchProduct',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded', },
-        body: { "search_product": term }
+        body: { search_product: term }
       }).then((response) => {
         expect(response.status).to.eq(200)
         expect(JSON.parse(response.body).responseCode).to.eq(200)
@@ -94,14 +94,27 @@ describe('API tests for the site automationexercise.com', ()=> {
     })
   })
 
+  it('API 11: POST To Create/Register User Account', () => {
+    cy.request({
+      method: 'POST',
+      url: '/api/createAccount',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded', },
+      body: testUser
+    }).then((response) => {
+      expect(response.status).to.eq(200)
+      expect(JSON.parse(response.body).responseCode).to.eq(201)
+      expect(JSON.parse(response.body).message).to.eq('User created!')
+    })
+  })
+
   it('API 7: POST To Verify Login with valid details', () => {
     cy.request({
       method: 'POST',
       url: '/api/verifyLogin',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded', },
       body: {
-        "email": "test-AQA@gmail.com",
-        "password": "123456"
+        email: testUser.email,
+        password: testUser.password
       } 
     }).then((response) => {
       expect(response.status).to.eq(200)
@@ -115,7 +128,7 @@ describe('API tests for the site automationexercise.com', ()=> {
       method: 'POST',
       url: '/api/verifyLogin',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded', },
-      body: {"password": "123456" } 
+      body: { password: testUser.password } 
     }).then((response) => {
       expect(response.status).to.eq(200)
       expect(JSON.parse(response.body).responseCode).to.eq(400)
@@ -124,7 +137,15 @@ describe('API tests for the site automationexercise.com', ()=> {
   })
 
   it('API 9: DELETE To Verify Login', () => {
-    cy.request('DELETE', '/api/verifyLogin').then((response) => {
+    cy.request({
+      method: 'DELETE',
+      url: '/api/verifyLogin',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded', },
+      body: {
+        email: testUser.email,
+        password: testUser.password
+      } 
+    }).then((response) => {
       expect(response.status).to.eq(200)
       expect(JSON.parse(response.body).responseCode).to.eq(405)
       expect(JSON.parse(response.body).message).to.eq('This request method is not supported.')
@@ -137,26 +158,13 @@ describe('API tests for the site automationexercise.com', ()=> {
       url: '/api/verifyLogin',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded', },
       body: {
-        "email": "test-AQA@gmail.com",
-        "password": "" 
+        email: testUser.email,
+        password: "" 
       } 
     }).then((response) => {
       expect(response.status).to.eq(200)
       expect(JSON.parse(response.body).responseCode).to.eq(404)
       expect(JSON.parse(response.body).message).to.eq('User not found!')
-    })
-  })
-
-  it('API 11: POST To Create/Register User Account', () => {
-    cy.request({
-      method: 'POST',
-      url: '/api/createAccount',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded', },
-      body: testUser
-    }).then((response) => {
-      expect(response.status).to.eq(200)
-      expect(JSON.parse(response.body).responseCode).to.eq(201)
-      expect(JSON.parse(response.body).message).to.eq('User created!')
     })
   })
 
