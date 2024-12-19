@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+
 describe('Test for the site automationexercise.com', ()=> {
   let userName = 'test-AQA user'
   let userEmail = 'test-AQA@gmail.com'

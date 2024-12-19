@@ -1,0 +1,8 @@
+{
+  "liveServerUrl": "http://127.0.0.1:55514/cypress/fixtures/mockPage.html",
+  "searchTerms": [
+    "top",
+    "tshirt",
+    "jeans"
+  ]
+}

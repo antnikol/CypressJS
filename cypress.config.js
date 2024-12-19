@@ -1,12 +1,17 @@
-const { defineConfig } = require("cypress");
+import { defineConfig } from "cypress";
+import { allureCypress } from "allure-cypress/reporter";
+import * as os from "node:os";
 
-module.exports = defineConfig({
-  // watchForFileChanges: false,
+export default defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      allureCypress(on, config, {
+        resultsDir: "allure-results",
+      });
+      return config;
     },
-     viewportWidth: 1024,
-     viewportHeight: 768,
+    baseUrl: 'https://automationexercise.com',
+    viewportWidth: 1024,
+    viewportHeight: 768,
   },
 });
