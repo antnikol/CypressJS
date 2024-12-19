@@ -197,8 +197,8 @@ describe('API tests for the site automationexercise.com', ()=> {
       url: '/api/deleteAccount',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded', },
       body: {
-        "email": testUser.email,
-        "password": testUser.password,
+        email: testUser.email,
+        password: testUser.password,
       } 
     }).then((response) => {
       expect(response.status).to.eq(200)
