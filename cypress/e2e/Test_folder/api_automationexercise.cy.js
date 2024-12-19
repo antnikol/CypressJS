@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import { liveServerUrl, searchTerms, testUser, testUserUpdate } from '../../fixtures/api.json'
+import { liveServerUrl, searchTerms, testUser, testUserUpdate, message } from '../../fixtures/api.json'
 
 describe('API tests for the site automationexercise.com', ()=> {
 
@@ -25,7 +25,7 @@ describe('API tests for the site automationexercise.com', ()=> {
     cy.intercept('GET', '/api/productsList', {
       statusCode: 201,
       body: {
-        products: [ { name: 'Mocked Data' } ],
+        products: [ { name: message.mocked } ],
       }
     }).as('mockProdList')
 
@@ -33,7 +33,7 @@ describe('API tests for the site automationexercise.com', ()=> {
 
     cy.wait('@mockProdList').then((interception) => {
       expect(interception.response.statusCode).to.eq(201)
-      expect(interception.response.body.products[0].name).to.eq('Mocked Data')
+      expect(interception.response.body.products[0].name).to.eq(message.mocked)
     })
   })
 
@@ -41,7 +41,7 @@ describe('API tests for the site automationexercise.com', ()=> {
     cy.request('POST', '/api/productsList').then((response) => {
       expect(response.status).to.eq(200)
       expect(JSON.parse(response.body).responseCode).to.eq(405)
-      expect(JSON.parse(response.body).message).to.eq('This request method is not supported.')
+      expect(JSON.parse(response.body).message).to.eq(message.methodNotSupported)
     })
   })
 
@@ -60,7 +60,7 @@ describe('API tests for the site automationexercise.com', ()=> {
     cy.request('PUT', '/api/brandsList').then((response) => {
       expect(response.status).to.eq(200)
       expect(JSON.parse(response.body).responseCode).to.eq(405)
-      expect(JSON.parse(response.body).message).to.eq('This request method is not supported.')
+      expect(JSON.parse(response.body).message).to.eq(message.requestNotSupported)
     })
   })
 
@@ -90,7 +90,7 @@ describe('API tests for the site automationexercise.com', ()=> {
     }).then((response) => {
       expect(response.status).to.eq(200)
       expect(JSON.parse(response.body).responseCode).to.eq(400)
-      expect(JSON.parse(response.body).message).to.eq('Bad request, search_product parameter is missing in POST request.')
+      expect(JSON.parse(response.body).message).to.eq(message.badRequestSearchParametr)
     })
   })
 
@@ -103,7 +103,7 @@ describe('API tests for the site automationexercise.com', ()=> {
     }).then((response) => {
       expect(response.status).to.eq(200)
       expect(JSON.parse(response.body).responseCode).to.eq(201)
-      expect(JSON.parse(response.body).message).to.eq('User created!')
+      expect(JSON.parse(response.body).message).to.eq(message.userCreated)
     })
   })
 
@@ -119,7 +119,7 @@ describe('API tests for the site automationexercise.com', ()=> {
     }).then((response) => {
       expect(response.status).to.eq(200)
       expect(JSON.parse(response.body).responseCode).to.eq(200)
-      expect(JSON.parse(response.body).message).to.eq('User exists!')
+      expect(JSON.parse(response.body).message).to.eq(message.userExist)
     })
   })
 
@@ -132,7 +132,7 @@ describe('API tests for the site automationexercise.com', ()=> {
     }).then((response) => {
       expect(response.status).to.eq(200)
       expect(JSON.parse(response.body).responseCode).to.eq(400)
-      expect(JSON.parse(response.body).message).to.eq('Bad request, email or password parameter is missing in POST request.')
+      expect(JSON.parse(response.body).message).to.eq(message.badRequestEmaiOrPasswordParametr)
     })
   })
 
@@ -148,7 +148,7 @@ describe('API tests for the site automationexercise.com', ()=> {
     }).then((response) => {
       expect(response.status).to.eq(200)
       expect(JSON.parse(response.body).responseCode).to.eq(405)
-      expect(JSON.parse(response.body).message).to.eq('This request method is not supported.')
+      expect(JSON.parse(response.body).message).to.eq(message.requestNotSupported)
     })
   })
 
@@ -164,7 +164,7 @@ describe('API tests for the site automationexercise.com', ()=> {
     }).then((response) => {
       expect(response.status).to.eq(200)
       expect(JSON.parse(response.body).responseCode).to.eq(404)
-      expect(JSON.parse(response.body).message).to.eq('User not found!')
+      expect(JSON.parse(response.body).message).to.eq(message.userNotFound)
     })
   })
 
@@ -177,7 +177,7 @@ describe('API tests for the site automationexercise.com', ()=> {
     }).then((response) => {
       expect(response.status).to.eq(200)
       expect(JSON.parse(response.body).responseCode).to.eq(200)
-      expect(JSON.parse(response.body).message).to.eq('User updated!')
+      expect(JSON.parse(response.body).message).to.eq(message.userUpdated)
     })
   })
 
@@ -203,7 +203,7 @@ describe('API tests for the site automationexercise.com', ()=> {
     }).then((response) => {
       expect(response.status).to.eq(200)
       expect(JSON.parse(response.body).responseCode).to.eq(200)
-      expect(JSON.parse(response.body).message).to.eq('Account deleted!')
+      expect(JSON.parse(response.body).message).to.eq(message.accountDeleted)
     })
   })
 })

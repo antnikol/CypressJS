@@ -42,5 +42,17 @@
     "state": "Cucumber",
     "city": "Port",
     "mobile_number": "+212312312331"
+  },
+  "message": {
+    "mocked": "Mocked Data",
+    "methodNotSupported": "This request method is not supported.",
+    "requestNotSupported": "This request method is not supported.",
+    "badRequestSearchParametr": "Bad request, search_product parameter is missing in POST request.",
+    "userCreated": "User created!",
+    "userExist": "User exists!",
+    "badRequestEmaiOrPasswordParametr": "Bad request, email or password parameter is missing in POST request.",
+    "userNotFound": "User not found!",
+    "userUpdated": "User updated!",
+    "accountDeleted": "Account deleted!"
   }
 }
