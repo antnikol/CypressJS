@@ -13,11 +13,11 @@ const loginPage = new LoginPage()
 
 describe('Test for the site automationexercise.com', ()=> {
   beforeEach(() => {
-    cy.deleteUser()
     cy.visit('/')
   })
 
   it('Test Case 1: Register User', () => {
+    cy.deleteUser()
     homePage.clickSignupLoginButton();
     loginPage.getSignupFormHeader().should('have.text', 'New User Signup!');
     loginPage
@@ -46,6 +46,18 @@ describe('Test for the site automationexercise.com', ()=> {
       .clickCreateAccountButton()
       .clickContinueButton();
     homePage.getListHeaderButtons().should('contain', `${user.name}`);
+    cy.deleteUserAfterRegistration()
   });
+
+  it.only('Test Case 2: Login User with correct email and password', () => {
+    cy.registerUser()
+    homePage.clickLogoutButton();
+    loginPage.getLoginFormHeader().should('have.text', 'Login to your account');
+    loginPage
+      .typeEmailLoginTextField(user.email)
+      .typePasswordLoginTextField(user.password)
+      .clickLoginButton()
+    homePage.getListHeaderButtons().should('contain', `${user.name}`);
+  })
 
 })

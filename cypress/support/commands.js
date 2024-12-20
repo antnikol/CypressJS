@@ -30,10 +30,12 @@ import { user } from '../fixtures/api.json'
 import HomePage from '../pageObjects/HomePage'
 import LoginPage from '../pageObjects/LoginPage'
 import BasePage from '../pageObjects/BasePage'
+import SignUpPage from '../pageObjects/SignUpPage'
 
 const homePage = new HomePage()
 const loginPage = new LoginPage()
 const basePage = new BasePage()
+const signupPage = new SignUpPage()
 const USEREMAIL = user.email;
 const PASSWORD = user.password;
 
@@ -54,4 +56,41 @@ Cypress.Commands.add('deleteUser',(userEmail = USEREMAIL, pass = PASSWORD) => {
         basePage.getAccountDeletedConfirmMessage().should('contain', 'Account Deleted!');
       }
     });
+});
+
+Cypress.Commands.add('deleteUserAfterRegistration',(userEmail = USEREMAIL, pass = PASSWORD) => {
+  cy.visit('/');
+  homePage.clickDeleteAccountButton();
+  basePage.getAccountDeletedConfirmMessage().should('contain', 'Account Deleted!');
+});
+
+Cypress.Commands.add('registerUser',(userEmail = USEREMAIL, pass = PASSWORD) => {
+  cy.visit('/');
+  cy.deleteUser()
+    homePage.clickSignupLoginButton();
+    loginPage
+      .typeNameSignupTextField(user.name)
+      .typeEmailSignupTextField(user.email)
+      .clickSignupButton();
+    signupPage
+      .checkTitleMrRadioButton()
+      .typePasswordTextField(user.password)
+      .selectBirthDay(user.birth_date)
+      .selectBirthMonth(user.birth_month)
+      .selectBirthYear(user.birth_year)
+      .checkNewsletterCheckbox()
+      .checkSpecialOffersCheckbox()
+      .typeFirstNameTextField(user.firstname)
+      .typeLastNameTextField(user.lastname)
+      .typeCompanyTextField(user.company)
+      .typeAddressTextField(user.address1)
+      .typeAddress2TextField(user.address2)
+      .selectCountryList(user.country)
+      .typeStateTextField(user.state)
+      .typeCityTextField(user.city)
+      .typeZipCodeTextField(user.zipcode)
+      .typeMobileNumberTextField(user.mobile_number)
+      .clickCreateAccountButton()
+      .clickContinueButton();
+    homePage.getListHeaderButtons().should('contain', `${user.name}`);
 });

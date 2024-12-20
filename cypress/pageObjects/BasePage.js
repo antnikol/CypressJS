@@ -6,6 +6,7 @@ class BasePage  {
   getListHeaderButtons = () => cy.get('.nav.navbar-nav')
   getDeleteAccountButton = () => cy.get('a[href="/delete_account"]')
   getAccountDeletedConfirmMessage = () => cy.get('h2[data-qa="account-deleted"]')
+  getLogoutButton = () => cy.get('a[href="/logout"]')
   
 
   clickSignupLoginButton() {
@@ -15,6 +16,11 @@ class BasePage  {
 
   clickDeleteAccountButton() {
     this.getDeleteAccountButton().click()
+    return this
+  }
+
+  clickLogoutButton() {
+    this.getLogoutButton().click()
     return this
   }
 
