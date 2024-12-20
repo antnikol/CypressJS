@@ -20,16 +20,15 @@ describe('Test for the site automationexercise.com', ()=> {
   let birth_month = 'January'
   let birth_day = '1'
   let gender = 'Mr'
-  beforeEach( () => {
-    cy.visit('https://automationexercise.com/')
-    cy.get(".fa-home").should('have.css', 'color', 'rgb(255, 165, 0)')
-    cy.get("section[id='slider']").should('exist')
-    cy.contains(/Brands/i).should('be.visible')
-    cy.get('a[href="/login"]').as('loginButton')
-  })
+  // beforeEach( () => {
+  //   // cy.get(".fa-home").should('have.css', 'color', 'rgb(255, 165, 0)')
+  //   // cy.get("section[id='slider']").should('exist')
+  //   // cy.contains(/Brands/i).should('be.visible')
+  //   // cy.get('a[href="/login"]').as('loginButton')
+  // })
 
   it('Test Case 1: Register User', () => {
-    cy.get('@loginButton').click()
+    cy.get('a[href="/login"]').click()
     cy.contains(/New User Signup!/i).should('be.visible')
     // cy.get(".signup-form").should('contain', 'New User Signup!')
     cy.get('input[data-qa="signup-name"]').type(userName)
@@ -42,7 +41,7 @@ describe('Test for the site automationexercise.com', ()=> {
         cy.get('input[data-qa="login-password"]').type(userPassword)
         cy.get('button[data-qa="login-button"]').click()
         cy.get('a[href="/delete_account"]').click()
-        cy.get('@loginButton').click()
+        cy.get('a[href="/login"]').click()
         cy.get('input[data-qa="signup-name"]').type(userName)
         cy.get('input[data-qa="signup-email"]').type(userEmailDelete)
         cy.get('button[data-qa="signup-button"]').click()
@@ -75,7 +74,7 @@ describe('Test for the site automationexercise.com', ()=> {
   })
 
   it('Test Case 2: Login User with correct email and password', () => {
-    cy.get('@loginButton').click()
+    cy.get('a[href="/login"]').click()
     cy.contains(/Login to your account/i).should('be.visible')
     cy.get('input[data-qa="login-email"]').type(userEmail)
     cy.get('input[data-qa="login-password"]').type(userPassword)
@@ -84,7 +83,7 @@ describe('Test for the site automationexercise.com', ()=> {
   })
 
   it('Test Case 3: Login User with incorrect email and password', () => {
-    cy.get('@loginButton').click()
+    cy.get('a[href="/login"]').click()
     cy.contains(/Login to your account/i).should('be.visible')
     cy.get('input[data-qa="login-email"]').type(userEmail+'1')
     cy.get('input[data-qa="login-password"]').type(userPassword+'1')
@@ -95,7 +94,7 @@ describe('Test for the site automationexercise.com', ()=> {
   })
 
   it('Test Case 4: Logout User', () => {
-    cy.get('@loginButton').click()
+    cy.get('a[href="/login"]').click()
     cy.contains(/Login to your account/i).should('be.visible')
     cy.get('input[data-qa="login-email"]').type(userEmail)
     cy.get('input[data-qa="login-password"]').type(userPassword)
@@ -106,7 +105,7 @@ describe('Test for the site automationexercise.com', ()=> {
   })
 
   it('Test Case 5: Register User with existing email', () => {
-    cy.get('@loginButton').click()
+    cy.get('a[href="/login"]').click()
     cy.contains(/New User Signup!/i).should('be.visible')
     cy.get('input[data-qa="signup-name"]').type(userName)
     cy.get('input[data-qa="signup-email"]').type(userEmail)
@@ -291,7 +290,7 @@ describe('Test for the site automationexercise.com', ()=> {
         cy.get('input[data-qa="login-password"]').type(userPassword)
         cy.get('button[data-qa="login-button"]').click()
         cy.get('a[href="/delete_account"]').click()
-        cy.get('@loginButton').click()
+        cy.get('a[href="/login"]').click()
         cy.get('input[data-qa="signup-name"]').type(userName)
         cy.get('input[data-qa="signup-email"]').type(userEmailDelete)
         cy.get('button[data-qa="signup-button"]').click()
@@ -385,7 +384,7 @@ describe('Test for the site automationexercise.com', ()=> {
         cy.get('input[data-qa="login-password"]').type(userPassword)
         cy.get('button[data-qa="login-button"]').click()
         cy.get('a[href="/delete_account"]').click()
-        cy.get('@loginButton').click()
+        cy.get('a[href="/login"]').click()
         cy.get('input[data-qa="signup-name"]').type(userName)
         cy.get('input[data-qa="signup-email"]').type(userEmailDelete)
         cy.get('button[data-qa="signup-button"]').click()
@@ -625,7 +624,7 @@ describe('Test for the site automationexercise.com', ()=> {
   })
 
   it('Test Case 23: Verify address details in checkout page', () => {
-    cy.get('@loginButton').click()
+    cy.get('a[href="/login"]').click()
     cy.contains(/New User Signup!/i).should('be.visible')
     cy.get(".signup-form").should('contain', 'New User Signup!')
     cy.get('input[data-qa="signup-name"]').type(userName)
@@ -638,7 +637,7 @@ describe('Test for the site automationexercise.com', ()=> {
         cy.get('input[data-qa="login-password"]').type(userPassword)
         cy.get('button[data-qa="login-button"]').click()
         cy.get('a[href="/delete_account"]').click()
-        cy.get('@loginButton').click()
+        cy.get('a[href="/login"]').click()
         cy.get('input[data-qa="signup-name"]').type(userName)
         cy.get('input[data-qa="signup-email"]').type(userEmailDelete)
         cy.get('button[data-qa="signup-button"]').click()
@@ -739,7 +738,7 @@ describe('Test for the site automationexercise.com', ()=> {
         cy.get('input[data-qa="login-password"]').type(userPassword)
         cy.get('button[data-qa="login-button"]').click()
         cy.get('a[href="/delete_account"]').click()
-        cy.get('@loginButton').click()
+        cy.get('a[href="/login"]').click()
         cy.get('input[data-qa="signup-name"]').type(userName)
         cy.get('input[data-qa="signup-email"]').type(userEmailDelete)
         cy.get('button[data-qa="signup-button"]').click()

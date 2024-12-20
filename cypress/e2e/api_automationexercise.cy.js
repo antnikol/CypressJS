@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import { liveServerUrl, searchTerms, testUser, testUserUpdate, message } from '../../fixtures/api.json'
+import { liveServerUrl, searchTerms, user, userUpdate, message } from '../fixtures/api.json'
 
 describe('API tests for the site automationexercise.com', ()=> {
 
@@ -99,7 +99,7 @@ describe('API tests for the site automationexercise.com', ()=> {
       method: 'POST',
       url: '/api/createAccount',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded', },
-      body: testUser
+      body: user
     }).then((response) => {
       expect(response.status).to.eq(200)
       expect(JSON.parse(response.body).responseCode).to.eq(201)
@@ -113,8 +113,8 @@ describe('API tests for the site automationexercise.com', ()=> {
       url: '/api/verifyLogin',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded', },
       body: {
-        email: testUser.email,
-        password: testUser.password
+        email: user.email,
+        password: user.password
       } 
     }).then((response) => {
       expect(response.status).to.eq(200)
@@ -128,7 +128,7 @@ describe('API tests for the site automationexercise.com', ()=> {
       method: 'POST',
       url: '/api/verifyLogin',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded', },
-      body: { password: testUser.password } 
+      body: { password: user.password } 
     }).then((response) => {
       expect(response.status).to.eq(200)
       expect(JSON.parse(response.body).responseCode).to.eq(400)
@@ -142,8 +142,8 @@ describe('API tests for the site automationexercise.com', ()=> {
       url: '/api/verifyLogin',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded', },
       body: {
-        email: testUser.email,
-        password: testUser.password
+        email: user.email,
+        password: user.password
       } 
     }).then((response) => {
       expect(response.status).to.eq(200)
@@ -158,7 +158,7 @@ describe('API tests for the site automationexercise.com', ()=> {
       url: '/api/verifyLogin',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded', },
       body: {
-        email: testUser.email,
+        email: user.email,
         password: "" 
       } 
     }).then((response) => {
@@ -173,7 +173,7 @@ describe('API tests for the site automationexercise.com', ()=> {
       method: 'PUT',
       url: '/api/updateAccount',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded', },
-      body: testUserUpdate
+      body: userUpdate
     }).then((response) => {
       expect(response.status).to.eq(200)
       expect(JSON.parse(response.body).responseCode).to.eq(200)
@@ -182,12 +182,12 @@ describe('API tests for the site automationexercise.com', ()=> {
   })
 
   it('API 14: GET user account detail by email', () => {
-    cy.request('GET', `/api/getUserDetailByEmail?email=${testUser.email}`)   
+    cy.request('GET', `/api/getUserDetailByEmail?email=${user.email}`)   
       .then((response) => {
         console.log(response)
         expect(response.status).to.eq(200)
         expect(JSON.parse(response.body).responseCode).to.eq(200)
-        expect(JSON.parse(response.body).user.name).to.eq(testUserUpdate.name)
+        expect(JSON.parse(response.body).user.name).to.eq(userUpdate.name)
       })
   })
 
@@ -197,8 +197,8 @@ describe('API tests for the site automationexercise.com', ()=> {
       url: '/api/deleteAccount',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded', },
       body: {
-        email: testUser.email,
-        password: testUser.password,
+        email: user.email,
+        password: user.password,
       } 
     }).then((response) => {
       expect(response.status).to.eq(200)

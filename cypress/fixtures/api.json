@@ -5,12 +5,12 @@
     "tshirt",
     "jeans"
   ],
-  "testUser": {
+  "user": {
     "name": "test_Name",
     "email": "testUser33@gmail.com",
     "password": "123456",
-    "title": "Mr",
-    "birth_date": "01",
+    "title": "Mr.",
+    "birth_date": "1",
     "birth_month": "January",
     "birth_year": "1999",
     "firstname": "Ann",
@@ -18,18 +18,18 @@
     "company": "company_Name",
     "address1": "street #4, Madagaskar",
     "address2": "none",
-    "country": "USA",
+    "country": "Canada",
     "zipcode": "123123",
     "state": "CA",
     "city": "California",
     "mobile_number": "+18123456789"
   },
-  "testUserUpdate": {
+  "userUpdate": {
     "name": "test_Name2",
     "email": "testUser33@gmail.com",
     "password": "123456",
-    "title": "Ms",
-    "birth_date": "02",
+    "title": "Mrs.",
+    "birth_date": "2",
     "birth_month": "February",
     "birth_year": "2000",
     "firstname": "Anna",
@@ -37,7 +37,7 @@
     "company": "company_Name_2",
     "address1": "street #8, Madagaskar",
     "address2": "flat #3",
-    "country": "Jamaica",
+    "country": "Australia",
     "zipcode": "321321 ",
     "state": "Cucumber",
     "city": "Port",
