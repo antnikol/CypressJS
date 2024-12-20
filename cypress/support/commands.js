@@ -36,20 +36,20 @@ const homePage = new HomePage()
 const loginPage = new LoginPage()
 const basePage = new BasePage()
 const signupPage = new SignUpPage()
-const USEREMAIL = user.email;
-const PASSWORD = user.password;
+const USEREMAIL = user.email
+const PASSWORD = user.password
+const ErrorLoginMessageLocator = 'form[action="/login"] > p'
 
 Cypress.Commands.add('deleteUser',(userEmail = USEREMAIL, pass = PASSWORD) => {
-  cy.visit('/');
   homePage.clickSignupLoginButton()
   loginPage
     .typeEmailLoginTextField(userEmail)
     .typePasswordLoginTextField(pass)
     .clickLoginButton()
     cy.get('body').then(($body) => {
-      if ($body.find('form[action="/login"] > p').length > 0) {
+      if ($body.find(ErrorLoginMessageLocator).length > 0) {
         cy.log('Error message found.');
-        cy.get('form[action="/login"] > p').should('have.text', 'Your email or password is incorrect!');
+        loginPage.getErrorLoginMessage().should('have.text', 'Your email or password is incorrect!');
       } else {
         cy.log('Error message does not exist in the DOM.');
         homePage.clickDeleteAccountButton();
@@ -59,13 +59,11 @@ Cypress.Commands.add('deleteUser',(userEmail = USEREMAIL, pass = PASSWORD) => {
 });
 
 Cypress.Commands.add('deleteUserAfterRegistration',(userEmail = USEREMAIL, pass = PASSWORD) => {
-  cy.visit('/');
   homePage.clickDeleteAccountButton();
   basePage.getAccountDeletedConfirmMessage().should('contain', 'Account Deleted!');
 });
 
 Cypress.Commands.add('registerUser',(userEmail = USEREMAIL, pass = PASSWORD) => {
-  cy.visit('/');
   cy.deleteUser()
     homePage.clickSignupLoginButton();
     loginPage

@@ -20,43 +20,7 @@ describe('Test for the site automationexercise.com', ()=> {
   let birth_month = 'January'
   let birth_day = '1'
   let gender = 'Mr'
-  // beforeEach( () => {
-  //   // cy.get(".fa-home").should('have.css', 'color', 'rgb(255, 165, 0)')
-  //   // cy.get("section[id='slider']").should('exist')
-  //   // cy.contains(/Brands/i).should('be.visible')
-  //   // cy.get('a[href="/login"]').as('loginButton')
-  // })
 
-  it('Test Case 2: Login User with correct email and password', () => {
-    cy.get('a[href="/login"]').click()
-    cy.contains(/Login to your account/i).should('be.visible')
-    cy.get('input[data-qa="login-email"]').type(userEmail)
-    cy.get('input[data-qa="login-password"]').type(userPassword)
-    cy.get('button[data-qa="login-button"]').click()
-    cy.contains(userName).should('be.visible')
-  })
-
-  it('Test Case 3: Login User with incorrect email and password', () => {
-    cy.get('a[href="/login"]').click()
-    cy.contains(/Login to your account/i).should('be.visible')
-    cy.get('input[data-qa="login-email"]').type(userEmail+'1')
-    cy.get('input[data-qa="login-password"]').type(userPassword+'1')
-    cy.get('button[data-qa="login-button"]').click()
-    cy.contains(/Your email or password is incorrect!/i).should('be.visible')
-    cy.get('form[action="/login"]>p')
-      .should('have.text', 'Your email or password is incorrect!')
-  })
-
-  it('Test Case 4: Logout User', () => {
-    cy.get('a[href="/login"]').click()
-    cy.contains(/Login to your account/i).should('be.visible')
-    cy.get('input[data-qa="login-email"]').type(userEmail)
-    cy.get('input[data-qa="login-password"]').type(userPassword)
-    cy.get('button[data-qa="login-button"]').click()
-    cy.contains(userName).should('be.visible')
-    cy.get('a[href="/logout"]').click()
-    cy.contains(/Login to your account/i).should('be.visible')
-  })
 
   it('Test Case 5: Register User with existing email', () => {
     cy.get('a[href="/login"]').click()

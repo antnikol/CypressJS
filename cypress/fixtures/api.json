@@ -54,5 +54,8 @@
     "userNotFound": "User not found!",
     "userUpdated": "User updated!",
     "accountDeleted": "Account deleted!"
-  }
+  },
+  "incorrectPassword": [
+    "123456incorrect"
+  ]
 }

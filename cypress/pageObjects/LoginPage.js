@@ -2,6 +2,8 @@
 
 class LoginPage  {
 
+const 
+
 getSignupFormHeader = () => cy.get('.signup-form > h2')
 getSignupNameTextField = () => cy.get('input[data-qa="signup-name"]')
 getSignupEmailTextField = () => cy.get('input[data-qa="signup-email"]')
@@ -10,7 +12,9 @@ getLoginFormHeader = () => cy.get('.login-form > h2')
 getLoginEmailTextField = () => cy.get('input[data-qa="login-email"]')
 getLoginPasswordTextField = () => cy.get('input[data-qa="login-password"]')
 getLoginButton = () => cy.get('button[data-qa="login-button"]')
-getErrorLoginMessageForDeleteUser = () => cy.get('form[action="/login"] > p', {timeout: 0})
+getErrorLoginMessage = () => cy.get('form[action="/login"] > p')
+getErrorSingupMessage = () => cy.get('form[action="/signup"] > p')
+
 
 
 

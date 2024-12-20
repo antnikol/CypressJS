@@ -16,5 +16,9 @@ export default defineConfig({
     chromeWebSecurity: false,
     requestTimeout: 7000,
     defaultCommandTimeout: 7000,
+    specPattern: [
+      'cypress/api/',
+      'cypress/e2e/'
+    ]
   },
 });

@@ -7,6 +7,7 @@ class BasePage  {
   getDeleteAccountButton = () => cy.get('a[href="/delete_account"]')
   getAccountDeletedConfirmMessage = () => cy.get('h2[data-qa="account-deleted"]')
   getLogoutButton = () => cy.get('a[href="/logout"]')
+  getHeaderHomeIcon = () => cy.get(".fa-home")
   
 
   clickSignupLoginButton() {
