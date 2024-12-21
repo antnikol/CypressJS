@@ -1,6 +1,8 @@
 /// <reference types="cypress" />
 
-class LoginPage  {
+import BasePage from "./BasePage.js"
+
+class LoginPage extends BasePage {
 
 const 
 

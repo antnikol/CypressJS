@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import BasePage from "./BasePage"
+import BasePage from "./BasePage.js"
 import HomePage from "./HomePage"
 
 class SignUpPage extends BasePage {

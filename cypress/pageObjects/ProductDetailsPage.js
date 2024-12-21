@@ -1,6 +1,8 @@
 /// <reference types="cypress" />
 
-class ProductDetailsPage  {
+import BasePage from "./BasePage.js"
+
+class ProductDetailsPage extends BasePage {
 
 getProductInformationSection = () => cy.get('.product-information')
 getProductName = () => cy.get('.product-information h2')

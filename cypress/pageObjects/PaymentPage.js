@@ -1,6 +1,8 @@
 /// <reference types="cypress" />
 
-class PaymentPage  {
+import BasePage from "./BasePage.js";
+
+class PaymentPage extends BasePage {
 
 
 

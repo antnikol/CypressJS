@@ -5,6 +5,7 @@ import HomePage from "../pageObjects/HomePage"
 import LoginPage from "../pageObjects/LoginPage"
 import { searchTerms, user, userUpdate, incorrectPassword } from '../fixtures/api.json'
 import ContactUsPage from "../pageObjects/ContactUsPage"
+import CartPage from "../pageObjects/CartPage"
 
 
 
@@ -12,6 +13,7 @@ const signupPage = new SignUpPage()
 const homePage = new HomePage()
 const loginPage = new LoginPage()
 const contactUsPage = new ContactUsPage()
+const cartPage = new CartPage()
 
 describe('Test for the site automationexercise.com', ()=> {
 
@@ -32,11 +34,22 @@ describe('Test for the site automationexercise.com', ()=> {
     homePage.getPageTitle().should('include', 'Automation Exercise')
   })  
 
-  it.only('Test Case 10: Verify Subscription in home page', () => {
+  it('Test Case 10: Verify Subscription in home page', () => {
     homePage
       .scrollToBottom()
       .getSubscriptionFooterSection().should('include.text', 'Subscription')
     homePage
+      .typeSubscriptionFooterEmailField(user.email)
+      .clickSubscribeButton()
+      .getSuccessSubscribeMessage().should('be.visible')
+  })
+
+  it('Test Case 11: Verify Subscription in Cart page', () => {
+    homePage.clickViewCartHeaderButton()
+    cartPage
+      .scrollToBottom()
+      .getSubscriptionFooterSection().should('include.text', 'Subscription')
+    cartPage
       .typeSubscriptionFooterEmailField(user.email)
       .clickSubscribeButton()
       .getSuccessSubscribeMessage().should('be.visible')

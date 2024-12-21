@@ -1,8 +1,10 @@
 /// <reference types="cypress" />
 
+
+import BasePage from "./BasePage.js"
 import HomePage from "./HomePage"
 
-class ContactUsPage  {
+class ContactUsPage extends BasePage {
 
 getGetInTouchHeader = () => cy.get('.contact-form h2')
 getNameTextField = () => cy.get('input[data-qa="name"]')

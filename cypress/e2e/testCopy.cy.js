@@ -23,32 +23,12 @@ describe('Test for the site automationexercise.com', ()=> {
 
 
   it('Test Case 7: Verify Test Cases Page', () => {
-  cy.get('a[href="/test_cases"]').contains(' Test Cases').click()
-  cy.get('a[href="/test_cases"]').contains(/\s*Test Cases\s*/).click()
-  cy.get('h2.title').should('have.text', 'Test Cases')
+    cy.get('a[href="/test_cases"]').contains(' Test Cases').click()
+    cy.get('a[href="/test_cases"]').contains(/\s*Test Cases\s*/).click()
+    cy.get('h2.title').should('have.text', 'Test Cases')
   })
 
 
-  it('Test Case 10: Verify Subscription in home page', () => {
-    cy.scrollTo('bottom')
-    cy.get('.single-widget').should('include.text', 'Subscription')
-    cy.get('#susbscribe_email').type('test@email.com')
-    cy.get('button#subscribe').click()
-    cy.contains('You have been successfully subscribed!').should('be.visible')
-  })
-
-  it('Test Case 11: Verify Subscription in Cart page', () => {
-    cy.get('.shop-menu a[href="/view_cart"]').click()
-    cy.window().then((win) => {
-      if (win.document.body.scrollHeight > win.innerHeight) {
-        cy.scrollTo('bottom')
-      }
-    })
-    cy.get('.single-widget').should('include.text', 'Subscription')
-    cy.get('#susbscribe_email').type('test@email.com')
-    cy.get('button#subscribe').click()
-    cy.contains('You have been successfully subscribed!').should('be.visible')
-  })
 
   it('Test Case 12: Add Products in Cart', () => {
     let qtyCartTrimed, totalPriceSliced

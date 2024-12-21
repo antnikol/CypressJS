@@ -12,10 +12,7 @@ getPageUrl = () => cy.url()
 
 
 
-scrollToBottom() {
-  cy.scrollTo('bottom')
-  return this
-} 
+
 
 
 }

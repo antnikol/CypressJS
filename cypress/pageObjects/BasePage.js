@@ -14,6 +14,7 @@ class BasePage  {
   getSubscriptionFooterEmailField = () => cy.get('#susbscribe_email')
   getSubscribeButton = () => cy.get('button#subscribe')
   getSuccessSubscribeMessage = () => cy.get('.alert-success.alert')
+  getViewCartHeaderButton = () => cy.get('.shop-menu a[href="/view_cart"]')
 
   
 
@@ -51,6 +52,20 @@ class BasePage  {
     this.getSubscribeButton().click()
     return this
   }
+
+  clickViewCartHeaderButton() {
+    this.getViewCartHeaderButton().click()
+    return this
+  }
+
+  scrollToBottom() {
+    cy.window().then((win) => {
+      if (win.document.body.scrollHeight > win.innerHeight) {
+        cy.scrollTo('bottom')
+      }
+    })
+    return this
+  } 
 }
 
 export default BasePage;
