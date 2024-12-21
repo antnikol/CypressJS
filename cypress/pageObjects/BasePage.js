@@ -8,6 +8,7 @@ class BasePage  {
   getAccountDeletedConfirmMessage = () => cy.get('h2[data-qa="account-deleted"]')
   getLogoutButton = () => cy.get('a[href="/logout"]')
   getHeaderHomeIcon = () => cy.get(".fa-home")
+  getContactUsButton = () => cy.get('a[href="/contact_us"]')
   
 
   clickSignupLoginButton() {
@@ -25,6 +26,10 @@ class BasePage  {
     return this
   }
 
+  clickContactUsButton() {
+    this.getContactUsButton().click()
+    return this
+  }
 }
 
 export default BasePage;

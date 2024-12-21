@@ -22,36 +22,6 @@ describe('Test for the site automationexercise.com', ()=> {
   let gender = 'Mr'
 
 
-  it('Test Case 5: Register User with existing email', () => {
-    cy.get('a[href="/login"]').click()
-    cy.contains(/New User Signup!/i).should('be.visible')
-    cy.get('input[data-qa="signup-name"]').type(userName)
-    cy.get('input[data-qa="signup-email"]').type(userEmail)
-    cy.get('button[data-qa="signup-button"]').click()
-    cy.contains(/Email Address already exist!/i).should('be.visible')
-    cy.get('form[action="/signup"]>p')
-      .should('have.text', 'Email Address already exist!')
-  })
-
-  it('Test Case 6: Contact Us Form', () => {
-    cy.get('a[href="/contact_us"]').click()
-    cy.contains(/Get In Touch/i).should('be.visible')
-    cy.get('h2[class="title text-center"]').eq(1)
-      .should('have.text', 'Get In Touch')
-    cy.contains('h2.title.text-center', 'Get In Touch')
-    cy.get('input[data-qa="name"]').type('test Name')
-    cy.get('input[data-qa="email"]').type('test@email.com')
-    cy.get('input[data-qa="subject"]').type('Subject text for test')
-    cy.get('textarea[data-qa="message"]').type('Message text for test')
-    cy.get('input[type="file"]').attachFile('/example.json')
-    cy.on('window:alert', () => {})
-    cy.get('input[data-qa="submit-button"]').click()
-    cy.contains(/Success! Your details have been submitted successfully./i).should('be.visible')
-    cy.get('.status.alert.alert-success')
-      .should('have.text', 'Success! Your details have been submitted successfully.')
-    cy.get('.btn.btn-success').click()
-  })  
-
   it('Test Case 7: Verify Test Cases Page', () => {
   cy.get('a[href="/test_cases"]').contains(' Test Cases').click()
   cy.get('a[href="/test_cases"]').contains(/\s*Test Cases\s*/).click()
