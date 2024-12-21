@@ -9,6 +9,7 @@ class BasePage  {
   getLogoutButton = () => cy.get('a[href="/logout"]')
   getHeaderHomeIcon = () => cy.get(".fa-home")
   getContactUsButton = () => cy.get('a[href="/contact_us"]')
+  getProductsHeaderButton = () => cy.get('.shop-menu a[href="/products"]')
   
 
   clickSignupLoginButton() {
@@ -28,6 +29,11 @@ class BasePage  {
 
   clickContactUsButton() {
     this.getContactUsButton().click()
+    return this
+  }
+
+  clickProductsHeaderButton() {
+    this.getProductsHeaderButton().click()
     return this
   }
 }

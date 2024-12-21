@@ -11,7 +11,7 @@ import ContactUsPage from "../pageObjects/ContactUsPage"
 const signupPage = new SignUpPage()
 const homePage = new HomePage()
 const loginPage = new LoginPage()
-const contactUsPage = new ContactUsPage
+const contactUsPage = new ContactUsPage()
 
 describe('Test for the site automationexercise.com', ()=> {
 
