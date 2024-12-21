@@ -26,6 +26,14 @@ describe('Test for the site automationexercise.com', ()=> {
     productDetailsPage.getProductBrand().should('be.visible')
   })
 
-
+  it('Test Case 9: Search Product', () => {
+    homePage.clickProductsHeaderButton()
+    productsPage.getAllProductsHeader().should('have.text', 'All Products')
+    productsPage
+      .typeSearchProductField(searchTerms[2])
+      .clickSearchButton()
+      .getAllProductsHeader().should('have.text', 'Searched Products')
+    productsPage.checkSearchedProductsNames(searchTerms[2])
+  })
 
 })

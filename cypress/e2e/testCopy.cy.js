@@ -28,13 +28,6 @@ describe('Test for the site automationexercise.com', ()=> {
   cy.get('h2.title').should('have.text', 'Test Cases')
   })
 
-  it('Test Case 8: Verify All Products and product detail page', () => {
-    cy.get('.shop-menu a[href="/products"]').contains(/\s*Products\s*/).click()
-    cy.get('h2.title').should('have.text', 'All Products')
-    cy.get('.product-overlay').should('have.length.above', 0)
-    cy.get('.choose').eq(0).contains('View Product').click()
-    cy.get('.product-information').should('be.visible')
-  })
 
   it('Test Case 9: Search Product', () => {
     cy.get('.shop-menu a[href="/products"]').contains(/\s*Products\s*/).click()
