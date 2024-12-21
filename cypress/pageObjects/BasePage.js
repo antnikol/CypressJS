@@ -10,6 +10,11 @@ class BasePage  {
   getHeaderHomeIcon = () => cy.get(".fa-home")
   getContactUsButton = () => cy.get('a[href="/contact_us"]')
   getProductsHeaderButton = () => cy.get('.shop-menu a[href="/products"]')
+  getSubscriptionFooterSection = () => cy.get('.single-widget')
+  getSubscriptionFooterEmailField = () => cy.get('#susbscribe_email')
+  getSubscribeButton = () => cy.get('button#subscribe')
+  getSuccessSubscribeMessage = () => cy.get('.alert-success.alert')
+
   
 
   clickSignupLoginButton() {
@@ -34,6 +39,16 @@ class BasePage  {
 
   clickProductsHeaderButton() {
     this.getProductsHeaderButton().click()
+    return this
+  }
+
+  typeSubscriptionFooterEmailField(subscriptionEmail) {
+    this.getSubscriptionFooterEmailField().type(subscriptionEmail)
+    return this
+  }
+
+  clickSubscribeButton() {
+    this.getSubscribeButton().click()
     return this
   }
 }

@@ -15,7 +15,7 @@ const contactUsPage = new ContactUsPage()
 
 describe('Test for the site automationexercise.com', ()=> {
 
-  it.only('Test Case 6: Contact Us Form', () => {
+  it('Test Case 6: Contact Us Form', () => {
     homePage.clickContactUsButton()
     homePage.getPageUrl().should('contain', '/contact_us')
     contactUsPage.getGetInTouchHeader().should('contain', 'Get In Touch')
@@ -30,8 +30,16 @@ describe('Test for the site automationexercise.com', ()=> {
       .getSuccessMessage().should('have.text', 'Success! Your details have been submitted successfully.')
     contactUsPage.clickBackToHomePageButton()
     homePage.getPageTitle().should('include', 'Automation Exercise')
-
   })  
 
+  it.only('Test Case 10: Verify Subscription in home page', () => {
+    homePage
+      .scrollToBottom()
+      .getSubscriptionFooterSection().should('include.text', 'Subscription')
+    homePage
+      .typeSubscriptionFooterEmailField(user.email)
+      .clickSubscribeButton()
+      .getSuccessSubscribeMessage().should('be.visible')
+  })
 
 })

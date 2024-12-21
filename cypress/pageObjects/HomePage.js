@@ -11,6 +11,13 @@ getPageTitle = () => cy.title()
 getPageUrl = () => cy.url()
 
 
+
+scrollToBottom() {
+  cy.scrollTo('bottom')
+  return this
+} 
+
+
 }
 
 export default HomePage;

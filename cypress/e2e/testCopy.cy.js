@@ -29,17 +29,6 @@ describe('Test for the site automationexercise.com', ()=> {
   })
 
 
-  it('Test Case 9: Search Product', () => {
-    cy.get('.shop-menu a[href="/products"]').contains(/\s*Products\s*/).click()
-    cy.get('h2.title').should('have.text', 'All Products')
-    cy.get('input#search_product').type('saree')
-    cy.get('button#submit_search').click()
-    cy.get('h2.title').should('have.text', 'Searched Products')
-    cy.get('.overlay-content p').each(($el) => {
-      cy.wrap($el).invoke('text').should('match', /Saree/i);
-    })
-  })
-
   it('Test Case 10: Verify Subscription in home page', () => {
     cy.scrollTo('bottom')
     cy.get('.single-widget').should('include.text', 'Subscription')
