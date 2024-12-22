@@ -20,10 +20,8 @@ class BasePage  {
   getPageUrl = () => cy.url()
 
   //Left-Sidebar
-  getLeftSidebarAllCategories = () => cy.get('a[data-parent="#accordian"]')
-  getLeftSidebarWomenCategory = () => cy.get('a[href="#Women"]')
+  getLeftSidebarCategoryList = () => cy.get('a[data-parent="#accordian"]')
   getLeftSidebarSubCategoryList = () => cy.get('.panel-body a')
-  getLeftSidebarMenCategory = () => cy.get('a[href="#Men"]')
   
 
   clickSignupLoginButton() {
@@ -81,7 +79,7 @@ class BasePage  {
   }
 
   clickLeftSidebarCategory(categoryName) {
-    this.getLeftSidebarAllCategories().contains(categoryName).click()
+    this.getLeftSidebarCategoryList().contains(categoryName).click()
     return this
   }
 
