@@ -51,7 +51,7 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     })
   })
 
-  it.only('Test Case 13: Verify product quantity in Cart by add from "Product details page"', () => {
+  it('Test Case 13: Verify product quantity in Cart by add from "Product details page"', () => {
     homePage.clickProductsHeaderButton()
     productsPage.clickFirstViewProductButton()
     productDetailsPage.getProductInformationSection().should('be.visible')
@@ -63,5 +63,17 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     cartPage.getCartProductsList().should('have.length', 1)
     cartPage.getProductQuantityList().should('have.text', product.quantity)
   }) 
+
+  it.only('Test Case 17: Remove Products From Cart', () => {
+    homePage
+      .clickFirstProductAddToCartButton()
+      .clickViewCartModalButton()
+    cartPage.getCartProductsList().should('have.length', 1)
+    cartPage.getPageUrl().should('include', '/view_cart')
+    cartPage.getPageTitle().should('equal', 'Automation Exercise - Checkout')
+    cartPage.getActiveBreadcrumbs().should('have.text', 'Shopping Cart')
+    cartPage.clickDeleteProductFromCartButton()
+    cartPage.getEmptyCardSection().should('contain', 'Cart is empty!')
+  })
 
 })

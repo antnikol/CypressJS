@@ -17,6 +17,7 @@ class BasePage  {
   getViewCartHeaderButton = () => cy.get('.shop-menu a[href="/view_cart"]')
   getTestCasesHeaderMenuButton = () => cy.get('.nav a[href="/test_cases"]')
   getPageTitle = () => cy.title()
+  getPageUrl = () => cy.url()
   
 
   clickSignupLoginButton() {

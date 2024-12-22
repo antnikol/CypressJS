@@ -8,9 +8,12 @@ getCartProductsList = () => cy.get('.cart_product')
 getProductQuantityList = () => cy.get('.cart_quantity button')
 getProductPricesList = () => cy.get('.cart_price p')
 getProductTotalPriceList = () => cy.get('.cart_total_price')
+getActiveBreadcrumbs = () => cy.get('.breadcrumb .active')
+getDeleteProductFromCartButton = () => cy.get('.cart_quantity_delete')
+getEmptyCardSection = () => cy.get('#empty_cart p')
+
 getFirstProductQuantity = () => cy.get('.cart_quantity button').first()
 getLastProductQuantity = () => cy.get('.cart_quantity button').last()
-
 getFirstProductPrice = () => cy.get('.cart_price p').first()
 getFirstProductTotalPrice = () => cy.get('.cart_total_price').first()
 getLastProductPrice = () => cy.get('.cart_price p').last()
@@ -60,6 +63,11 @@ takeLastProductTotalPriceNumber() {
 takeExpectedFirstProductTotalPrice(quantity) {
   return this.takeFirstProductPrice().invoke('text')
     .then((price) => { return (parseFloat(price) * quantity)  });
+}
+
+clickDeleteProductFromCartButton() {
+  this.getDeleteProductFromCartButton().click()
+  return this
 }
 }
 

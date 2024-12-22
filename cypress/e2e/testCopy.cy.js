@@ -22,16 +22,6 @@ describe('Test for the site automationexercise.com', ()=> {
   let gender = 'Mr'
 
 
-  it('Test Case 13: Verify product quantity in Cart', () => {
-    cy.get('.choose').eq(0).contains('View Product').click()
-    cy.get('.product-information').should('be.visible')
-    cy.get('#quantity').clear().type('4')
-    cy.get('.btn.btn-default.cart').click()
-    cy.get('.modal-body a[href="/view_cart"]').click()
-    cy.get('.cart_product').should('have.length', 1)
-    cy.get('.disabled').first().should('have.text', '4')
-  })
-
   it('Test Case 14: Place Order: Register while Checkout', () => {
     let price1psc, price1pscNum, goodName
     cy.get('.overlay-content h2').eq(0).invoke('text')
