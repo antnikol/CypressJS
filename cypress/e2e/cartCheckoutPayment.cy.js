@@ -37,14 +37,13 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
       cartPage.takeLastProductTotalPriceNumber().should('equal', totalPrice)
     })
 
-    cy.log('Checking that the name, price and quantity of the product in the cart matches the previously added one')
+    cy.log('Checking that the name, price of the product in the cart matches the previously added one')
     cy.get('@firstProductName').then((firstProductName) => {
       cartPage.getFirstProductName().should('have.text', firstProductName)
     })
     cy.get('@firstProductPrice').then((firstProductPrice) => {
       cartPage.getFirstProductPrice().should('have.text', firstProductPrice)
     })
-    cy.log('checking that quantiyty of the product in the cart matches previously added one')
   })
 
 })
