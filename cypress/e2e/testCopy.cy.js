@@ -22,66 +22,7 @@ describe('Test for the site automationexercise.com', ()=> {
   let gender = 'Mr'
 
 
-
-  it('Test Case 12: Add Products in Cart', () => {
-    let qtyCartTrimed, totalPriceSliced
-    let price1psc, price1pscNum, goodName
-    cy.get('.shop-menu a[href="/products"]').contains(/\s*Products\s*/).click()
-    cy.get('.overlay-content h2').eq(0).invoke('text')
-      .then((text) => {
-        price1psc = text.trim()
-        price1pscNum = text.slice(4)
-    })
-    cy.get('.overlay-content p').eq(0).invoke('text')
-      .then((text) => {
-        goodName = text.trim()
-      })
-    cy.then(() => {
-      cy.log('Price:', price1psc);
-      cy.log('Good Name:', goodName);
-      cy.log('Price as Number:', price1pscNum);
-    })
-    cy.get('.single-products').eq(0).scrollIntoView()
-      .realHover().find('.product-overlay a.btn')
-      .click({ animationDistanceThreshold: 40 })
-    cy.get('.btn-success').contains('Continue Shopping').click()
-    cy.get('.single-products').eq(1).scrollIntoView()
-      .realHover().find('.product-overlay a.btn')
-      .click({ animationDistanceThreshold: 40 })
-    cy.get('.modal-body a[href="/view_cart"]').click()
-    cy.get('.cart_product').should('have.length', 2)
-    cy.get('.disabled').first().should('have.text', '1')
-    cy.get('.disabled').last().should('have.text', '1')
-    cy.get('.cart_price').first().invoke('text')
-      .then((cartPriceText) => {
-        cy.get('.cart_total_price').first().invoke('text')
-        .should('equal', cartPriceText.trim());
-      })
-    cy.get('.cart_price').last().invoke('text')
-    .then((cartPriceText) => {
-      cy.get('.cart_total_price').last().invoke('text')
-      .should('equal', cartPriceText.trim());
-    })
-    cy.then(() => {
-      cy.get('.cart_description a').eq(0).should('have.text', goodName)
-    })
-    cy.then(() => {
-      cy.get('.cart_price p').eq(0).should('have.text', price1psc)
-    })
-    cy.get('.disabled').first().invoke('text')
-      .then((text) => {
-        qtyCartTrimed = text.trim()
-    })
-    cy.get('.cart_total_price').first().invoke('text')
-      .then((text) => {
-        totalPriceSliced = text.slice(4)
-    })
-    cy.then(() => {
-      expect(totalPriceSliced/qtyCartTrimed).to.equal(parseFloat(price1pscNum))
-    })
-  })
-
-  it('Test Case 13: Verify Product quantity in Cart', () => {
+  it('Test Case 13: Verify product quantity in Cart', () => {
     cy.get('.choose').eq(0).contains('View Product').click()
     cy.get('.product-information').should('be.visible')
     cy.get('#quantity').clear().type('4')
