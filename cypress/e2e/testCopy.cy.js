@@ -283,16 +283,6 @@ describe('Test for the site automationexercise.com', ()=> {
     cy.contains(/account deleted!/i).should('be.visible')
   })
 
-  it('Test Case 17: Remove Products From Cart', () => {
-    cy.get('a[data-product-id]').eq(1).click({force:true})
-    cy.get('.modal-body a[href="/view_cart"]').click()
-    // cy.get('.shop-menu a[href="/view_cart"]').click()
-    cy.get('.cart_product').should('have.length', 1)
-    cy.url().should('include', '/view_cart')
-    cy.title().should('equal', 'Automation Exercise - Checkout')
-    cy.get('.cart_quantity_delete').click()
-    cy.get('#empty_cart').contains('Cart is empty!').should('be.visible')
-  })
 
 
   it('Test Case 18: View Category Products', () => {

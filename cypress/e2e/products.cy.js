@@ -36,4 +36,22 @@ describe('Test for the site automationexercise.com', ()=> {
     productsPage.checkSearchedProductsNames(searchTerms[2])
   })
 
+  it('Test Case 18: View Category Products', () => {
+    homePage
+      .clickLeftSidebarCategory('Women')
+      .clickLeftSidebarSubCategory('Dress')
+    productsPage.getAllProductsHeader().should('have.text', 'Women - Dress Products')
+    productsPage.getPageTitle().should('equal', 'Automation Exercise - Dress Products')
+    productsPage.getPageUrl().should('contain', 'category_products')
+    productsPage.checkSearchedProductsNames('Dress')
+
+    productsPage
+      .clickLeftSidebarCategory('Men')
+      .clickLeftSidebarSubCategory('Jeans')
+    productsPage.getAllProductsHeader().should('have.text', 'Men - Jeans Products')
+    productsPage.getPageTitle().should('equal', 'Automation Exercise - Jeans Products')
+    productsPage.getPageUrl().should('contain', 'category_products')
+    productsPage.checkSearchedProductsNames('Jeans')
+    
+  })
 })

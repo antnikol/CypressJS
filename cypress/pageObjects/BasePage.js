@@ -18,6 +18,12 @@ class BasePage  {
   getTestCasesHeaderMenuButton = () => cy.get('.nav a[href="/test_cases"]')
   getPageTitle = () => cy.title()
   getPageUrl = () => cy.url()
+
+  //Left-Sidebar
+  getLeftSidebarAllCategories = () => cy.get('a[data-parent="#accordian"]')
+  getLeftSidebarWomenCategory = () => cy.get('a[href="#Women"]')
+  getLeftSidebarSubCategoryList = () => cy.get('.panel-body a')
+  getLeftSidebarMenCategory = () => cy.get('a[href="#Men"]')
   
 
   clickSignupLoginButton() {
@@ -73,6 +79,17 @@ class BasePage  {
     this.getTestCasesHeaderMenuButton().click()
     return this
   }
+
+  clickLeftSidebarCategory(categoryName) {
+    this.getLeftSidebarAllCategories().contains(categoryName).click()
+    return this
+  }
+
+  clickLeftSidebarSubCategory(subCategoryName) {
+    this.getLeftSidebarSubCategoryList().contains(subCategoryName).click()
+    return this
+  }
+
 }
 
 export default BasePage;
