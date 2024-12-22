@@ -18,6 +18,7 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     productsPage.takeFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
     productsPage.takeFirstProductPrice().then((name) => { cy.wrap(name).as('firstProductPrice') })
     productsPage
+      .resetCounterClickFirstProductAddToCartButton()
       .clickFirstProductAddToCartButton()
       .clickContinueShoppingButton()
       .clickFirstProductAddToCartButton()
@@ -25,7 +26,7 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
       .clickSecondProductAddToCartButton()
       .clickViewCartModalButton()
     cartPage.getCartProductsList().should('have.length', 2)
-    cartPage.getFirstProductQuantity().should('have.text', '2')
+    cartPage.getFirstProductQuantity().should('have.text', productsPage.takeCounterClickFirstProductAddToCartButton())
     cartPage.getLastProductQuantity().should('have.text', '1')
 
     cy.log('Checking that multiply quantity by price function in Cart works correctly for both items')

@@ -18,7 +18,7 @@ getAllSingleProductsSection = () => cy.get('.single-products')
 getContinueShoppingButton = () => cy.get('button[data-dismiss="modal"]')
 getViewCartModalButton = () => cy.get('.modal-body a[href="/view_cart"]')
 
-
+static counterClickFirstProductAddToCartButton = 0
 
 clickFirstViewProductButton() {
   this.getAllViewProductButtons().eq(0).click()
@@ -67,6 +67,7 @@ clickFirstProductAddToCartButton() {
   this.getAllSingleProductsSection().first().scrollIntoView()
   .realHover().find('.product-overlay a.btn')
   .click({ animationDistanceThreshold: 40 })
+  this.counterClickFirstProductAddToCartButton += 1
   return this
 }
 
@@ -106,6 +107,15 @@ returnSecondProductName() {
 clickViewCartModalButton() {
   this.getViewCartModalButton().click()
   return new CartPage()
+}
+
+resetCounterClickFirstProductAddToCartButton() {
+  this.counterClickFirstProductAddToCartButton = 0
+  return this
+}
+
+takeCounterClickFirstProductAddToCartButton() {
+  return this.counterClickFirstProductAddToCartButton;
 }
 }
 
