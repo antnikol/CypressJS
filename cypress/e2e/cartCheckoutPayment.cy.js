@@ -62,6 +62,6 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
       .clickViewCartModalButton()
     cartPage.getCartProductsList().should('have.length', 1)
     cartPage.getProductQuantityList().should('have.text', product.quantity)
-  })
+  }) 
 
 })
