@@ -22,13 +22,6 @@ describe('Test for the site automationexercise.com', ()=> {
   let gender = 'Mr'
 
 
-  it('Test Case 7: Verify Test Cases Page', () => {
-    cy.get('a[href="/test_cases"]').contains(' Test Cases').click()
-    cy.get('a[href="/test_cases"]').contains(/\s*Test Cases\s*/).click()
-    cy.get('h2.title').should('have.text', 'Test Cases')
-  })
-
-
 
   it('Test Case 12: Add Products in Cart', () => {
     let qtyCartTrimed, totalPriceSliced

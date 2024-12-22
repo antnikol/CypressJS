@@ -15,7 +15,8 @@ class BasePage  {
   getSubscribeButton = () => cy.get('button#subscribe')
   getSuccessSubscribeMessage = () => cy.get('.alert-success.alert')
   getViewCartHeaderButton = () => cy.get('.shop-menu a[href="/view_cart"]')
-
+  getTestCasesHeaderMenuButton = () => cy.get('.nav a[href="/test_cases"]')
+  getPageTitle = () => cy.title()
   
 
   clickSignupLoginButton() {
@@ -66,6 +67,11 @@ class BasePage  {
     })
     return this
   } 
+
+  clickTestCasesHeaderMenuButton() {
+    this.getTestCasesHeaderMenuButton().click()
+    return this
+  }
 }
 
 export default BasePage;
