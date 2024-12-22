@@ -4,12 +4,14 @@ import HomePage from "../pageObjects/HomePage"
 import ProductsPage from "../pageObjects/ProductsPage"
 import { searchTerms, user, userUpdate, incorrectPassword } from '../fixtures/api.json'
 import ProductDetailsPage from "../pageObjects/ProductDetailsPage"
+import CartPage from "../pageObjects/CartPage"
 
 
 
 const homePage = new HomePage()
 const productsPage = new ProductsPage()
 const productDetailsPage = new ProductDetailsPage()
+const cartPage = new CartPage()
 
 describe('Test for the site automationexercise.com', ()=> {
 
@@ -36,6 +38,35 @@ describe('Test for the site automationexercise.com', ()=> {
     productsPage.checkSearchedProductsNames(searchTerms[2])
   })
 
+  it.only('Test Case 20: Search Products and Verify Cart After Login', () => {
+    cy.registerUser()
+    homePage.clickLogoutButton()
+
+    homePage.clickProductsHeaderButton()
+    productsPage.getAllProductsHeader().should('have.text', 'All Products')
+    productsPage.getPageUrl().should('include', '/products')
+    productsPage
+      .typeSearchProductField(searchTerms[2])
+      .clickSearchButton()
+      .getAllProductsHeader().should('have.text', 'Searched Products')
+    productsPage.getPageUrl().should('include', '?search')
+    productsPage
+      .checkSearchedProductsNames(searchTerms[2])
+      .clickAllProductsAddToCartButton()
+      .clickViewCartHeaderButton()
+    cartPage.getActiveBreadcrumbs().should('have.text', 'Shopping Cart')
+    cartPage
+      .checkSearchedProductNamesInCart(searchTerms[2])
+      .checkSearchedProductQuantityInCart(2)
+
+    cy.loginUser()
+    homePage.clickViewCartHeaderButton()
+    cartPage.getActiveBreadcrumbs().should('have.text', 'Shopping Cart')
+    cartPage
+      .checkSearchedProductNamesInCart(searchTerms[2])
+      .checkSearchedProductQuantityInCart(2)
+  })
+
   it('Test Case 18: View Category Products', () => {
     homePage
       .clickLeftSidebarCategory('Women')
@@ -52,6 +83,5 @@ describe('Test for the site automationexercise.com', ()=> {
     productsPage.getPageTitle().should('equal', 'Automation Exercise - Jeans Products')
     productsPage.getPageUrl().should('contain', 'category_products')
     productsPage.checkSearchedProductsNames('Jeans')
-    
   })
 })

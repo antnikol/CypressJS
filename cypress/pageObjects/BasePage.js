@@ -2,7 +2,7 @@
 
 class BasePage  {
 
-  getSignupLoginButton = () => cy.get('a[href="/login"]')
+  getSignupLoginButton = () => cy.get('.nav a[href="/login"]')
   getListHeaderButtons = () => cy.get('.nav.navbar-nav')
   getDeleteAccountButton = () => cy.get('a[href="/delete_account"]')
   getAccountDeletedConfirmMessage = () => cy.get('h2[data-qa="account-deleted"]')

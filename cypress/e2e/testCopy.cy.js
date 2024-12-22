@@ -284,24 +284,6 @@ describe('Test for the site automationexercise.com', ()=> {
   })
 
 
-
-  it('Test Case 18: View Category Products', () => {
-    let categoryHrefWomen, categoryHrefMen
-    cy.get('a[href="#Women"]').click()
-    cy.get('.panel-body a').eq(0).invoke('attr', 'href').then((hrefValue) => {
-      categoryHrefWomen = hrefValue.trim()
-      cy.get('.panel-body a').eq(0).click()
-      cy.url().should('include', categoryHrefWomen)
-    })
-    cy.get('a[href="#Men"]').click()
-    cy.get('div#Men li a').eq(1).invoke('attr', 'href').then((hrefValue) => {
-      categoryHrefMen = hrefValue
-      cy.get('div#Men li a').eq(1).click()
-      cy.url().should('include', categoryHrefMen)
-    })
-    cy.get('.features_items h2').should('contain', 'Men')
-  })
-
   it('Test Case 19: View & Cart Brand Products', () => {
     let brandName, brandCount, brand, categoryHrefBrand
     cy.get('.shop-menu a[href="/products"]').click()

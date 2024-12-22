@@ -92,3 +92,13 @@ Cypress.Commands.add('registerUser',(userEmail = USEREMAIL, pass = PASSWORD) => 
       .clickContinueButton();
     homePage.getListHeaderButtons().should('contain', `${user.name}`);
 });
+
+Cypress.Commands.add('loginUser',(userEmail = USEREMAIL, pass = PASSWORD) => {
+  basePage.clickSignupLoginButton()
+  loginPage.getLoginFormHeader().should('have.text', 'Login to your account');
+  loginPage
+    .typeEmailLoginTextField(user.email)
+    .typePasswordLoginTextField(user.password)
+    .clickLoginButton()
+  homePage.getListHeaderButtons().should('contain', `${user.name}`);
+});
