@@ -23,68 +23,6 @@ describe('Test for the site automationexercise.com', ()=> {
 
 
 
-  it('Test Case 16: Place Order: Login before Checkout', () => {
-    let price1psc, price1pscNum, goodName
-    cy.get('.overlay-content h2').eq(7).invoke('text')
-      .then((text) => {
-        price1psc = text.trim()
-        price1pscNum = text.slice(4)
-    })
-    cy.get('.overlay-content p').eq(7).invoke('text')
-      .then((text) => {
-        goodName = text.trim()
-      })
-    cy.then(() => {
-      cy.log('Price:', price1psc);
-      cy.log('Good Name:', goodName);
-      cy.log('Price as Number:', price1pscNum);
-    })
-    cy.get('a[href="/login"]').click()
-    cy.contains(/Login to your account/i).should('be.visible')
-    cy.get('input[data-qa="login-email"]').type(userEmail)
-    cy.get('input[data-qa="login-password"]').type(userPassword)
-    cy.get('button[data-qa="login-button"]').click()
-    cy.contains(userName).should('be.visible')
-
-    cy.get('a[data-product-id]').eq(15).click({force:true})
-    cy.get('.modal-body a[href="/view_cart"]').click()
-    cy.get('.cart_product').should('have.length', 1)
-    cy.url().should('include', '/view_cart')
-    cy.title().should('equal', 'Automation Exercise - Checkout')
-    cy.get('#do_action a').contains('Proceed To Checkout').click()
-
-    cy.contains(/Your delivery address/i).should('be.visible')
-    cy.contains(/Your billing address/i).should('be.visible')
-    cy.get('#address_delivery .address_firstname.address_lastname').invoke('text')
-      .should('equal', `${gender}. ${first_name} ${last_name}`)
-    cy.get('#address_delivery .address_address1.address_address2').eq(0)
-      .should('have.text', company)
-    cy.get('#address_delivery .address_address1.address_address2').eq(1)
-      .should('have.text', address)
-    cy.get('#address_delivery .address_address1.address_address2').eq(2)
-      .should('have.text', address2)
-    cy.then(() => {
-      cy.get('.cart_description a').should('have.text', goodName)
-    })
-    cy.then(() => {
-      cy.get('.cart_price p').should('have.text', price1psc)
-    })
-    cy.get('textarea[class="form-control"]').type('...some comment to order...')
-    cy.get('a[href="/payment"]').contains('Place Order').click()
-    cy.get('input[data-qa="name-on-card"]').type(`${first_name} ${last_name}`)
-    cy.get('input[data-qa="card-number"]').type('1234567890123456')
-    cy.get('input[data-qa="cvc"]').type('111')
-    cy.get('input[data-qa="expiry-month"]').type('12')
-    cy.get('input[data-qa="expiry-year"]').type('2025')
-    cy.get('button[data-qa="pay-button"]').click()
-    // cy.contains('Your order has been placed successfully!')
-    // cy.get('div#success_message').contains('Your order has been placed successfully!').should('be.visible')
-    cy.get('h2[data-qa="order-placed"]').should('have.text', 'Order Placed!')  
-    cy.get('a[href="/delete_account"]').click()
-    cy.contains(/account deleted!/i).should('be.visible')
-  })
-
-
   it('Test Case 19: View & Cart Brand Products', () => {
     let brandName, brandCount, brand, categoryHrefBrand
     cy.get('.shop-menu a[href="/products"]').click()

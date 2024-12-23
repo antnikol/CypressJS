@@ -192,7 +192,7 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     paymentDonePage.getOrderPlacedMessage().should('have.text', 'Congratulations! Your order has been confirmed!')
   })
 
-  it('Test Case 16: Place Order: Login before Checkout', () => {
+  it('Test Case 16 + 23 : Place Order: Login before Checkout + Verify address details in checkout page', () => {
     cy.loginUser()
     homePage.takeFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
     homePage.takeFirstProductPrice().then((price) => { cy.wrap(price).as('firstProductPrice') })
