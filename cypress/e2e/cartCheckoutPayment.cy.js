@@ -95,7 +95,7 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     })
   })
 
-  it.only('Test Case 14: Place Order: Register while Checkout', () => {
+  it('Test Case 14: Place Order: Register while Checkout', () => {
     homePage.takeFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
     homePage.takeFirstProductPrice().then((price) => { cy.wrap(price).as('firstProductPrice') })
     homePage
@@ -108,6 +108,53 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     cy.registerUser()
     homePage.clickViewCartHeaderButton()
     cartPage.clickProceedToCheckoutButton()
+    checkoutPage.getActiveBreadcrumbs().should('have.text', 'Checkout')
+    checkoutPage.getCartInfoSection().should('be.visible')
+    checkoutPage.getPageTitle().should('equal', 'Automation Exercise - Checkout')
+    checkoutPage.getPageUrl().should('include', 'checkout')
+    checkoutPage.getCartProductDescription().should('have.length', 1)
+    checkoutPage.getAddressDeliverySection().should('contain', 'Your delivery address')
+    checkoutPage.getAddressBillingSection().should('contain', 'Your billing address')
+    checkoutPage.scrollToCartTableSection()
+    checkoutPage.getDeliveryGenderFirstNameLastName()
+      .should('contain', `${user.title}. ${user.firstname} ${user.lastname}`)
+    checkoutPage.getDeliveryCompany().should('have.text', user.company)
+    checkoutPage.getDeliveryAddress().should('have.text', user.address1)
+    checkoutPage.getDeliveryAddress2().should('have.text', user.address2)
+    checkoutPage.getSavedVariableAs('firstProductName').then((firstProductName) => {
+      checkoutPage.getAllCartProductNameList().should('have.text', firstProductName)
+    })
+    checkoutPage.getSavedVariableAs('firstProductPrice').then((firstProductPrice) => {
+      checkoutPage.getAllCartProductPriceList().should('have.text', firstProductPrice)
+    })
+    checkoutPage
+      .typeCommentOrderTextField(product.commentToOrder)
+      .clickPlaceOrderButton()
+    paymentPage.getActiveBreadcrumbs().should('have.text', 'Payment')
+    paymentPage.getHeadingOfSection().should('have.text', 'Payment')
+    paymentPage.getPaymentInformation().should('be.visible')
+    paymentPage
+      .typeNameOnCardTextField(user.name, user.lastname)
+      .typeCardNumberTextField(userCardNumber[0])
+      .typeCardCvvTextField(userCardCvv[0])
+      .typeCardExpiryMonthTextField(userCardExMonth[0])
+      .typeCardExpiryYearTextField(userCardExYear[0])
+      .clickPayAndConfirmOrderButton()
+    // paymentPage.getSuccessOrderMessage().should('include.text', 'Your order has been placed successfully!')
+    paymentDonePage.getOrderPlacedHeading().should('have.text', 'Order Placed!')
+    paymentDonePage.getOrderPlacedMessage().should('have.text', 'Congratulations! Your order has been confirmed!')
+  })
+
+  it.only('Test Case 15: Test Case 15: Place Order: Register before Checkout', () => {
+    cy.registerUser()
+    homePage.takeFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
+    homePage.takeFirstProductPrice().then((price) => { cy.wrap(price).as('firstProductPrice') })
+    homePage
+      .clickFirstProductAddToCartButton()
+      .clickViewCartModalButton()
+    cartPage.getCartProductsList().should('have.length', 1) 
+    cartPage
+      .clickProceedToCheckoutButton()
     checkoutPage.getActiveBreadcrumbs().should('have.text', 'Checkout')
     checkoutPage.getCartInfoSection().should('be.visible')
     checkoutPage.getPageTitle().should('equal', 'Automation Exercise - Checkout')
