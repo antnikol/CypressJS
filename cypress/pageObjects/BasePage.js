@@ -20,6 +20,8 @@ class BasePage  {
   getPageUrl = () => cy.url()
   getScrollUpButton = () => cy.get('#scrollUp')
   getCopyrightText = () => cy.get('.footer-bottom .pull-left')
+  getActiveBreadcrumbs = () => cy.get('.breadcrumb .active')
+  getRegisterLoginModalButton = () => cy.get('.modal-body a[href="/login"]')
 
   //Left-Sidebar
   getLeftSidebarCategoryList = () => cy.get('a[data-parent="#accordian"]')
@@ -101,6 +103,11 @@ class BasePage  {
 
   clickScrollUpButton() {
     this.getScrollUpButton().click()
+    return this
+  }
+
+  clickRegisterLoginModalButton() {
+    this.getRegisterLoginModalButton().click()
     return this
   }
 

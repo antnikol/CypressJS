@@ -17,7 +17,7 @@ class ProductsPage extends BasePage {
   getContinueShoppingButton = () => cy.get('button[data-dismiss="modal"]')
   getViewCartModalButton = () => cy.get('.modal-body a[href="/view_cart"]')
   getAllAddToCartButtons = () => cy.get('a[data-product-id]')
-  
+
   
 
   getFirstProductItem = () => cy.get('.choose').eq(0)
@@ -62,12 +62,12 @@ class ProductsPage extends BasePage {
     }) 
   }
 
-  takeFirstProductName() {
+ takeFirstProductName() {
     return this.getAllProductsNames().first().invoke('text')
       .then((text) => {
         return text.trim()
     }) 
-  }
+  } 
 
   clickFirstProductAddToCartButton() {
     this.getAllSingleProductsSection().first().scrollIntoView()

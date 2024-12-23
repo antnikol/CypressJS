@@ -16,7 +16,9 @@ getRecommendedItemCarouselSection = () => cy.get('#recommended-item-carousel div
 getRecommendedItemCarouselSectionActive = () => cy.get('#recommended-item-carousel .item.active')
 getCarouselRecommendedItemNamesList = () => cy.get('#recommended-item-carousel .item.active p')
 getCarouselRecommendedItemAddToCartButtonssList = () => cy.get('#recommended-item-carousel .item.active a.add-to-cart')
-get
+getAllProductsNames = () => cy.get('.overlay-content p')
+getAllProductsPrices = () => cy.get('.overlay-content h2')
+
 
 
 
@@ -48,6 +50,17 @@ scrollToCarouselRecommendedItems() {
   this.getRecommendedItemCarouselSection().scrollIntoView({ easing: 'linear', duration: 500 });
   return this
 }
+
+takeFirstProductName() {
+  return this.getAllProductsNames().first().invoke('text')
+    .then((text) => { return text.trim() }) 
+} 
+
+takeFirstProductPrice() {
+  return this.getAllProductsPrices().first().invoke('text')
+    .then((text) => { return text.trim() }) 
+}
+
 }
 
 export default HomePage;

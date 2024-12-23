@@ -324,22 +324,6 @@ describe('Test for the site automationexercise.com', ()=> {
   })
 
 
-  it.only('Test Case 22: Add to cart from Recommended items', () => {
-    let goodName
-    cy.scrollTo('bottom')
-    cy.get('.recommended_items').contains('recommended items')
-      .should('be.visible')
-    cy.get('div.item.active').last().find('p').eq(1)
-      .invoke('text').then((text) => {
-      goodName = text.trim()
-    })
-    cy.get('div.item.active').last().find('a.add-to-cart').eq(1).click()
-    cy.get('.modal-body').find('a[href="/view_cart"]').click()
-    cy.then(() => {
-      cy.get('.cart_description a').should('have.text', goodName)
-    })
-  })
-
   it('Test Case 23: Verify address details in checkout page', () => {
     cy.get('a[href="/login"]').click()
     cy.contains(/New User Signup!/i).should('be.visible')

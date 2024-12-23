@@ -5,7 +5,11 @@ import ProductsPage from "../pageObjects/ProductsPage"
 import CartPage from "../pageObjects/CartPage"
 import ProductDetailsPage from "../pageObjects/ProductDetailsPage"
 import genData from "../fixtures/genData"
-import { searchTerms, user, userUpdate, incorrectPassword } from '../fixtures/api.json'
+import CheckoutPage from "../pageObjects/CheckoutPage"
+import PaymentPage from "../pageObjects/PaymentPage"
+import PaymentDonePage from "../pageObjects/PaymentDonePage.cy"
+import { userCardNumber, userCardCvv, userCardExMonth, userCardExYear, user, incorrectPassword } from '../fixtures/api.json'
+
 
 
 
@@ -13,6 +17,9 @@ const homePage = new HomePage()
 const productsPage = new ProductsPage()
 const cartPage = new CartPage()
 const productDetailsPage = new ProductDetailsPage()
+const checkoutPage = new CheckoutPage()
+const paymentPage = new PaymentPage()
+const paymentDonePage = new PaymentDonePage()
 
 const product = genData.newProductTestData()
 
@@ -21,7 +28,7 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
   it('Test Case 12: Hover and click "Add to cart" button for two different products with different quantity', () => {
     homePage.clickProductsHeaderButton()
     productsPage.takeFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
-    productsPage.takeFirstProductPrice().then((name) => { cy.wrap(name).as('firstProductPrice') })
+    productsPage.takeFirstProductPrice().then((price) => { cy.wrap(price).as('firstProductPrice') })
     productsPage
       .resetCounterClickFirstProductAddToCartButton()
       .clickFirstProductAddToCartButton()
@@ -86,6 +93,56 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     cartPage.getSavedVariableAs('productName').then((productName) => {
       cartPage.getFirstProductName().should('have.text', productName)
     })
+  })
+
+  it.only('Test Case 14: Place Order: Register while Checkout', () => {
+    homePage.takeFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
+    homePage.takeFirstProductPrice().then((price) => { cy.wrap(price).as('firstProductPrice') })
+    homePage
+      .clickFirstProductAddToCartButton()
+      .clickViewCartModalButton()
+    cartPage.getCartProductsList().should('have.length', 1) 
+    cartPage
+      .clickProceedToCheckoutButton()
+      .clickRegisterLoginModalButton()
+    cy.registerUser()
+    homePage.clickViewCartHeaderButton()
+    cartPage.clickProceedToCheckoutButton()
+    checkoutPage.getActiveBreadcrumbs().should('have.text', 'Checkout')
+    checkoutPage.getCartInfoSection().should('be.visible')
+    checkoutPage.getPageTitle().should('equal', 'Automation Exercise - Checkout')
+    checkoutPage.getPageUrl().should('include', 'checkout')
+    checkoutPage.getCartProductDescription().should('have.length', 1)
+    checkoutPage.getAddressDeliverySection().should('contain', 'Your delivery address')
+    checkoutPage.getAddressBillingSection().should('contain', 'Your billing address')
+    checkoutPage.scrollToCartTableSection()
+    checkoutPage.getDeliveryGenderFirstNameLastName()
+      .should('contain', `${user.title}. ${user.firstname} ${user.lastname}`)
+    checkoutPage.getDeliveryCompany().should('have.text', user.company)
+    checkoutPage.getDeliveryAddress().should('have.text', user.address1)
+    checkoutPage.getDeliveryAddress2().should('have.text', user.address2)
+    checkoutPage.getSavedVariableAs('firstProductName').then((firstProductName) => {
+      checkoutPage.getAllCartProductNameList().should('have.text', firstProductName)
+    })
+    checkoutPage.getSavedVariableAs('firstProductPrice').then((firstProductPrice) => {
+      checkoutPage.getAllCartProductPriceList().should('have.text', firstProductPrice)
+    })
+    checkoutPage
+      .typeCommentOrderTextField(product.commentToOrder)
+      .clickPlaceOrderButton()
+    paymentPage.getActiveBreadcrumbs().should('have.text', 'Payment')
+    paymentPage.getHeadingOfSection().should('have.text', 'Payment')
+    paymentPage.getPaymentInformation().should('be.visible')
+    paymentPage
+      .typeNameOnCardTextField(user.name, user.lastname)
+      .typeCardNumberTextField(userCardNumber[0])
+      .typeCardCvvTextField(userCardCvv[0])
+      .typeCardExpiryMonthTextField(userCardExMonth[0])
+      .typeCardExpiryYearTextField(userCardExYear[0])
+      .clickPayAndConfirmOrderButton()
+    // paymentPage.getSuccessOrderMessage().should('include.text', 'Your order has been placed successfully!')
+    paymentDonePage.getOrderPlacedHeading().should('have.text', 'Order Placed!')
+    paymentDonePage.getOrderPlacedMessage().should('have.text', 'Congratulations! Your order has been confirmed!')
   })
 
 })

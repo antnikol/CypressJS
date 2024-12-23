@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import BasePage from "./BasePage.js"
+import CheckoutPage from "./CheckoutPage.js"
 
 class CartPage extends BasePage {
 
@@ -12,6 +13,7 @@ getActiveBreadcrumbs = () => cy.get('.breadcrumb .active')
 getDeleteProductFromCartButton = () => cy.get('.cart_quantity_delete')
 getEmptyCardSection = () => cy.get('#empty_cart p')
 getProductsNamesList = () => cy.get('h4 a')
+getProceedToCheckoutButton = () => cy.get('.btn.check_out')
 
 getFirstProductQuantity = () => cy.get('.cart_quantity button').first()
 getLastProductQuantity = () => cy.get('.cart_quantity button').last()
@@ -87,6 +89,11 @@ checkSearchedProductQuantityInCart(quantity) {
 
 getSavedVariableAs(variable) {
   return cy.get(`@${variable}`);
+}
+
+clickProceedToCheckoutButton() {
+  this.getProceedToCheckoutButton().click()
+  return this
 }
 
 }

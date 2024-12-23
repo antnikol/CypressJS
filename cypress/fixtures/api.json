@@ -9,7 +9,7 @@
     "name": "test_Name",
     "email": "testUser33@gmail.com",
     "password": "123456",
-    "title": "Mr.",
+    "title": "Mr",
     "birth_date": "1",
     "birth_month": "January",
     "birth_year": "1999",
@@ -57,5 +57,17 @@
   },
   "incorrectPassword": [
     "123456incorrect"
+  ],
+  "userCardNumber": [
+    "1111222233334444"
+  ],
+  "userCardCvv": [
+    "111"
+  ],
+  "userCardExMonth": [
+    "01"
+  ],
+  "userCardExYear": [
+    "2029"
   ]
 }
