@@ -555,41 +555,7 @@ describe('Test for the site automationexercise.com', ()=> {
     cy.contains(/account deleted!/i).should('be.visible')
   })
   
-  it('Test Case 25: Verify Scroll Up using "Arrow" button and Scroll Down functionality', () => {
-    cy.scrollTo('bottom')
-    cy.get('.single-widget h2').contains('Subscription').should('be.visible')
-    cy.get('.single-widget h2')
-      .should(($el) => {
-        const rect = $el[0].getBoundingClientRect(); // Отримуємо розмір і позицію елемента
-        try {
-          expect(rect.top).to.be.greaterThan(0); // Перевіряємо, що елемент знаходиться в межах видимої частини
-          expect(rect.bottom).to.be.lessThan(Cypress.config('viewportHeight')); // Перевіряємо, що елемент не вийшов за межі екрану
-        } catch (error) {
-          Cypress.log({
-            name: 'Visibility check',
-            message: 'Subscription section is not visible within the viewport',
-            consoleProps: () => {
-                return {
-                    rect,
-                    errorMessage: error.message,
-                };
-            },
-          });
-          throw error;
-        }
-      })
-    cy.get('#scrollUp').click()
-    cy.get('div.carousel-inner div.item.active').eq(0)
-      .contains('Full-Fledged practice website for Automation Engineers')
-      .should('be.visible')
-    cy.get('div.carousel-inner div.item.active').eq(0) 
-      .should(($el) => {
-        const rect = $el[0].getBoundingClientRect(); // Отримуємо розмір і позицію елемента
-        expect(rect.top).to.be.greaterThan(0); // Перевіряємо, що елемент знаходиться в межах видимої частини
-        expect(rect.bottom).to.be.lessThan(Cypress.config('viewportHeight')); // Перевіряємо, що елемент не вийшов за межі екрану
-      })
-  })
-
+ 
   it('Test Case 26: Verify Scroll Up without "Arrow" button and Scroll Down functionality', () => {
     cy.scrollTo('bottom')
     cy.get('.single-widget h2').contains('Subscription').should('be.visible')

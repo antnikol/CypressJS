@@ -42,4 +42,27 @@ describe('Test for the site automationexercise.com', ()=> {
     })
   })
 
+  it('Test Case 26: Verify Scroll Up without "Arrow" button and Scroll Down functionality', () => {
+    homePage.scrollToBottom()
+    homePage.getCopyrightText().should('be.visible')
+    homePage.getCopyrightText().should('have.text', 'Copyright © 2021 All rights reserved')
+    homePage.getCopyrightText().should(($el) => {
+      const rect = $el[0].getBoundingClientRect()
+      expect(rect.top).to.be.greaterThan(0)
+      expect(rect.bottom).to.be.lessThan(Cypress.config('viewportHeight'))
+    })
+    
+    
+      cy.scrollTo('top')
+    cy.get('div.carousel-inner div.item.active').eq(0)
+      .contains('Full-Fledged practice website for Automation Engineers')
+      .should('be.visible')
+    cy.get('div.carousel-inner div.item.active').eq(0) 
+      .should(($el) => {
+        const rect = $el[0].getBoundingClientRect(); // Отримуємо розмір і позицію елемента
+        expect(rect.top).to.be.greaterThan(0); // Перевіряємо, що елемент знаходиться в межах видимої частини
+        expect(rect.bottom).to.be.lessThan(Cypress.config('viewportHeight')); // Перевіряємо, що елемент не вийшов за межі екрану
+      })
+  })
+
 })

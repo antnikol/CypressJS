@@ -75,6 +75,15 @@ class BasePage  {
     return this
   } 
 
+  scrollToTop() {
+    cy.window().then((win) => {
+      if (win.document.body.scrollHeight > win.innerHeight) {
+        cy.scrollTo('top')
+      }
+    })
+    return this
+  } 
+
   clickTestCasesHeaderMenuButton() {
     this.getTestCasesHeaderMenuButton().click()
     return this
