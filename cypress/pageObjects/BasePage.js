@@ -10,7 +10,7 @@ class BasePage  {
   getHeaderHomeIcon = () => cy.get(".fa-home")
   getContactUsButton = () => cy.get('a[href="/contact_us"]')
   getProductsHeaderButton = () => cy.get('.shop-menu a[href="/products"]')
-  getSubscriptionFooterSection = () => cy.get('.single-widget')
+  getSubscriptionFooterSection = () => cy.get('.single-widget h2')
   getSubscriptionFooterEmailField = () => cy.get('#susbscribe_email')
   getSubscribeButton = () => cy.get('button#subscribe')
   getSuccessSubscribeMessage = () => cy.get('.alert-success.alert')
@@ -18,6 +18,8 @@ class BasePage  {
   getTestCasesHeaderMenuButton = () => cy.get('.nav a[href="/test_cases"]')
   getPageTitle = () => cy.title()
   getPageUrl = () => cy.url()
+  getScrollUpButton = () => cy.get('#scrollUp')
+  getCopyrightText = () => cy.get('.footer-bottom .pull-left')
 
   //Left-Sidebar
   getLeftSidebarCategoryList = () => cy.get('a[data-parent="#accordian"]')
@@ -85,6 +87,11 @@ class BasePage  {
 
   clickLeftSidebarSubCategory(subCategoryName) {
     this.getLeftSidebarSubCategoryList().contains(subCategoryName).click()
+    return this
+  }
+
+  clickScrollUpButton() {
+    this.getScrollUpButton().click()
     return this
   }
 

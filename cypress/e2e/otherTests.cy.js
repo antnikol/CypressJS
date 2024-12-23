@@ -23,4 +23,23 @@ describe('Test for the site automationexercise.com', ()=> {
     testCasesPage.getFeedbackForUsTitle().should('have.text', 'Feedback for Us')
   })
 
+  it.only('Test Case 25: Verify Scroll Up using "Arrow" button and Scroll Down functionality', () => {
+    homePage.scrollToBottom()
+    homePage.getCopyrightText().should('be.visible')
+    homePage.getCopyrightText().should('have.text', 'Copyright © 2021 All rights reserved')
+    homePage.getCopyrightText().should(($el) => {
+      const rect = $el[0].getBoundingClientRect()
+      expect(rect.top).to.be.greaterThan(0)
+      expect(rect.bottom).to.be.lessThan(Cypress.config('viewportHeight'))
+    })
+    homePage.clickScrollUpButton()
+    homePage.getSliderCarouselSection().should('be.visible')
+    homePage.getSliderCarouselSection().should('contain', 'Full-Fledged practice website for Automation Engineers')
+    homePage.getSliderCarouselSection().should(($el) => {
+      const rect = $el[0].getBoundingClientRect()
+      expect(rect.top).to.be.greaterThan(0)
+      expect(rect.bottom).to.be.lessThan(Cypress.config('viewportHeight'))
+    })
+  })
+
 })

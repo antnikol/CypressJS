@@ -11,6 +11,8 @@ getFeaturesItemsSection = ()=> cy.get('.features_items')
 getPageTitle = () => cy.title()
 getAllAddToCartButtons = () => cy.get('a[data-product-id]')
 getViewCartModalButton = () => cy.get('.modal-body a[href="/view_cart"]')
+getSliderCarouselSection = () => cy.get('#slider-carousel div.carousel-inner')
+getRecommendedItemCarouselSection = () => cy.get('#recommended-item-carousel div.carousel-inner')
 
 
 

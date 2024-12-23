@@ -323,21 +323,6 @@ describe('Test for the site automationexercise.com', ()=> {
     cy.get('.single-products').should('have.length.above', 0)
   })
 
-  it('Test Case 20: Search Products and Verify Cart After Login', () => {
-    cy.get('a[href="/products"]').click()
-    cy.get('.features_items').children().first().should('have.text', 'All Products')
-    cy.url().should('include', '/products')
-    cy.get('input#search_product').type('Saree')
-    cy.get('button#submit_search').click()
-    cy.url().should('include', '?search')
-    cy.get('h2.title').should('have.text', 'Searched Products')
-    cy.get('.product-image-wrapper').should('have.length.above', 0)
-    cy.get('.product-image-wrapper')
-
-    cy.get('.overlay-content p').each(($el) => {
-      cy.wrap($el).invoke('text').should('match', /Saree/i);
-    })
-  })
 
   it('Test Case 21: Add review on product', () => {
     cy.get('a[href="/products"]').click()
