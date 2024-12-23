@@ -51,18 +51,14 @@ describe('Test for the site automationexercise.com', ()=> {
       expect(rect.top).to.be.greaterThan(0)
       expect(rect.bottom).to.be.lessThan(Cypress.config('viewportHeight'))
     })
-    
-    
-      cy.scrollTo('top')
-    cy.get('div.carousel-inner div.item.active').eq(0)
-      .contains('Full-Fledged practice website for Automation Engineers')
-      .should('be.visible')
-    cy.get('div.carousel-inner div.item.active').eq(0) 
-      .should(($el) => {
-        const rect = $el[0].getBoundingClientRect(); // Отримуємо розмір і позицію елемента
-        expect(rect.top).to.be.greaterThan(0); // Перевіряємо, що елемент знаходиться в межах видимої частини
-        expect(rect.bottom).to.be.lessThan(Cypress.config('viewportHeight')); // Перевіряємо, що елемент не вийшов за межі екрану
-      })
+    homePage.scrollToTop()
+    homePage.getSliderCarouselSection().should('be.visible')
+    homePage.getSliderCarouselSection().should('contain', 'Full-Fledged practice website for Automation Engineers')
+    homePage.getSliderCarouselSection().should(($el) => {
+      const rect = $el[0].getBoundingClientRect()
+      expect(rect.top).to.be.greaterThan(0)
+      expect(rect.bottom).to.be.lessThan(Cypress.config('viewportHeight'))
+    })
   })
 
 })
