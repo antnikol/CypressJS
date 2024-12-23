@@ -84,6 +84,11 @@ checkSearchedProductQuantityInCart(quantity) {
   });
   return this;
 }
+
+getSavedVariableAs(variable) {
+  return cy.get(`@${variable}`);
+}
+
 }
 
 export default CartPage;

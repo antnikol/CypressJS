@@ -13,6 +13,10 @@ getAllAddToCartButtons = () => cy.get('a[data-product-id]')
 getViewCartModalButton = () => cy.get('.modal-body a[href="/view_cart"]')
 getSliderCarouselSection = () => cy.get('#slider-carousel div.carousel-inner')
 getRecommendedItemCarouselSection = () => cy.get('#recommended-item-carousel div.carousel-inner')
+getRecommendedItemCarouselSectionActive = () => cy.get('#recommended-item-carousel .item.active')
+getCarouselRecommendedItemNamesList = () => cy.get('#recommended-item-carousel .item.active p')
+getCarouselRecommendedItemAddToCartButtonssList = () => cy.get('#recommended-item-carousel .item.active a.add-to-cart')
+get
 
 
 
@@ -24,6 +28,25 @@ clickFirstProductAddToCartButton() {
 clickViewCartModalButton() {
   this.getViewCartModalButton().click()
   return new CartPage()
+}
+
+clickAddToCartRecommendedItemCarousel(itemNumber) {
+  this.getRecommendedItemCarouselActive().eq(itemNumber).click()
+  return new CartPage()
+}
+
+takeCarouselRecommendedItemName(randomCarouselNumber) {
+  return this.getCarouselRecommendedItemNamesList().eq(randomCarouselNumber).invoke('text')
+}
+
+clickCarouselRecommendedItemAddToCartButton(randomCarouselNumber) {
+  this.getCarouselRecommendedItemAddToCartButtonssList().eq(randomCarouselNumber).click()
+  return this
+}
+
+scrollToCarouselRecommendedItems() {
+  this.getRecommendedItemCarouselSection().scrollIntoView({ easing: 'linear', duration: 500 });
+  return this
 }
 }
 

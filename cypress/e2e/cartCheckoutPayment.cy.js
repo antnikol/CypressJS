@@ -64,7 +64,7 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     cartPage.getProductQuantityList().should('have.text', product.quantity)
   }) 
 
-  it.only('Test Case 17: Remove Products From Cart', () => {
+  it('Test Case 17: Remove Products From Cart', () => {
     homePage
       .clickFirstProductAddToCartButton()
       .clickViewCartModalButton()
@@ -74,6 +74,18 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     cartPage.getActiveBreadcrumbs().should('have.text', 'Shopping Cart')
     cartPage.clickDeleteProductFromCartButton()
     cartPage.getEmptyCardSection().should('contain', 'Cart is empty!')
+  })
+
+  it('Test Case 22: Add to cart from Recommended items', () => {
+    homePage.scrollToCarouselRecommendedItems()
+    homePage.takeCarouselRecommendedItemName(product.randomCarouselProductNumber)
+      .then((name) => { cy.wrap(name).as('productName') })
+    homePage
+      .clickCarouselRecommendedItemAddToCartButton(product.randomCarouselProductNumber)
+      .clickViewCartModalButton()
+    cartPage.getSavedVariableAs('productName').then((productName) => {
+      cartPage.getFirstProductName().should('have.text', productName)
+    })
   })
 
 })

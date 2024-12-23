@@ -324,21 +324,7 @@ describe('Test for the site automationexercise.com', ()=> {
   })
 
 
-  it('Test Case 21: Add review on product', () => {
-    cy.get('a[href="/products"]').click()
-    cy.get('.features_items').children().first().should('have.text', 'All Products')
-    cy.url().should('include', '/products')
-    cy.get('.choose a').eq(5).contains('View Product').click()
-    cy.get('li.active').invoke('text').should('match', /Write Your Review/i)
-    cy.get('input#name').type(first_name)
-    cy.get('input#email').type(userEmail)
-    cy.get('textarea#review').type('...some review text...')
-    cy.get('#button-review').click()
-    cy.get('div#review-section').contains('Thank you for your review.')
-      .should('be.visible')
-  })
-
-  it('Test Case 22: Add to cart from Recommended items', () => {
+  it.only('Test Case 22: Add to cart from Recommended items', () => {
     let goodName
     cy.scrollTo('bottom')
     cy.get('.recommended_items').contains('recommended items')
