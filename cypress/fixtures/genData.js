@@ -3,8 +3,8 @@ import { faker } from "@faker-js/faker";
 module.exports = {
     newProductTestData: function () {
         let Product = {
-            quantity: faker.number.int({ min: 1, max: 10000 })
-
+            quantity: faker.number.int({ min: 1, max: 10000 }),
+            review: faker.lorem.sentences(3),
             // name: faker.company.buzzNoun(),
             // longName: faker.commerce.productName(),
             // newName: faker.company.buzzNoun(),

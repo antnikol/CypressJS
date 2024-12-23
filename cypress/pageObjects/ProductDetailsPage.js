@@ -15,6 +15,12 @@ getProductPrice = () => cy.get('.product-information span span')
 getProductQuantityField = () => cy.get('#quantity')
 getAddToCartButton = () => cy.get('button.btn.btn-default.cart')
 getViewCartModalButton = () => cy.get('.modal-body a[href="/view_cart"]')
+getWriteYourReviewHeader = () => cy.get('li.active a')
+getYourNameField = () => cy.get('input#name')
+getYourEmailField = () => cy.get('input#email')
+getReviewTextField = () => cy.get('textarea#review')
+getSubmitReviewButton = () => cy.get('#button-review')
+getReviewSuccessMessage = () => cy.get('#review-form .alert-success span')
 
 
 clearProductQuantityField() {
@@ -34,6 +40,26 @@ clickAddToCartButton() {
 
 clickViewCartModalButton() {
   this.getViewCartModalButton().click()
+  return this
+}
+
+typeYourNameField(name) {
+  this.getYourNameField().type(name)
+  return this
+}
+
+typeYourEmailField(email) {
+  this.getYourEmailField().type(email)
+  return this
+}
+
+typeReviewTextField(reviewText) {
+  this.getReviewTextField().type(reviewText)
+  return this
+}
+
+clickSubmitReviewButton() {
+  this.getSubmitReviewButton().click()
   return this
 }
   

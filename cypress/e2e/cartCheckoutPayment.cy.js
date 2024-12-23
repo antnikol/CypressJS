@@ -4,7 +4,7 @@ import HomePage from "../pageObjects/HomePage"
 import ProductsPage from "../pageObjects/ProductsPage"
 import CartPage from "../pageObjects/CartPage"
 import ProductDetailsPage from "../pageObjects/ProductDetailsPage"
-import genData from "../fixtures/genData";
+import genData from "../fixtures/genData"
 import { searchTerms, user, userUpdate, incorrectPassword } from '../fixtures/api.json'
 
 

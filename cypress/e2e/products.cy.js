@@ -2,9 +2,10 @@
 
 import HomePage from "../pageObjects/HomePage"
 import ProductsPage from "../pageObjects/ProductsPage"
-import { searchTerms, user, userUpdate, incorrectPassword } from '../fixtures/api.json'
 import ProductDetailsPage from "../pageObjects/ProductDetailsPage"
 import CartPage from "../pageObjects/CartPage"
+import genData from "../fixtures/genData"
+import { searchTerms, user, userUpdate, incorrectPassword } from '../fixtures/api.json'
 
 
 
@@ -12,6 +13,8 @@ const homePage = new HomePage()
 const productsPage = new ProductsPage()
 const productDetailsPage = new ProductDetailsPage()
 const cartPage = new CartPage()
+
+const product = genData.newProductTestData()
 
 describe('Test for the site automationexercise.com', ()=> {
 
@@ -38,7 +41,7 @@ describe('Test for the site automationexercise.com', ()=> {
     productsPage.checkSearchedProductsNames(searchTerms[2])
   })
 
-  it.only('Test Case 20: Search Products and Verify Cart After Login', () => {
+  it('Test Case 20: Search Products and Verify Cart After Login', () => {
     cy.registerUser()
     homePage.clickLogoutButton()
 
@@ -84,4 +87,24 @@ describe('Test for the site automationexercise.com', ()=> {
     productsPage.getPageUrl().should('contain', 'category_products')
     productsPage.checkSearchedProductsNames('Jeans')
   })
+
+  it.only('Test Case 21: Add review on product', () => {
+    homePage.clickProductsHeaderButton()
+    productsPage.getAllProductsHeader().should('have.text', 'All Products')
+    productsPage.getPageUrl().should('include', '/products')
+    productsPage.clickFirstViewProductButton()
+    productDetailsPage.getWriteYourReviewHeader().should('have.text', 'Write Your Review')
+    productDetailsPage
+      .typeYourNameField(user.name)
+      .typeYourEmailField(user.email)
+      .typeReviewTextField(product.review)
+      .clickSubmitReviewButton()
+    productDetailsPage.getReviewSuccessMessage().should('be.visible')
+    productDetailsPage.getReviewSuccessMessage().should('have.text', 'Thank you for your review.')
+
+
+
+      
+  })
+
 })

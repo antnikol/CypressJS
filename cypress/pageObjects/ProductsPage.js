@@ -18,6 +18,7 @@ class ProductsPage extends BasePage {
   getViewCartModalButton = () => cy.get('.modal-body a[href="/view_cart"]')
   getAllAddToCartButtons = () => cy.get('a[data-product-id]')
   
+  
 
   getFirstProductItem = () => cy.get('.choose').eq(0)
 
