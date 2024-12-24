@@ -3,9 +3,9 @@
 import SignUpPage from "../pageObjects/SignUpPage"
 import HomePage from "../pageObjects/HomePage"
 import LoginPage from "../pageObjects/LoginPage"
-import { searchTerms, user, userUpdate, incorrectPassword } from '../fixtures/api.json'
 import ContactUsPage from "../pageObjects/ContactUsPage"
 import CartPage from "../pageObjects/CartPage"
+import { user } from '../fixtures/api.json'
 
 
 

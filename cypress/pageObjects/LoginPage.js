@@ -3,8 +3,7 @@
 import BasePage from "./BasePage.js"
 
 class LoginPage extends BasePage {
-
-const 
+ 
 
 getSignupFormHeader = () => cy.get('.signup-form > h2')
 getSignupNameTextField = () => cy.get('input[data-qa="signup-name"]')

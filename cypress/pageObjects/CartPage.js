@@ -1,7 +1,6 @@
 /// <reference types="cypress" />
 
 import BasePage from "./BasePage.js"
-import CheckoutPage from "./CheckoutPage.js"
 
 class CartPage extends BasePage {
 

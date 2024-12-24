@@ -5,8 +5,7 @@ import ProductsPage from "../pageObjects/ProductsPage"
 import ProductDetailsPage from "../pageObjects/ProductDetailsPage"
 import CartPage from "../pageObjects/CartPage"
 import genData from "../fixtures/genData"
-import { searchTerms, user, userUpdate, incorrectPassword } from '../fixtures/api.json'
-
+import { searchTerms, user } from '../fixtures/api.json'
 
 
 const homePage = new HomePage()

@@ -2,10 +2,9 @@
 
 import HomePage from "../pageObjects/HomePage"
 import ProductsPage from "../pageObjects/ProductsPage"
-import { searchTerms, user, userUpdate, incorrectPassword } from '../fixtures/api.json'
 import ProductDetailsPage from "../pageObjects/ProductDetailsPage"
 import TestCasesPage from "../pageObjects/TestCasesPage"
-
+import { user } from '../fixtures/api.json'
 
 
 const homePage = new HomePage()

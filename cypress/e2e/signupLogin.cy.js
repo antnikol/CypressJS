@@ -3,8 +3,7 @@
 import SignUpPage from "../pageObjects/SignUpPage"
 import HomePage from "../pageObjects/HomePage"
 import LoginPage from "../pageObjects/LoginPage"
-import { searchTerms, user, userUpdate, incorrectPassword } from '../fixtures/api.json'
-
+import { user, incorrectPassword } from '../fixtures/api.json'
 
 
 const signupPage = new SignUpPage()

@@ -11,8 +11,6 @@ import PaymentDonePage from "../pageObjects/PaymentDonePage.cy"
 import { userCardNumber, userCardCvv, userCardExMonth, userCardExYear, user, incorrectPassword } from '../fixtures/api.json'
 
 
-
-
 const homePage = new HomePage()
 const productsPage = new ProductsPage()
 const cartPage = new CartPage()
