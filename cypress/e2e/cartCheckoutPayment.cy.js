@@ -82,7 +82,7 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     cartPage.getEmptyCardSection().should('contain', text.cartPage.cardIsEmpty)
   })
 
-  it('Test Case 22: Add to cart from Recommended items', () => {
+  it.only('Test Case 22: Add to cart from Recommended items', () => {
     homePage.scrollToCarouselRecommendedItems()
     homePage.getCarouselRecommendedItemName(product.randomCarouselProductNumber)
       .then((name) => { cy.wrap(name).as('productName') })

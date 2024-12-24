@@ -26,6 +26,7 @@ describe('Old tests for the site automationexercise.com', ()=> {
   })
 
   it('Test Case 1: Register User', () => {
+    cy.deleteUser()
     cy.get('@loginButton').click()
     cy.contains(/New User Signup!/i).should('be.visible')
     cy.get('input[data-qa="signup-name"]').type(userName)
