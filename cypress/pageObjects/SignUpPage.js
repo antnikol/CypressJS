@@ -28,7 +28,6 @@ getContinueButton = () => cy.get('a[data-qa="continue-button"]')
 
 
 
-
 checkTitleMrRadioButton() {
   this.getTitleMrRadioButton().check()
   return this

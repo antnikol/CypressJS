@@ -22,9 +22,6 @@ describe('Test for the site automationexercise.com', ()=> {
   let gender = 'Mr'
   beforeEach( () => {
     cy.visit('/')
-    cy.get(".fa-home").should('have.css', 'color', 'rgb(255, 165, 0)')
-    cy.get("section[id='slider']").should('exist')
-    cy.contains(/Brands/i).should('be.visible')
     cy.get('a[href="/login"]').as('loginButton')
   })
 

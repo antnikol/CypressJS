@@ -12,7 +12,7 @@ getCardCvvTextField = () => cy.get('input[data-qa="cvc"]')
 getCardExpiryMonthTextField = () => cy.get('input[data-qa="expiry-month"]')
 getCardExpiryYearTextField = () => cy.get('input[data-qa="expiry-year"]')
 getPayAndConfirmOrderButton = () => cy.get('button[data-qa="pay-button"]')
-getSuccessOrderMessage = () => cy.get('#success_message > .alert-success', { timeout: 5000 })
+getSuccessOrderMessage = () => cy.get('#success_message > .alert-success')
 
 
 

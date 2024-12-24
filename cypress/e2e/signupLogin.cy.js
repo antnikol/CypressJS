@@ -4,6 +4,7 @@ import SignUpPage from "../pageObjects/SignUpPage"
 import HomePage from "../pageObjects/HomePage"
 import LoginPage from "../pageObjects/LoginPage"
 import { user, incorrectPassword } from '../fixtures/api.json'
+import text from "../fixtures/text.json"
 
 
 const signupPage = new SignUpPage()
@@ -15,12 +16,12 @@ describe('Test for the site automationexercise.com', ()=> {
   it('Test Case 1: Register User', () => {
     cy.deleteUser()
     homePage.clickSignupLoginButton();
-    loginPage.getSignupFormHeader().should('have.text', 'New User Signup!');
+    loginPage.getSignupFormHeader().should('have.text', text.loginPage.signupFormHeader);
     loginPage
       .typeNameSignupTextField(user.name)
       .typeEmailSignupTextField(user.email)
       .clickSignupButton();
-    signupPage.getCreateAccountButton().should('have.text', 'Create Account');
+    signupPage.getCreateAccountButton().should('have.text', text.loginPage.createAccount);
     signupPage
       .checkTitleMrRadioButton()
       .typePasswordTextField(user.password)
@@ -50,7 +51,7 @@ describe('Test for the site automationexercise.com', ()=> {
     homePage
       .clickLogoutButton()
       .clickSignupLoginButton()
-    loginPage.getLoginFormHeader().should('have.text', 'Login to your account');
+    loginPage.getLoginFormHeader().should('have.text', text.loginPage.loginFormHeader);
     loginPage
       .typeEmailLoginTextField(user.email)
       .typePasswordLoginTextField(user.password)
@@ -63,7 +64,7 @@ describe('Test for the site automationexercise.com', ()=> {
     homePage
       .clickLogoutButton()
       .clickSignupLoginButton()
-    loginPage.getLoginFormHeader().should('have.text', 'Login to your account');
+    loginPage.getLoginFormHeader().should('have.text', text.loginPage.loginFormHeader);
     loginPage
       .typeEmailLoginTextField(user.email)
       .typePasswordLoginTextField(incorrectPassword[0])
@@ -76,27 +77,27 @@ describe('Test for the site automationexercise.com', ()=> {
     homePage
       .clickLogoutButton()
       .clickSignupLoginButton()
-    loginPage.getLoginFormHeader().should('have.text', 'Login to your account');
+    loginPage.getLoginFormHeader().should('have.text', text.loginPage.loginFormHeader);
     loginPage
       .typeEmailLoginTextField(user.email)
       .typePasswordLoginTextField(user.password)
       .clickLoginButton()
     homePage.getListHeaderButtons().should('contain', `${user.name}`);
     homePage.clickLogoutButton()
-    loginPage.getLoginFormHeader().should('have.text', 'Login to your account');
+    loginPage.getLoginFormHeader().should('have.text', text.loginPage.loginFormHeader);
   })
 
-  it.only('Test Case 5: Register User with existing email', () => {
+  it('Test Case 5: Register User with existing email', () => {
     cy.registerUser()
     homePage
       .clickLogoutButton()
       .clickSignupLoginButton()
-    loginPage.getLoginFormHeader().should('have.text', 'Login to your account');
+    loginPage.getLoginFormHeader().should('have.text', text.loginPage.loginFormHeader);
     loginPage
       .typeNameSignupTextField(user.name)
       .typeEmailSignupTextField(user.email)
       .clickSignupButton()
-    loginPage.getErrorSingupMessage().should('have.text', 'Email Address already exist!')
+    loginPage.getErrorSingupMessage().should('have.text', text.loginPage.errorSingupMessage)
   })
 
 })

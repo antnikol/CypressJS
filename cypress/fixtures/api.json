@@ -57,17 +57,5 @@
   },
   "incorrectPassword": [
     "123456incorrect"
-  ],
-  "userCardNumber": [
-    "1111222233334444"
-  ],
-  "userCardCvv": [
-    "111"
-  ],
-  "userCardExMonth": [
-    "01"
-  ],
-  "userCardExYear": [
-    "2029"
   ]
 }

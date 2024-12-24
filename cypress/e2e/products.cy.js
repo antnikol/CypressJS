@@ -6,6 +6,7 @@ import ProductDetailsPage from "../pageObjects/ProductDetailsPage"
 import CartPage from "../pageObjects/CartPage"
 import genData from "../fixtures/genData"
 import { searchTerms, user } from '../fixtures/api.json'
+import text from "../fixtures/text.json"
 
 
 const homePage = new HomePage()
@@ -19,7 +20,7 @@ describe('Test for the site automationexercise.com', ()=> {
 
   it('Test Case 8: Verify All Products and product detail page', () => {
     homePage.clickProductsHeaderButton()
-    productsPage.getAllProductsHeader().should('have.text', 'All Products')
+    productsPage.getAllProductsHeader().should('have.text', text.productsPage.allProductsHeader)
     productsPage.getAllProductsList().should('have.length.above', 0)
     productsPage.clickFirstViewProductButton()
     productDetailsPage.getProductInformationSection().should('be.visible')
@@ -32,11 +33,11 @@ describe('Test for the site automationexercise.com', ()=> {
 
   it('Test Case 9: Search Product', () => {
     homePage.clickProductsHeaderButton()
-    productsPage.getAllProductsHeader().should('have.text', 'All Products')
+    productsPage.getAllProductsHeader().should('have.text', text.productsPage.allProductsHeader)
     productsPage
       .typeSearchProductField(searchTerms[2])
       .clickSearchButton()
-      .getAllProductsHeader().should('have.text', 'Searched Products')
+      .getAllProductsHeader().should('have.text', text.productsPage.searchedProductsHeader)
     productsPage.checkSearchedProductsNames(searchTerms[2])
   })
 
@@ -45,25 +46,25 @@ describe('Test for the site automationexercise.com', ()=> {
     homePage.clickLogoutButton()
 
     homePage.clickProductsHeaderButton()
-    productsPage.getAllProductsHeader().should('have.text', 'All Products')
-    productsPage.getPageUrl().should('include', '/products')
+    productsPage.getAllProductsHeader().should('have.text', text.productsPage.allProductsHeader)
+    productsPage.getPageUrl().should('include', text.productsPage.pageUrl)
     productsPage
       .typeSearchProductField(searchTerms[2])
       .clickSearchButton()
-      .getAllProductsHeader().should('have.text', 'Searched Products')
-    productsPage.getPageUrl().should('include', '?search')
+      .getAllProductsHeader().should('have.text', text.productsPage.searchedProductsHeader)
+    productsPage.getPageUrl().should('include', text.productsPage.searchedPageUrl)
     productsPage
       .checkSearchedProductsNames(searchTerms[2])
       .clickAllProductsAddToCartButton()
       .clickViewCartHeaderButton()
-    cartPage.getActiveBreadcrumbs().should('have.text', 'Shopping Cart')
+    cartPage.getActiveBreadcrumbs().should('have.text', text.cartPage.breadCrumbs)
     cartPage
       .checkSearchedProductNamesInCart(searchTerms[2])
       .checkSearchedProductQuantityInCart(2)
 
     cy.loginUser()
     homePage.clickViewCartHeaderButton()
-    cartPage.getActiveBreadcrumbs().should('have.text', 'Shopping Cart')
+    cartPage.getActiveBreadcrumbs().should('have.text', text.cartPage.breadCrumbs)
     cartPage
       .checkSearchedProductNamesInCart(searchTerms[2])
       .checkSearchedProductQuantityInCart(2)
@@ -71,46 +72,46 @@ describe('Test for the site automationexercise.com', ()=> {
 
   it('Test Case 18: View Category Products', () => {
     homePage
-      .clickLeftSidebarCategory('Women')
-      .clickLeftSidebarSubCategory('Dress')
-    productsPage.getAllProductsHeader().should('have.text', 'Women - Dress Products')
-    productsPage.getPageTitle().should('equal', 'Automation Exercise - Dress Products')
-    productsPage.getPageUrl().should('contain', 'category_products')
-    productsPage.checkSearchedProductsNames('Dress')
+      .clickLeftSidebarCategory(text.category[0])
+      .clickLeftSidebarSubCategory(text.subCategoryWomen[0])
+    productsPage.getAllProductsHeader().should('have.text', `${text.category[0]} - ${text.subCategoryWomen[0]} Products`)
+    productsPage.getPageTitle().should('equal', `Automation Exercise - ${text.subCategoryWomen[0]} Products`)
+    productsPage.getPageUrl().should('contain', text.productsPage.categoryPageUrl)
+    productsPage.checkSearchedProductsNames(text.subCategoryWomen[0])
 
     productsPage
-      .clickLeftSidebarCategory('Men')
-      .clickLeftSidebarSubCategory('Jeans')
-    productsPage.getAllProductsHeader().should('have.text', 'Men - Jeans Products')
-    productsPage.getPageTitle().should('equal', 'Automation Exercise - Jeans Products')
-    productsPage.getPageUrl().should('contain', 'category_products')
-    productsPage.checkSearchedProductsNames('Jeans')
+      .clickLeftSidebarCategory(text.category[1])
+      .clickLeftSidebarSubCategory(text.subCategoryMen[1])
+    productsPage.getAllProductsHeader().should('have.text', `${text.category[1]} - ${text.subCategoryMen[1]} Products`)
+    productsPage.getPageTitle().should('equal', `Automation Exercise - ${text.subCategoryMen[1]} Products`)
+    productsPage.getPageUrl().should('contain', text.productsPage.categoryPageUrl)
+    productsPage.checkSearchedProductsNames(text.subCategoryMen[1])
   })
 
   it('Test Case 21: Add review on product', () => {
     homePage.clickProductsHeaderButton()
-    productsPage.getAllProductsHeader().should('have.text', 'All Products')
-    productsPage.getPageUrl().should('include', '/products')
+    productsPage.getAllProductsHeader().should('have.text', text.productsPage.allProductsHeader)
+    productsPage.getPageUrl().should('include', text.productsPage.pageUrl)
     productsPage.clickFirstViewProductButton()
-    productDetailsPage.getWriteYourReviewHeader().should('have.text', 'Write Your Review')
+    productDetailsPage.getWriteYourReviewHeader().should('have.text', text.productDetailsPage.writeYourReviewHeader)
     productDetailsPage
       .typeYourNameField(user.name)
       .typeYourEmailField(user.email)
       .typeReviewTextField(product.review)
       .clickSubmitReviewButton()
     productDetailsPage.getReviewSuccessMessage().should('be.visible')
-    productDetailsPage.getReviewSuccessMessage().should('have.text', 'Thank you for your review.')     
+    productDetailsPage.getReviewSuccessMessage().should('have.text', text.productDetailsPage.reviewSuccessMessage)     
   })
 
   it('Test Case 19: View & Cart Brand Products', () => {
     homePage.clickProductsHeaderButton()
-    productsPage.getLeftSidebarBrandsHeading().should('be.visible').and('have.text','Brands')
+    productsPage.getLeftSidebarBrandsHeading().should('be.visible').and('have.text', text.productsPage.brandsHeading)
     productsPage.getLeftSidebarBrandsList().should('have.length.above', 0)
     
     cy.log('Saving the brand name and quantity of the brand to be selected')
     homePage.getLeftSidebarRandomBrandCount(product.randomLeftSidebarBrandNumber)
       .then((count) => cy.wrap(count).as('brandCount'))
-    homePage.getBrandName(product.randomLeftSidebarBrandNumber)
+    homePage.getBrandName(product.randomLeftSidebarBrandNumber, 'brandCount')
       .then((brandName) => cy.wrap(brandName).as('brandName'))
 
     cy.log('Verifying user is navigated to brand page and brand products are displayed according to the selection')
@@ -127,7 +128,7 @@ describe('Test for the site automationexercise.com', ()=> {
     cy.log('Saving the brand name and quantity of the brand to be selected')
     homePage.getLeftSidebarRandomBrandCount(product.anotherRandomLeftSidebarBrandNumber)
       .then((count) => cy.wrap(count).as('brandCount'))
-    homePage.getBrandName(product.anotherRandomLeftSidebarBrandNumber)
+    homePage.getBrandName(product.anotherRandomLeftSidebarBrandNumber, 'brandCount')
       .then((brandName) => cy.wrap(brandName).as('brandName'))
   
     cy.log('Verifying user is navigated to another brand page and brand products are displayed according to the selection')

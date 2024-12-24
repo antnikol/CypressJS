@@ -8,7 +8,7 @@ import genData from "../fixtures/genData"
 import CheckoutPage from "../pageObjects/CheckoutPage"
 import PaymentPage from "../pageObjects/PaymentPage"
 import PaymentDonePage from "../pageObjects/PaymentDonePage.cy"
-import { userCardNumber, userCardCvv, userCardExMonth, userCardExYear, user, incorrectPassword } from '../fixtures/api.json'
+import { user } from '../fixtures/api.json'
 import text from "../fixtures/text.json"
 
 
@@ -134,10 +134,10 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     paymentPage.getPaymentInformation().should('be.visible')
     paymentPage
       .typeNameOnCardTextField(user.name, user.lastname)
-      .typeCardNumberTextField(userCardNumber[0])
-      .typeCardCvvTextField(userCardCvv[0])
-      .typeCardExpiryMonthTextField(userCardExMonth[0])
-      .typeCardExpiryYearTextField(userCardExYear[0])
+      .typeCardNumberTextField(text.userCardNumber[0])
+      .typeCardCvvTextField(text.userCardCvv[0])
+      .typeCardExpiryMonthTextField(text.userCardExMonth[0])
+      .typeCardExpiryYearTextField(text.userCardExYear[0])
       .clickPayAndConfirmOrderButton()
     // paymentPage.getSuccessOrderMessage().should('include.text', text.paymentPage.successOrderMessage)
     paymentDonePage.getOrderPlacedHeading().should('have.text', text.paymentDonePage.orderPlacedHeading)
@@ -181,10 +181,10 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     paymentPage.getPaymentInformation().should('be.visible')
     paymentPage
       .typeNameOnCardTextField(user.name, user.lastname)
-      .typeCardNumberTextField(userCardNumber[0])
-      .typeCardCvvTextField(userCardCvv[0])
-      .typeCardExpiryMonthTextField(userCardExMonth[0])
-      .typeCardExpiryYearTextField(userCardExYear[0])
+      .typeCardNumberTextField(text.userCardNumber[0])
+      .typeCardCvvTextField(text.userCardCvv[0])
+      .typeCardExpiryMonthTextField(text.userCardExMonth[0])
+      .typeCardExpiryYearTextField(text.userCardExYear[0])
       .clickPayAndConfirmOrderButton()
     // paymentPage.getSuccessOrderMessage().should('include.text', text.paymentPage.successOrderMessage)
     paymentDonePage.getOrderPlacedHeading().should('have.text', text.paymentDonePage.orderPlacedHeading)
@@ -228,10 +228,10 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     paymentPage.getPaymentInformation().should('be.visible')
     paymentPage
       .typeNameOnCardTextField(user.name, user.lastname)
-      .typeCardNumberTextField(userCardNumber[0])
-      .typeCardCvvTextField(userCardCvv[0])
-      .typeCardExpiryMonthTextField(userCardExMonth[0])
-      .typeCardExpiryYearTextField(userCardExYear[0])
+      .typeCardNumberTextField(text.userCardNumber[0])
+      .typeCardCvvTextField(text.userCardCvv[0])
+      .typeCardExpiryMonthTextField(text.userCardExMonth[0])
+      .typeCardExpiryYearTextField(text.userCardExYear[0])
       .clickPayAndConfirmOrderButton()
     // paymentPage.getSuccessOrderMessage().should('include.text', text.paymentPage.successOrderMessage)
     paymentDonePage.getOrderPlacedHeading().should('have.text', text.paymentDonePage.orderPlacedHeading)
@@ -275,10 +275,10 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     paymentPage.getPaymentInformation().should('be.visible')
     paymentPage
       .typeNameOnCardTextField(user.name, user.lastname)
-      .typeCardNumberTextField(userCardNumber[0])
-      .typeCardCvvTextField(userCardCvv[0])
-      .typeCardExpiryMonthTextField(userCardExMonth[0])
-      .typeCardExpiryYearTextField(userCardExYear[0])
+      .typeCardNumberTextField(text.userCardNumber[0])
+      .typeCardCvvTextField(text.userCardCvv[0])
+      .typeCardExpiryMonthTextField(text.userCardExMonth[0])
+      .typeCardExpiryYearTextField(text.userCardExYear[0])
       .clickPayAndConfirmOrderButton()
     // paymentPage.getSuccessOrderMessage().should('include.text', text.paymentPage.successOrderMessage)
     paymentDonePage.getOrderPlacedHeading().should('have.text', text.paymentDonePage.orderPlacedHeading)

@@ -1,42 +1,43 @@
 /// <reference types="cypress" />
 
-import SignUpPage from "../pageObjects/SignUpPage"
 import HomePage from "../pageObjects/HomePage"
-import LoginPage from "../pageObjects/LoginPage"
 import ContactUsPage from "../pageObjects/ContactUsPage"
 import CartPage from "../pageObjects/CartPage"
+import genData from "../fixtures/genData"
 import { user } from '../fixtures/api.json'
+import text from "../fixtures/text.json"
 
 
-const signupPage = new SignUpPage()
 const homePage = new HomePage()
-const loginPage = new LoginPage()
 const contactUsPage = new ContactUsPage()
 const cartPage = new CartPage()
+
+const testData = genData.newProductTestData()
+
 
 describe('Test for the site automationexercise.com', ()=> {
 
   it('Test Case 6: Contact Us Form', () => {
     homePage.clickContactUsButton()
-    homePage.getPageUrl().should('contain', '/contact_us')
-    contactUsPage.getGetInTouchHeader().should('contain', 'Get In Touch')
+    homePage.getPageUrl().should('contain', text.contactUsPage.pageUrl)
+    contactUsPage.getGetInTouchHeader().should('contain', text.contactUsPage.getInTouchHeader)
     contactUsPage
       .typeNameTextField(user.name)
       .typeEmailTextField(user.email)
-      .typeSubjectTextField('Subject text for test')
-      .typeMessageTextField('Message text for test')
-      .clickAndAttachFile('/example.json')
+      .typeSubjectTextField(testData.subject)
+      .typeMessageTextField(testData.message)
+      .clickAndAttachFile(text.contactUsPage.fileLocation)
       .waitAndConfirmAlertWindow()
       .clickSubmitButton()
-      .getSuccessMessage().should('have.text', 'Success! Your details have been submitted successfully.')
+      .getSuccessMessage().should('have.text', text.contactUsPage.sentLetterSuccessMessage)
     contactUsPage.clickBackToHomePageButton()
-    homePage.getPageTitle().should('include', 'Automation Exercise')
+    homePage.getPageTitle().should('include', text.homePage.pageTitle)
   })  
 
   it('Test Case 10: Verify Subscription in home page', () => {
     homePage
       .scrollToBottom()
-      .getSubscriptionFooterSection().should('include.text', 'Subscription')
+      .getSubscriptionFooterSection().should('include.text', text.homePage.subscriptionHeading)
     homePage
       .typeSubscriptionFooterEmailField(user.email)
       .clickSubscribeButton()
@@ -47,7 +48,7 @@ describe('Test for the site automationexercise.com', ()=> {
     homePage.clickViewCartHeaderButton()
     cartPage
       .scrollToBottom()
-      .getSubscriptionFooterSection().should('include.text', 'Subscription')
+      .getSubscriptionFooterSection().should('include.text', text.homePage.subscriptionHeading)
     cartPage
       .typeSubscriptionFooterEmailField(user.email)
       .clickSubscribeButton()

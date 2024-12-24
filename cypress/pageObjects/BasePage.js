@@ -44,9 +44,9 @@ class BasePage  {
     return this.getLeftSidebarBrandCountList().eq(randomNumber).invoke('text')
   }
 
-  getBrandName(brandNumber) {
+  getBrandName(brandNumber, alias) {
     return this.getLeftSidebarRandomBrandNameAndCount(brandNumber).then((nameAndCount) => 
-      this.getSavedVariableAs('brandCount').then((brandCount) => 
+      this.getSavedVariableAs(alias).then((brandCount) => 
         nameAndCount.replace(brandCount, '').trim()
       )
     )
