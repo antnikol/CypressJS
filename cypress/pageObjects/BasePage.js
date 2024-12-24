@@ -26,7 +26,40 @@ class BasePage  {
   //Left-Sidebar
   getLeftSidebarCategoryList = () => cy.get('a[data-parent="#accordian"]')
   getLeftSidebarSubCategoryList = () => cy.get('.panel-body a')
-  
+  getLeftSidebarBrandsHeading = () => cy.get('.brands_products h2')
+  getLeftSidebarBrandsList = () => cy.get('.brands-name li')
+  getLeftSidebarBrandNameList = () => cy.get('.brands-name li a')
+  getLeftSidebarBrandCountList = () => cy.get('.brands-name li a span')
+
+
+  getSavedVariableAs(variable) {
+    return cy.get(`@${variable}`);
+  }
+
+  getLeftSidebarRandomBrandNameAndCount(randomNumber) {
+    return this.getLeftSidebarBrandNameList().eq(randomNumber).invoke('text')
+  }
+
+  getLeftSidebarRandomBrandCount(randomNumber) {
+    return this.getLeftSidebarBrandCountList().eq(randomNumber).invoke('text')
+  }
+
+  getBrandName(brandNumber) {
+    return this.getLeftSidebarRandomBrandNameAndCount(brandNumber).then((nameAndCount) => 
+      this.getSavedVariableAs('brandCount').then((brandCount) => 
+        nameAndCount.replace(brandCount, '').trim()
+      )
+    )
+  }
+
+  clickLeftSidebarRandomBrandName(randomNumber) {
+    this.getLeftSidebarBrandNameList().eq(randomNumber).click()
+    return this
+  }
+
+  getLeftSidebarRandomBrandHref(randomNumber) {
+    return this.getLeftSidebarBrandNameList().eq(randomNumber).invoke('attr','href')
+  }
 
   clickSignupLoginButton() {
     this.getSignupLoginButton().click()

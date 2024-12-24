@@ -145,7 +145,7 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     paymentDonePage.getOrderPlacedMessage().should('have.text', 'Congratulations! Your order has been confirmed!')
   })
 
-  it.only('Test Case 15: Place Order: Register before Checkout', () => {
+  it('Test Case 15: Place Order: Register before Checkout', () => {
     cy.registerUser()
     homePage.takeFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
     homePage.takeFirstProductPrice().then((price) => { cy.wrap(price).as('firstProductPrice') })
@@ -239,7 +239,7 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     paymentDonePage.getOrderPlacedMessage().should('have.text', 'Congratulations! Your order has been confirmed!')
   })
 
-  it.only('Test Case 24: Download Invoice after purchase order', () => {
+  it('Test Case 24: Download Invoice after purchase order', () => {
     cy.loginUser()
     homePage.takeFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
     homePage.takeFirstProductPrice().then((price) => { cy.wrap(price).as('firstProductPrice') })

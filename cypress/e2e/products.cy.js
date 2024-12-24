@@ -88,7 +88,7 @@ describe('Test for the site automationexercise.com', ()=> {
     productsPage.checkSearchedProductsNames('Jeans')
   })
 
-  it.only('Test Case 21: Add review on product', () => {
+  it('Test Case 21: Add review on product', () => {
     homePage.clickProductsHeaderButton()
     productsPage.getAllProductsHeader().should('have.text', 'All Products')
     productsPage.getPageUrl().should('include', '/products')
@@ -100,11 +100,47 @@ describe('Test for the site automationexercise.com', ()=> {
       .typeReviewTextField(product.review)
       .clickSubmitReviewButton()
     productDetailsPage.getReviewSuccessMessage().should('be.visible')
-    productDetailsPage.getReviewSuccessMessage().should('have.text', 'Thank you for your review.')
+    productDetailsPage.getReviewSuccessMessage().should('have.text', 'Thank you for your review.')     
+  })
 
+  it.only('Test Case 19: View & Cart Brand Products', () => {
+    homePage.clickProductsHeaderButton()
+    productsPage.getLeftSidebarBrandsHeading().should('be.visible').and('have.text','Brands')
+    productsPage.getLeftSidebarBrandsList().should('have.length.above', 0)
+    
+    cy.log('Saving the brand name and quantity of the brand to be selected')
+    homePage.getLeftSidebarRandomBrandCount(product.randomLeftSidebarBrandNumber)
+      .then((count) => cy.wrap(count).as('brandCount'))
+    homePage.getBrandName(product.randomLeftSidebarBrandNumber)
+      .then((brandName) => cy.wrap(brandName).as('brandName'))
 
+    cy.log('Verifying user is navigated to brand page and brand products are displayed according to the selection')
+    homePage.clickLeftSidebarRandomBrandName(product.randomLeftSidebarBrandNumber)
+    productsPage.getLeftSidebarRandomBrandHref(product.randomLeftSidebarBrandNumber)  
+      .then((hrefValue) => productsPage.getPageUrl().should('include', hrefValue.replace(/ /g, '%20')) )
+    productsPage.getSavedVariableAs('brandName').then((brandName) => { 
+      productsPage.getBrandPageSectionHeading().should('have.text', `Brand - ${brandName} Products`)
+    })
+    productsPage.getSavedVariableAs('brandCount').then((brandCount) => { 
+      productsPage.getAllSingleProductsSection().should('have.length', brandCount.replace(/[()]/g, ''))
+    })
 
-      
+    cy.log('Saving the brand name and quantity of the brand to be selected')
+    homePage.getLeftSidebarRandomBrandCount(product.anotherRandomLeftSidebarBrandNumber)
+      .then((count) => cy.wrap(count).as('brandCount'))
+    homePage.getBrandName(product.anotherRandomLeftSidebarBrandNumber)
+      .then((brandName) => cy.wrap(brandName).as('brandName'))
+  
+    cy.log('Verifying user is navigated to another brand page and brand products are displayed according to the selection')
+    productsPage.clickLeftSidebarRandomBrandName(product.anotherRandomLeftSidebarBrandNumber)
+    productsPage.getLeftSidebarRandomBrandHref(product.anotherRandomLeftSidebarBrandNumber)  
+      .then((hrefValue) => productsPage.getPageUrl().should('include', hrefValue.replace(/ /g, '%20')) )
+    productsPage.getSavedVariableAs('brandName').then((brandName) => { 
+      productsPage.getBrandPageSectionHeading().should('have.text', `Brand - ${brandName} Products`)
+    })
+    productsPage.getSavedVariableAs('brandCount').then((brandCount) => { 
+      productsPage.getAllSingleProductsSection().should('have.length', brandCount.replace(/[()]/g, ''))
+    })
   })
 
 })
