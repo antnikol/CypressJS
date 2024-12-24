@@ -37,7 +37,7 @@ clickAddToCartRecommendedItemCarousel(itemNumber) {
   return new CartPage()
 }
 
-takeCarouselRecommendedItemName(randomCarouselNumber) {
+getCarouselRecommendedItemName(randomCarouselNumber) {
   return this.getCarouselRecommendedItemNamesList().eq(randomCarouselNumber).invoke('text')
 }
 
@@ -51,7 +51,7 @@ scrollToCarouselRecommendedItems() {
   return this
 }
 
-takeFirstProductName() {
+getFirstProductName() {
   return this.getAllProductsNames().first().invoke('text')
     .then((text) => { return text.trim() }) 
 } 

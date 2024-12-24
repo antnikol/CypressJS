@@ -11,7 +11,7 @@ const signupPage = new SignUpPage()
 const homePage = new HomePage()
 const loginPage = new LoginPage()
 
-describe('Test for the site automationexercise.com', ()=> {
+describe('Tests for the sections: Sign Up, Login', ()=> {
 
   it('Test Case 1: Register User', () => {
     cy.deleteUser()
@@ -98,6 +98,7 @@ describe('Test for the site automationexercise.com', ()=> {
       .typeEmailSignupTextField(user.email)
       .clickSignupButton()
     loginPage.getErrorSingupMessage().should('have.text', text.loginPage.errorSingupMessage)
+    cy.deleteUser()
   })
 
 })

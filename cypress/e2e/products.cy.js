@@ -16,7 +16,7 @@ const cartPage = new CartPage()
 
 const product = genData.newProductTestData()
 
-describe('Test for the site automationexercise.com', ()=> {
+describe('Tests for the sections: Products', ()=> {
 
   it('Test Case 8: Verify All Products and product detail page', () => {
     homePage.clickProductsHeaderButton()

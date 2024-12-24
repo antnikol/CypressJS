@@ -61,7 +61,7 @@ returnFirstProductPriceOnlyNumber() {
   }) 
 }
 
-takeFirstProductName() {
+getFirstProductName() {
   return this.getAllProductsNames().first().invoke('text')
     .then((text) => {
       return text.trim()

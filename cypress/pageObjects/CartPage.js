@@ -24,7 +24,7 @@ getFirstProductName = () => cy.get('.cart_description a').first()
 
 
 
-takeFirstProductPriceNumber() {
+getFirstProductPriceNumber() {
   return this.getProductPricesList().first().invoke('text')
     .then((text) => { return parseFloat( text.slice(4) ) }) 
 }
@@ -32,18 +32,18 @@ takeFirstProductPriceNumber() {
 calculateFirstProductTotalPrice() {
   return this.getProductQuantityList().first().invoke('text')
     .then((quantity) => {
-      return this.takeFirstProductPriceNumber().then((price) => {
+      return this.getFirstProductPriceNumber().then((price) => {
         return parseFloat(quantity) * parseFloat(price);
       });
     });
 }
 
-takeFirstProductTotalPriceNumber() {
+getFirstProductTotalPriceNumber() {
   return this.getProductTotalPriceList().first().invoke('text')
     .then((text) => { return parseFloat( text.slice(4) ) }) 
 }
 
-takeLastProductPriceNumber() {
+getLastProductPriceNumber() {
   return this.getProductPricesList().last().invoke('text')
     .then((text) => { return parseFloat( text.slice(4) ) }) 
 }
@@ -51,18 +51,18 @@ takeLastProductPriceNumber() {
 calculateLastProductTotalPrice() {
   return this.getProductQuantityList().last().invoke('text')
     .then((quantity) => {
-      return this.takeLastProductPriceNumber().then((price) => {
+      return this.getLastProductPriceNumber().then((price) => {
         return parseFloat(quantity) * parseFloat(price);
       });
     });
 }
 
-takeLastProductTotalPriceNumber() {
+getLastProductTotalPriceNumber() {
   return this.getProductTotalPriceList().last().invoke('text')
     .then((text) => { return parseFloat( text.slice(4) ) }) 
 }
 
-takeExpectedFirstProductTotalPrice(quantity) {
+getExpectedFirstProductTotalPrice(quantity) {
   return this.takeFirstProductPrice().invoke('text')
     .then((price) => { return (parseFloat(price) * quantity)  });
 }

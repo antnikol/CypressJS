@@ -11,8 +11,8 @@ export default defineConfig({
       return config;
     },
     baseUrl: 'https://automationexercise.com',
-    viewportWidth: 1024,
-    viewportHeight: 768,
+    viewportWidth: 1920,
+    viewportHeight: 1080,
     chromeWebSecurity: false,
     requestTimeout: 7000,
     defaultCommandTimeout: 7000,

@@ -1,10 +1,12 @@
 {
   "liveServerUrl": "http://127.0.0.1:55514/cypress/fixtures/mockPage.html",
+  
   "searchTerms": [
     "top",
     "tshirt",
     "jeans"
   ],
+
   "user": {
     "name": "test_Name",
     "email": "testUser33@gmail.com",
@@ -24,6 +26,7 @@
     "city": "California",
     "mobile_number": "+18123456789"
   },
+
   "userUpdate": {
     "name": "test_Name2",
     "email": "testUser33@gmail.com",
@@ -43,6 +46,7 @@
     "city": "Port",
     "mobile_number": "+212312312331"
   },
+
   "message": {
     "mocked": "Mocked Data",
     "methodNotSupported": "This request method is not supported.",
@@ -55,6 +59,7 @@
     "userUpdated": "User updated!",
     "accountDeleted": "Account deleted!"
   },
+
   "incorrectPassword": [
     "123456incorrect"
   ]

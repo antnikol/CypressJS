@@ -12,7 +12,7 @@ const homePage = new HomePage()
 const testCasesPage = new TestCasesPage()
 
 
-describe('Test for the site automationexercise.com', ()=> {
+describe('Tests for the sections: Other tests', ()=> {
 
   it('Test Case 7: Verify Test Cases Page', () => {
     homePage.clickTestCasesHeaderMenuButton()

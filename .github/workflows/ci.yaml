@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  run-test:
+    name: "Run tests"
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - name: Git clone
+        uses: actions/checkout@v3
+
+      - name: Check for duplicated file names
+        run: |
+          git ls-files --exclude-standard --others --cached --no-empty-directory | sort -f > files.txt
+          uniq -di files.txt > duplicates.txt
+          if [[ -s duplicates.txt ]]; then
+            echo "Found files with the same name:"
+            cat duplicates.txt
+            exit 1
+          fi
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: Npm install
+        run: npm ci
+
+      - name: Install Allure CLI
+        run: |
+          npm install -g allure-commandline --save-dev
+
+      - name: Npx run tests
+        run: |
+          npx cypress run --headless --env allure=true
+
+      - name: Generate Allure report
+        run: |
+          allure generate ./allure-results --clean
+          allure open ./allure-report
+
+      - name: Upload Allure report
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: ./allure-report
+
+      - name: Publish Allure results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-results
+          path: ./allure-results
+
+      - name: Artifacts
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: ./cypress/screenshots

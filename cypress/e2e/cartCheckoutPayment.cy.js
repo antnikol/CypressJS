@@ -26,7 +26,7 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
 
   it('Test Case 12: Hover and click "Add to cart" button for two different products with different quantity', () => {
     homePage.clickProductsHeaderButton()
-    productsPage.takeFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
+    productsPage.getFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
     productsPage.takeFirstProductPrice().then((price) => { cy.wrap(price).as('firstProductPrice') })
     productsPage
       .resetCounterClickFirstProductAddToCartButton()
@@ -42,10 +42,10 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
 
     cy.log('Checking that multiply quantity by price function in Cart works correctly for both items')
     cartPage.calculateFirstProductTotalPrice().then((totalPrice) => {
-      cartPage.takeFirstProductTotalPriceNumber().should('equal', totalPrice)
+      cartPage.getFirstProductTotalPriceNumber().should('equal', totalPrice)
     })
     cartPage.calculateLastProductTotalPrice().then((totalPrice) => {
-      cartPage.takeLastProductTotalPriceNumber().should('equal', totalPrice)
+      cartPage.getLastProductTotalPriceNumber().should('equal', totalPrice)
     })
 
     cy.log('Checking that the name, price of the product in the cart matches the previously added one')
@@ -84,7 +84,7 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
 
   it('Test Case 22: Add to cart from Recommended items', () => {
     homePage.scrollToCarouselRecommendedItems()
-    homePage.takeCarouselRecommendedItemName(product.randomCarouselProductNumber)
+    homePage.getCarouselRecommendedItemName(product.randomCarouselProductNumber)
       .then((name) => { cy.wrap(name).as('productName') })
     homePage
       .clickCarouselRecommendedItemAddToCartButton(product.randomCarouselProductNumber)
@@ -95,7 +95,7 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
   })
 
   it('Test Case 14: Place Order: Register while Checkout', () => {
-    homePage.takeFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
+    homePage.getFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
     homePage.takeFirstProductPrice().then((price) => { cy.wrap(price).as('firstProductPrice') })
     homePage
       .clickFirstProductAddToCartButton()
@@ -146,7 +146,7 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
 
   it('Test Case 15: Place Order: Register before Checkout', () => {
     cy.registerUser()
-    homePage.takeFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
+    homePage.getFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
     homePage.takeFirstProductPrice().then((price) => { cy.wrap(price).as('firstProductPrice') })
     homePage
       .clickFirstProductAddToCartButton()
@@ -193,7 +193,7 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
 
   it('Test Case 16 + 23: Place Order: Login before Checkout + Verify address details in checkout', () => {
     cy.loginUser()
-    homePage.takeFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
+    homePage.getFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
     homePage.takeFirstProductPrice().then((price) => { cy.wrap(price).as('firstProductPrice') })
     homePage
       .clickFirstProductAddToCartButton()
@@ -240,7 +240,7 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
 
   it('Test Case 24: Download Invoice after purchase order', () => {
     cy.loginUser()
-    homePage.takeFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
+    homePage.getFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
     homePage.takeFirstProductPrice().then((price) => { cy.wrap(price).as('firstProductPrice') })
     homePage
       .clickFirstProductAddToCartButton()

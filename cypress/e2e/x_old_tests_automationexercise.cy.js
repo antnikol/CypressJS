@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Test for the site automationexercise.com', ()=> {
+describe('Old tests for the site automationexercise.com', ()=> {
   let new_brach = 'new_branch'
   let userName = 'test-AQA user'
   let userEmail = 'test-AQA@gmail.com'
@@ -28,10 +28,10 @@ describe('Test for the site automationexercise.com', ()=> {
   it('Test Case 1: Register User', () => {
     cy.get('@loginButton').click()
     cy.contains(/New User Signup!/i).should('be.visible')
-    // cy.get(".signup-form").should('contain', 'New User Signup!')
     cy.get('input[data-qa="signup-name"]').type(userName)
     cy.get('input[data-qa="signup-email"]').type(userEmail)
     cy.get('button[data-qa="signup-button"]').click()
+
     // Checking for an already registered user and error message "Email Address already exist!"
     cy.get('body').then(($body) => {
       if ($body.find('p[style="color: red;"]').length) {
@@ -67,8 +67,6 @@ describe('Test for the site automationexercise.com', ()=> {
     cy.contains(/account created!/i).should('be.visible')
     cy.get('a[data-qa="continue-button"]').click()
     cy.contains(userName).should('be.visible')
-    // cy.get('a[href="/delete_account"]').click()
-    // cy.contains(/account deleted!/i).should('be.visible')
   })
 
   it('Test Case 2: Login User with correct email and password', () => {
@@ -123,7 +121,7 @@ describe('Test for the site automationexercise.com', ()=> {
     cy.get('input[data-qa="email"]').type('test@email.com')
     cy.get('input[data-qa="subject"]').type('Subject text for test')
     cy.get('textarea[data-qa="message"]').type('Message text for test')
-    cy.get('input[type="file"]').attachFile('/example.json')
+    cy.get('input[type="file"]').attachFile('/text.json')
     cy.on('window:alert', () => {})
     cy.get('input[data-qa="submit-button"]').click()
     cy.contains(/Success! Your details have been submitted successfully./i).should('be.visible')
@@ -281,6 +279,7 @@ describe('Test for the site automationexercise.com', ()=> {
     cy.get('input[data-qa="signup-name"]').type(userName)
     cy.get('input[data-qa="signup-email"]').type(userEmailDelete)
     cy.get('button[data-qa="signup-button"]').click()
+
     // Checking for an already registered user and error message "Email Address already exist!"
     cy.get('body').then(($body) => {
       if ($body.find('p[style="color: red;"]').length) {
@@ -344,9 +343,7 @@ describe('Test for the site automationexercise.com', ()=> {
     cy.get('input[data-qa="expiry-month"]').type('12')
     cy.get('input[data-qa="expiry-year"]').type('2025')
     cy.get('button[data-qa="pay-button"]').click()
-    // cy.get('.form-row .alert-success').contains(/Your order has been placed successfully!/i)
-    // cy.contains(/Your order has been placed successfully!/i).should('be.visible')
-    // cy.get('#success_message > .alert-success').should('include.text', 'Your order has been placed successfully!')
+
     cy.get('h2[data-qa="order-placed"]').should('have.text', 'Order Placed!')  
     cy.get('a[href="/delete_account"]').click()
     cy.contains(/account deleted!/i).should('be.visible')
@@ -375,6 +372,7 @@ describe('Test for the site automationexercise.com', ()=> {
     cy.get('input[data-qa="signup-name"]').type(userName)
     cy.get('input[data-qa="signup-email"]').type(userEmailDelete)
     cy.get('button[data-qa="signup-button"]').click()
+
     // Checking for an already registered user and error message "Email Address already exist!"
     cy.get('body').then(($body) => {
       if ($body.find('p[style="color: red;"]').length) {
@@ -500,8 +498,7 @@ describe('Test for the site automationexercise.com', ()=> {
     cy.get('input[data-qa="expiry-month"]').type('12')
     cy.get('input[data-qa="expiry-year"]').type('2025')
     cy.get('button[data-qa="pay-button"]').click()
-    // cy.contains('Your order has been placed successfully!')
-    // cy.get('div#success_message').contains('Your order has been placed successfully!').should('be.visible')
+
     cy.get('h2[data-qa="order-placed"]').should('have.text', 'Order Placed!')  
     cy.get('a[href="/delete_account"]').click()
     cy.contains(/account deleted!/i).should('be.visible')
@@ -510,7 +507,6 @@ describe('Test for the site automationexercise.com', ()=> {
   it('Test Case 17: Remove Products From Cart', () => {
     cy.get('a[data-product-id]').eq(1).click({force:true})
     cy.get('.modal-body a[href="/view_cart"]').click()
-    // cy.get('.shop-menu a[href="/view_cart"]').click()
     cy.get('.cart_product').should('have.length', 1)
     cy.url().should('include', '/view_cart')
     cy.title().should('equal', 'Automation Exercise - Checkout')
@@ -628,6 +624,7 @@ describe('Test for the site automationexercise.com', ()=> {
     cy.get('input[data-qa="signup-name"]').type(userName)
     cy.get('input[data-qa="signup-email"]').type(userEmailDelete)
     cy.get('button[data-qa="signup-button"]').click()
+
     // Checking for an already registered user and error message "Email Address already exist!"
     cy.get('body').then(($body) => {
       if ($body.find('p[style="color: red;"]').length) {
@@ -666,7 +663,6 @@ describe('Test for the site automationexercise.com', ()=> {
 
     cy.get('a[data-product-id]').eq(1).click({force:true})
     cy.get('.modal-body a[href="/view_cart"]').click()
-    // cy.get('.shop-menu a[href="/view_cart"]').click()
     cy.get('.cart_product').should('have.length', 1)
     cy.url().should('include', '/view_cart')
     cy.title().should('equal', 'Automation Exercise - Checkout')
@@ -717,7 +713,6 @@ describe('Test for the site automationexercise.com', ()=> {
     })
     cy.get('a[data-product-id]').eq(1).click({force:true})
     cy.get('.modal-body a[href="/view_cart"]').click()
-    // cy.get('.shop-menu a[href="/view_cart"]').click()
     cy.get('.cart_product').should('have.length', 1)
     cy.url().should('include', '/view_cart')
     cy.title().should('equal', 'Automation Exercise - Checkout')
@@ -729,6 +724,7 @@ describe('Test for the site automationexercise.com', ()=> {
     cy.get('input[data-qa="signup-name"]').type(userName)
     cy.get('input[data-qa="signup-email"]').type(userEmailDelete)
     cy.get('button[data-qa="signup-button"]').click()
+
     // Checking for an already registered user and error message "Email Address already exist!"
     cy.get('body').then(($body) => {
       if ($body.find('p[style="color: red;"]').length) {
@@ -766,9 +762,7 @@ describe('Test for the site automationexercise.com', ()=> {
     cy.contains(userName).should('be.visible')
     cy.contains('li', 'Logged in as').find('b').should('have.text', userName)
     cy.get('.shop-menu a[href="/view_cart"]').click()
-    //or altenative = cy.get('.shop-menu').contains('a', 'Cart').click()
     cy.get('a.btn.btn-default.check_out').click()
-    //or altenative = cy.contains('.btn', 'Proceed To Checkout').click()
     
     cy.contains(/Your delivery address/i).should('be.visible')
     cy.contains(/Your billing address/i).should('be.visible')
@@ -808,13 +802,10 @@ describe('Test for the site automationexercise.com', ()=> {
     cy.get('input[data-qa="expiry-month"]').type('12')
     cy.get('input[data-qa="expiry-year"]').type('2025')
     cy.get('button[data-qa="pay-button"]').click()
-    // cy.get('.form-row .alert-success').contains(/Your order has been placed successfully!/i)
-    // cy.contains(/Your order has been placed successfully!/i).should('be.visible')
-    // cy.get('#success_message > .alert-success').should('include.text', 'Your order has been placed successfully!')
+    
     cy.get('h2[data-qa="order-placed"]').should('have.text', 'Order Placed!')  
     cy.intercept('GET', '/download_invoice/*').as('downloadInvoice')
     cy.contains('.btn', 'Download Invoice').click()
-    //or altenative = cy.get('.btn.btn-default.check_out').click()
     cy.wait('@downloadInvoice').its('response.statusCode').should('eq', 200)
     cy.get('a[data-qa="continue-button"]').click()
 
@@ -827,10 +818,10 @@ describe('Test for the site automationexercise.com', ()=> {
     cy.get('.single-widget h2').contains('Subscription').should('be.visible')
     cy.get('.single-widget h2')
       .should(($el) => {
-        const rect = $el[0].getBoundingClientRect(); // Отримуємо розмір і позицію елемента
+        const rect = $el[0].getBoundingClientRect()
         try {
-          expect(rect.top).to.be.greaterThan(0); // Перевіряємо, що елемент знаходиться в межах видимої частини
-          expect(rect.bottom).to.be.lessThan(Cypress.config('viewportHeight')); // Перевіряємо, що елемент не вийшов за межі екрану
+          expect(rect.top).to.be.greaterThan(0)
+          expect(rect.bottom).to.be.lessThan(Cypress.config('viewportHeight'))
         } catch (error) {
           Cypress.log({
             name: 'Visibility check',
@@ -851,9 +842,9 @@ describe('Test for the site automationexercise.com', ()=> {
       .should('be.visible')
     cy.get('div.carousel-inner div.item.active').eq(0) 
       .should(($el) => {
-        const rect = $el[0].getBoundingClientRect(); // Отримуємо розмір і позицію елемента
-        expect(rect.top).to.be.greaterThan(0); // Перевіряємо, що елемент знаходиться в межах видимої частини
-        expect(rect.bottom).to.be.lessThan(Cypress.config('viewportHeight')); // Перевіряємо, що елемент не вийшов за межі екрану
+        const rect = $el[0].getBoundingClientRect()
+        expect(rect.top).to.be.greaterThan(0)
+        expect(rect.bottom).to.be.lessThan(Cypress.config('viewportHeight'))
       })
   })
 
@@ -862,9 +853,9 @@ describe('Test for the site automationexercise.com', ()=> {
     cy.get('.single-widget h2').contains('Subscription').should('be.visible')
     cy.get('.single-widget h2')
       .should(($el) => {
-        const rect = $el[0].getBoundingClientRect(); // Отримуємо розмір і позицію елемента
-        expect(rect.top).to.be.greaterThan(0); // Перевіряємо, що елемент знаходиться в межах видимої частини
-        expect(rect.bottom).to.be.lessThan(Cypress.config('viewportHeight')); // Перевіряємо, що елемент не вийшов за межі екрану
+        const rect = $el[0].getBoundingClientRect()
+        expect(rect.top).to.be.greaterThan(0)
+        expect(rect.bottom).to.be.lessThan(Cypress.config('viewportHeight'))
       })
       cy.scrollTo('top')
     cy.get('div.carousel-inner div.item.active').eq(0)
@@ -872,9 +863,9 @@ describe('Test for the site automationexercise.com', ()=> {
       .should('be.visible')
     cy.get('div.carousel-inner div.item.active').eq(0) 
       .should(($el) => {
-        const rect = $el[0].getBoundingClientRect(); // Отримуємо розмір і позицію елемента
-        expect(rect.top).to.be.greaterThan(0); // Перевіряємо, що елемент знаходиться в межах видимої частини
-        expect(rect.bottom).to.be.lessThan(Cypress.config('viewportHeight')); // Перевіряємо, що елемент не вийшов за межі екрану
+        const rect = $el[0].getBoundingClientRect()
+        expect(rect.top).to.be.greaterThan(0)
+        expect(rect.bottom).to.be.lessThan(Cypress.config('viewportHeight'))
       })
   })
 })
