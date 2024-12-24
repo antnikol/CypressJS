@@ -1,0 +1,34 @@
+{
+  "cartPage": {
+    "cardIsEmpty": "Cart is empty!",
+    "breadCrumbs": "Shopping Cart",
+    "pageUrl": "/view_cart",
+    "pageTitle": "Automation Exercise - Checkout"
+  },
+
+  "checkoutPage": {
+    "emptyCard": "Cart is empty!",
+    "breadCrumbs": "Checkout",
+    "deliveryAddressSection": "Your delivery address",
+    "pageTitle": "Automation Exercise - Checkout",
+    "pageUrl": "/checkout",
+    "deliveryAddress": "Your delivery address",
+    "billingAddress": "Your billing address"
+  },
+
+  "paymentPage": {
+    "breadCrumbs": "Payment",
+    "sectionHeading": "Payment",
+    "successOrderMessage": "Your order has been placed successfully!"
+  },
+
+  "paymentDonePage": {
+    "orderPlacedHeading": "Order Placed!",
+    "orderPlacedMessage": "PaymCongratulations! Your order has been confirmed!ent"
+  },
+
+  "homePage": {
+    "accountDeleted": "Account Deleted!"
+  }
+
+}

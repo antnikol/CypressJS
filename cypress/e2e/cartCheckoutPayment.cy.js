@@ -9,6 +9,7 @@ import CheckoutPage from "../pageObjects/CheckoutPage"
 import PaymentPage from "../pageObjects/PaymentPage"
 import PaymentDonePage from "../pageObjects/PaymentDonePage.cy"
 import { userCardNumber, userCardCvv, userCardExMonth, userCardExYear, user, incorrectPassword } from '../fixtures/api.json'
+import text from "../fixtures/text.json"
 
 
 const homePage = new HomePage()
@@ -74,11 +75,11 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
       .clickFirstProductAddToCartButton()
       .clickViewCartModalButton()
     cartPage.getCartProductsList().should('have.length', 1)
-    cartPage.getPageUrl().should('include', '/view_cart')
-    cartPage.getPageTitle().should('equal', 'Automation Exercise - Checkout')
-    cartPage.getActiveBreadcrumbs().should('have.text', 'Shopping Cart')
+    cartPage.getPageUrl().should('include', text.cartPage.pageUrl)
+    cartPage.getPageTitle().should('equal', text.cartPage.pageTitle)
+    cartPage.getActiveBreadcrumbs().should('have.text', text.cartPage.breadCrumbs)
     cartPage.clickDeleteProductFromCartButton()
-    cartPage.getEmptyCardSection().should('contain', 'Cart is empty!')
+    cartPage.getEmptyCardSection().should('contain', text.cartPage.cardIsEmpty)
   })
 
   it('Test Case 22: Add to cart from Recommended items', () => {
@@ -106,13 +107,13 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     cy.registerUser()
     homePage.clickViewCartHeaderButton()
     cartPage.clickProceedToCheckoutButton()
-    checkoutPage.getActiveBreadcrumbs().should('have.text', 'Checkout')
+    checkoutPage.getActiveBreadcrumbs().should('have.text', text.checkoutPage.breadCrumbs)
     checkoutPage.getCartInfoSection().should('be.visible')
-    checkoutPage.getPageTitle().should('equal', 'Automation Exercise - Checkout')
-    checkoutPage.getPageUrl().should('include', 'checkout')
+    checkoutPage.getPageTitle().should('equal', text.checkoutPage.pageTitle)
+    checkoutPage.getPageUrl().should('include', text.checkoutPage.pageUrl)
     checkoutPage.getCartProductDescription().should('have.length', 1)
-    checkoutPage.getAddressDeliverySection().should('contain', 'Your delivery address')
-    checkoutPage.getAddressBillingSection().should('contain', 'Your billing address')
+    checkoutPage.getAddressDeliverySection().should('contain', text.checkoutPage.deliveryAddress)
+    checkoutPage.getAddressBillingSection().should('contain', text.checkoutPage.billingAddress)
     checkoutPage.scrollToCartTableSection()
     checkoutPage.getDeliveryGenderFirstNameLastName()
       .should('contain', `${user.title}. ${user.firstname} ${user.lastname}`)
@@ -128,8 +129,8 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     checkoutPage
       .typeCommentOrderTextField(product.commentToOrder)
       .clickPlaceOrderButton()
-    paymentPage.getActiveBreadcrumbs().should('have.text', 'Payment')
-    paymentPage.getHeadingOfSection().should('have.text', 'Payment')
+    paymentPage.getActiveBreadcrumbs().should('have.text', text.paymentPage.breadCrumbs)
+    paymentPage.getHeadingOfSection().should('have.text', text.paymentPage.sectionHeading)
     paymentPage.getPaymentInformation().should('be.visible')
     paymentPage
       .typeNameOnCardTextField(user.name, user.lastname)
@@ -138,9 +139,9 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
       .typeCardExpiryMonthTextField(userCardExMonth[0])
       .typeCardExpiryYearTextField(userCardExYear[0])
       .clickPayAndConfirmOrderButton()
-    // paymentPage.getSuccessOrderMessage().should('include.text', 'Your order has been placed successfully!')
-    paymentDonePage.getOrderPlacedHeading().should('have.text', 'Order Placed!')
-    paymentDonePage.getOrderPlacedMessage().should('have.text', 'Congratulations! Your order has been confirmed!')
+    // paymentPage.getSuccessOrderMessage().should('include.text', text.paymentPage.successOrderMessage)
+    paymentDonePage.getOrderPlacedHeading().should('have.text', text.paymentDonePage.orderPlacedHeading)
+    paymentDonePage.getOrderPlacedMessage().should('have.text', text.paymentDonePage.orderPlacedMessage)
   })
 
   it('Test Case 15: Place Order: Register before Checkout', () => {
@@ -153,13 +154,13 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     cartPage.getCartProductsList().should('have.length', 1) 
     cartPage
       .clickProceedToCheckoutButton()
-    checkoutPage.getActiveBreadcrumbs().should('have.text', 'Checkout')
+    checkoutPage.getActiveBreadcrumbs().should('have.text', text.checkoutPage.breadCrumbs)
     checkoutPage.getCartInfoSection().should('be.visible')
-    checkoutPage.getPageTitle().should('equal', 'Automation Exercise - Checkout')
-    checkoutPage.getPageUrl().should('include', 'checkout')
+    checkoutPage.getPageTitle().should('equal', text.checkoutPage.pageTitle)
+    checkoutPage.getPageUrl().should('include', text.checkoutPage.pageUrl)
     checkoutPage.getCartProductDescription().should('have.length', 1)
-    checkoutPage.getAddressDeliverySection().should('contain', 'Your delivery address')
-    checkoutPage.getAddressBillingSection().should('contain', 'Your billing address')
+    checkoutPage.getAddressDeliverySection().should('contain', text.checkoutPage.deliveryAddress)
+    checkoutPage.getAddressBillingSection().should('contain', text.checkoutPage.billingAddress)
     checkoutPage.scrollToCartTableSection()
     checkoutPage.getDeliveryGenderFirstNameLastName()
       .should('contain', `${user.title}. ${user.firstname} ${user.lastname}`)
@@ -175,8 +176,8 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     checkoutPage
       .typeCommentOrderTextField(product.commentToOrder)
       .clickPlaceOrderButton()
-    paymentPage.getActiveBreadcrumbs().should('have.text', 'Payment')
-    paymentPage.getHeadingOfSection().should('have.text', 'Payment')
+    paymentPage.getActiveBreadcrumbs().should('have.text', text.paymentPage.breadCrumbs)
+    paymentPage.getHeadingOfSection().should('have.text', text.paymentPage.sectionHeading)
     paymentPage.getPaymentInformation().should('be.visible')
     paymentPage
       .typeNameOnCardTextField(user.name, user.lastname)
@@ -185,9 +186,9 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
       .typeCardExpiryMonthTextField(userCardExMonth[0])
       .typeCardExpiryYearTextField(userCardExYear[0])
       .clickPayAndConfirmOrderButton()
-    // paymentPage.getSuccessOrderMessage().should('include.text', 'Your order has been placed successfully!')
-    paymentDonePage.getOrderPlacedHeading().should('have.text', 'Order Placed!')
-    paymentDonePage.getOrderPlacedMessage().should('have.text', 'Congratulations! Your order has been confirmed!')
+    // paymentPage.getSuccessOrderMessage().should('include.text', text.paymentPage.successOrderMessage)
+    paymentDonePage.getOrderPlacedHeading().should('have.text', text.paymentDonePage.orderPlacedHeading)
+    paymentDonePage.getOrderPlacedMessage().should('have.text', text.paymentDonePage.orderPlacedMessage)
   })
 
   it('Test Case 16 + 23: Place Order: Login before Checkout + Verify address details in checkout', () => {
@@ -200,13 +201,13 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     cartPage.getCartProductsList().should('have.length', 1) 
     cartPage
       .clickProceedToCheckoutButton()
-    checkoutPage.getActiveBreadcrumbs().should('have.text', 'Checkout')
+    checkoutPage.getActiveBreadcrumbs().should('have.text', text.checkoutPage.breadCrumbs)
     checkoutPage.getCartInfoSection().should('be.visible')
-    checkoutPage.getPageTitle().should('equal', 'Automation Exercise - Checkout')
-    checkoutPage.getPageUrl().should('include', 'checkout')
+    checkoutPage.getPageTitle().should('equal', text.checkoutPage.pageTitle)
+    checkoutPage.getPageUrl().should('include', text.checkoutPage.pageUrl)
     checkoutPage.getCartProductDescription().should('have.length', 1)
-    checkoutPage.getAddressDeliverySection().should('contain', 'Your delivery address')
-    checkoutPage.getAddressBillingSection().should('contain', 'Your billing address')
+    checkoutPage.getAddressDeliverySection().should('contain', text.checkoutPage.deliveryAddress)
+    checkoutPage.getAddressBillingSection().should('contain', text.checkoutPage.billingAddress)
     checkoutPage.scrollToCartTableSection()
     checkoutPage.getDeliveryGenderFirstNameLastName()
       .should('contain', `${user.title}. ${user.firstname} ${user.lastname}`)
@@ -222,8 +223,8 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     checkoutPage
       .typeCommentOrderTextField(product.commentToOrder)
       .clickPlaceOrderButton()
-    paymentPage.getActiveBreadcrumbs().should('have.text', 'Payment')
-    paymentPage.getHeadingOfSection().should('have.text', 'Payment')
+    paymentPage.getActiveBreadcrumbs().should('have.text', text.paymentPage.breadCrumbs)
+    paymentPage.getHeadingOfSection().should('have.text', text.paymentPage.sectionHeading)
     paymentPage.getPaymentInformation().should('be.visible')
     paymentPage
       .typeNameOnCardTextField(user.name, user.lastname)
@@ -232,9 +233,9 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
       .typeCardExpiryMonthTextField(userCardExMonth[0])
       .typeCardExpiryYearTextField(userCardExYear[0])
       .clickPayAndConfirmOrderButton()
-    // paymentPage.getSuccessOrderMessage().should('include.text', 'Your order has been placed successfully!')
-    paymentDonePage.getOrderPlacedHeading().should('have.text', 'Order Placed!')
-    paymentDonePage.getOrderPlacedMessage().should('have.text', 'Congratulations! Your order has been confirmed!')
+    // paymentPage.getSuccessOrderMessage().should('include.text', text.paymentPage.successOrderMessage)
+    paymentDonePage.getOrderPlacedHeading().should('have.text', text.paymentDonePage.orderPlacedHeading)
+    paymentDonePage.getOrderPlacedMessage().should('have.text', text.paymentDonePage.orderPlacedMessage)
   })
 
   it('Test Case 24: Download Invoice after purchase order', () => {
@@ -247,13 +248,13 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     cartPage.getCartProductsList().should('have.length', 1) 
     cartPage
       .clickProceedToCheckoutButton()
-    checkoutPage.getActiveBreadcrumbs().should('have.text', 'Checkout')
+    checkoutPage.getActiveBreadcrumbs().should('have.text', text.checkoutPage.breadCrumbs)
     checkoutPage.getCartInfoSection().should('be.visible')
-    checkoutPage.getPageTitle().should('equal', 'Automation Exercise - Checkout')
-    checkoutPage.getPageUrl().should('include', 'checkout')
+    checkoutPage.getPageTitle().should('equal', text.checkoutPage.pageTitle)
+    checkoutPage.getPageUrl().should('include', text.checkoutPage.pageUrl)
     checkoutPage.getCartProductDescription().should('have.length', 1)
-    checkoutPage.getAddressDeliverySection().should('contain', 'Your delivery address')
-    checkoutPage.getAddressBillingSection().should('contain', 'Your billing address')
+    checkoutPage.getAddressDeliverySection().should('contain', text.checkoutPage.deliveryAddress)
+    checkoutPage.getAddressBillingSection().should('contain', text.checkoutPage.billingAddress)
     checkoutPage.scrollToCartTableSection()
     checkoutPage.getDeliveryGenderFirstNameLastName()
       .should('contain', `${user.title}. ${user.firstname} ${user.lastname}`)
@@ -269,8 +270,8 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
     checkoutPage
       .typeCommentOrderTextField(product.commentToOrder)
       .clickPlaceOrderButton()
-    paymentPage.getActiveBreadcrumbs().should('have.text', 'Payment')
-    paymentPage.getHeadingOfSection().should('have.text', 'Payment')
+    paymentPage.getActiveBreadcrumbs().should('have.text', text.paymentPage.breadCrumbs)
+    paymentPage.getHeadingOfSection().should('have.text', text.paymentPage.sectionHeading)
     paymentPage.getPaymentInformation().should('be.visible')
     paymentPage
       .typeNameOnCardTextField(user.name, user.lastname)
@@ -279,17 +280,15 @@ describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
       .typeCardExpiryMonthTextField(userCardExMonth[0])
       .typeCardExpiryYearTextField(userCardExYear[0])
       .clickPayAndConfirmOrderButton()
-    // paymentPage.getSuccessOrderMessage().should('include.text', 'Your order has been placed successfully!')
-    paymentDonePage.getOrderPlacedHeading().should('have.text', 'Order Placed!')
-    paymentDonePage.getOrderPlacedMessage().should('have.text', 'Congratulations! Your order has been confirmed!')
+    // paymentPage.getSuccessOrderMessage().should('include.text', text.paymentPage.successOrderMessage)
+    paymentDonePage.getOrderPlacedHeading().should('have.text', text.paymentDonePage.orderPlacedHeading)
+    paymentDonePage.getOrderPlacedMessage().should('have.text', text.paymentDonePage.orderPlacedMessage)
 
     cy.intercept('GET', '/download_invoice/*').as('downloadInvoice')
     paymentDonePage.clickDownloadInvoiceButton()
     cy.wait('@downloadInvoice').its('response.statusCode').should('eq', 200)
     paymentDonePage.clickContinuePlacedOrderButton()
     homePage.clickDeleteAccountButton()
-    homePage.getAccountDeletedConfirmMessage().should('contain', 'Account Deleted!')
+    homePage.getAccountDeletedConfirmMessage().should('contain', text.homePage.accountDeleted)
   })
-
-  
 })

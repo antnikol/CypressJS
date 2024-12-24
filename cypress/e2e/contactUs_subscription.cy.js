@@ -8,7 +8,6 @@ import CartPage from "../pageObjects/CartPage"
 import { user } from '../fixtures/api.json'
 
 
-
 const signupPage = new SignUpPage()
 const homePage = new HomePage()
 const loginPage = new LoginPage()
