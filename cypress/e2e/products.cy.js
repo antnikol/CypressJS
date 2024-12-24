@@ -103,7 +103,7 @@ describe('Test for the site automationexercise.com', ()=> {
     productDetailsPage.getReviewSuccessMessage().should('have.text', 'Thank you for your review.')     
   })
 
-  it.only('Test Case 19: View & Cart Brand Products', () => {
+  it('Test Case 19: View & Cart Brand Products', () => {
     homePage.clickProductsHeaderButton()
     productsPage.getLeftSidebarBrandsHeading().should('be.visible').and('have.text','Brands')
     productsPage.getLeftSidebarBrandsList().should('have.length.above', 0)

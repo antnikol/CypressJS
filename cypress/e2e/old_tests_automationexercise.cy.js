@@ -826,7 +826,7 @@ describe('Test for the site automationexercise.com', ()=> {
   })
   
   it('Test Case 25: Verify Scroll Up using "Arrow" button and Scroll Down functionality', () => {
-    cy.scrollTo('bottom')
+    cy.get('.footer-widget .single-widget h2').scrollIntoView()
     cy.get('.single-widget h2').contains('Subscription').should('be.visible')
     cy.get('.single-widget h2')
       .should(($el) => {
@@ -861,7 +861,7 @@ describe('Test for the site automationexercise.com', ()=> {
   })
 
   it('Test Case 26: Verify Scroll Up without "Arrow" button and Scroll Down functionality', () => {
-    cy.scrollTo('bottom')
+    cy.get('.footer-widget .single-widget h2').scrollIntoView()
     cy.get('.single-widget h2').contains('Subscription').should('be.visible')
     cy.get('.single-widget h2')
       .should(($el) => {
