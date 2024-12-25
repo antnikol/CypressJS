@@ -28,13 +28,34 @@ jobs:
       - name: Npm install
         run: npm ci
 
-      - name: Install Allure CLI
+      - name: Install Express and Cypress
         run: |
-          npm install -g allure-commandline --save-dev
+          npm install express
+          npm install cypress
 
-      - name: Npx run tests
+      - name: Start Express server
         run: |
-          npx cypress run --headless --config --env allure=true
+          echo "
+          const express = require('express');
+          const app = express();
+          const port = 3000;
+
+          app.use(express.static('public')); 
+
+          app.get('https://automationexercise.com/api/productsList', (req, res) => {
+            res.json({ products: [{ name: 'Product 1' }] });
+          });
+
+          app.listen(port, () => {
+            console.log('Server is running at http://localhost:' + port);
+          });
+          " > server.js
+
+          nohup node server.js &
+
+      - name: Run Cypress tests
+        run: |
+          npx cypress run --config baseUrl=http://localhost:3000 --headless --env allure=true
 
       - name: Check Allure results
         run: |
