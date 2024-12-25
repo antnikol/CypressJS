@@ -46,18 +46,6 @@ jobs:
         run: |
           npx cypress run --headless --env allure=true
 
-      - name: Create test summary
-        uses: test-summary/action@v1.0
-        if: always()
-        with:
-          paths: reports/junit/*.xml
-
-      - name: Publish test results
-        uses: EnricoMi/publish-unit-test-result-action@v1
-        if: always()
-        with:
-          files: "reports/junit/*.xml"
-
       - name: Generate Allure report
         run: |
           allure generate ./allure-results --clean
@@ -81,3 +69,9 @@ jobs:
         with:
           name: cypress-screenshots
           path: ./cypress/screenshots
+
+      - name: Test Summary
+        uses: test-summary/action@v2
+        with:
+          paths: "allure-results/**/*.xml"
+        if: always()
