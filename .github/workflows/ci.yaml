@@ -61,7 +61,7 @@ jobs:
 
       - name: Run Cypress tests (including the one with mock server)
         run: |
-          npx cypress run --config baseUrl=http://localhost:3000 --headless --env allure=true
+          npx cypress run --config --headless --env allure=true
 
       - name: Check Allure results
         run: |
