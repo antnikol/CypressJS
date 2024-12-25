@@ -35,7 +35,7 @@ jobs:
       - name: Start Express server for mock test
         run: |
           echo "
-          const express = require('express');
+          import express from 'express';
           const app = express();
           const port = 3000;
 
@@ -50,7 +50,7 @@ jobs:
           });
           " > server.js
 
-          node server.js &
+          nohup node server.js &
 
       - name: Wait for the server to be ready
         run: |
