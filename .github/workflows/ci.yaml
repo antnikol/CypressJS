@@ -13,60 +13,49 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
 
     steps:
-      - name: Git clone
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          node-version: "18.x"
 
-      - name: Npm install
-        run: npm ci
+      - name: Install dependencies
+        run: npm install
 
       - name: Install Express and Cypress
         run: |
           npm install express
           npm install cypress
 
-          - name: Start Mock Server for specific test
-          run: |
-            echo "
-            import express from 'express';
+      - name: Start Express server for mock test
+        run: |
+          echo "
+          import express from 'express';
+          const app = express();
+          const port = 3000;
 
-            const app = express();
-            const port = 3000;
+          app.get('/api/productsList', (req, res) => {
+            res.json({ products: [{ name: 'Mocked Product' }] });
+          });
 
-            app.get('/api/productsList', (req, res) => {
-              res.json({ products: [{ name: 'Mocked Product' }] });
-            });
+          app.listen(port, () => {
+            console.log('Mock server is running at http://localhost:' + port);
+          });
+          " > server.js
 
-            app.listen(port, () => {
-              console.log('Mock server is running at http://localhost:' + port);
-            });
-            " > server.js
+          nohup node server.js &
 
-            nohup node server.js &
-
-            sleep 5
-
-            echo "Waiting for the mock server to start..."
-            while ! curl --silent --head --fail http://localhost:3000; do
-              echo "Waiting for server..."
-              sleep 1
-            done
-            echo "Mock server is up!"
-
-      - name: Wait for the mock server to be ready
+      - name: Wait for the server to be ready
         run: |
           echo "Waiting for the mock server to start..."
-          while ! curl --silent --head --fail http://localhost:3000; do
+          until curl --silent --head --fail http://localhost:3000; do
             echo "Waiting for server..."
-            sleep 1  
+            sleep 1
           done
           echo "Mock server is up!"
 
@@ -126,6 +115,6 @@ jobs:
           rm -rf gh-pages/*
           cp -r ./allure-report/* gh-pages/
           cd gh-pages
-          git add . 
+          git add .
           git commit -m "Update Allure report"
           git push
