@@ -70,10 +70,9 @@ jobs:
           name: cypress-screenshots
           path: ./cypress/screenshots
 
-      - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: success() || failure()
+      - name: Deploy Allure report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          name: Allure Tests
-          path: allure-results/**/*.xml
-          reporter: allure
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
