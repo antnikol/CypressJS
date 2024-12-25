@@ -61,7 +61,13 @@ jobs:
 
       - name: Run Cypress tests (including the one with mock server)
         run: |
-          npx cypress run --config baseUrl=http://localhost:3000 --headless --env allure=true
+          # Запуск тестів з мокованими даними
+          npx cypress run --config baseUrl=http://localhost:3000 --headless --env allure=true --spec "cypress/api/api_mocked.cy.js"
+
+      - name: Run remaining Cypress tests
+        run: |
+          # Запуск решти тестів без зміни базового URL
+          npx cypress run --headless --env allure=true --spec "cypress/e2e/**/*"
 
       - name: Check Allure results
         run: |
