@@ -17,6 +17,8 @@
 import './commands'
 import "allure-cypress"
 import './globalHooks'
-
+Cypress.on('log:added', (log) => {
+  console.log(log.message);
+});
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
