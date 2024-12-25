@@ -57,7 +57,7 @@ jobs:
           echo "Waiting for the mock server to start..."
           until curl --silent --head --fail http://localhost:3000/api/productsList; do
             echo "Waiting for server..."
-            sleep 5  
+            sleep 1
           done
           echo "Mock server is up!"
 
