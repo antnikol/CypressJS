@@ -35,7 +35,7 @@ describe('API tests with mocked data', () => {
     }).as('mockProdList');
   
     cy.log('Before visiting the page')
-    cy.visit('/cypress/e2e/mockPage.html')
+    cy.visit('/mockPage.html')
     // cy.visit('/cypress/public/mockPage.html')
       .then(() => {
         console.log('Page loaded'); 
