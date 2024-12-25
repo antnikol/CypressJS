@@ -39,6 +39,8 @@ jobs:
           const app = express();
           const port = 3000;
 
+          app.use(express.static('cypress'));
+
           app.get('/api/productsList', (req, res) => {
             res.json({ products: [{ name: 'Mocked Product' }] });
           });

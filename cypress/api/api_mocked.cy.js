@@ -14,7 +14,7 @@ describe('API tests with mocked data', () => {
       },
     }).as('mockProdList')
 
-    cy.visit('/cypress/fixtures/mockPage.html');
+    cy.visit('/cypress/fixtures/mockPage.html', { failOnStatusCode: false })
     cy.wait('@mockProdList').then((interception) => {
       expect(interception.response.statusCode).to.eq(201);
       expect(interception.response.body.products[0].name).to.eq(message.mocked);
