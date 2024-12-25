@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  run-test:
+  run-tests:
     name: "Run tests"
     runs-on: ubuntu-latest
 
@@ -33,38 +33,40 @@ jobs:
           npm install express
           npm install cypress
 
-      - name: Start Express server for specific test
+      - name: Start Express server for mock test
         run: |
           echo "
           const express = require('express');
           const app = express();
           const port = 3000;
 
-          app.use(express.static('public')); 
-
+          // Мокування API для одного тесту
           app.get('/api/productsList', (req, res) => {
-            res.json({ products: [{ name: 'Product 1' }] });
+            res.json({ products: [{ name: 'Mocked Product' }] });
           });
 
           app.listen(port, () => {
-            console.log('Server is running at http://localhost:' + port);
+            console.log('Mock server is running at http://localhost:' + port);
           });
           " > server.js
-
           nohup node server.js &
 
-      - name: Wait for the server to be ready
+      - name: Wait for mock server to be ready
         run: |
-          echo "Waiting for the server to start..."
+          echo "Waiting for the mock server to start..."
           while ! curl --silent --head --fail http://localhost:3000; do
             echo "Waiting for server..."
             sleep 1  
           done
-          echo "Server is up!"
+          echo "Mock server is up!"
 
-      - name: Run Cypress tests (including the one with mock server)
+      - name: Run mock test with Cypress
         run: |
-          npx cypress run --config baseUrl=http://localhost:3000 --headless --env allure=true
+          npx cypress run --config baseUrl=http://localhost:3000 --headless --env allure=true --spec "cypress/integration/mock_test_spec.js"
+
+      - name: Run other Cypress tests
+        run: |
+          npx cypress run --headless --env allure=true
 
       - name: Check Allure results
         run: |
