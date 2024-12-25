@@ -22,6 +22,6 @@ describe('API tests with mocked data', () => {
   })
 
   afterEach(() => {
-    Cypress.config('baseUrl', '')
+    Cypress.config('baseUrl', 'https://automationexercise.com')
   })
 })
