@@ -1,6 +1,6 @@
 {
-  "liveServerUrl": "http://127.0.0.1:55514/cypress/fixtures/mockPage.html",
-  
+  "liveServerUrl": "https://antnikol.github.io/CypressJS/",
+
   "searchTerms": [
     "top",
     "tshirt",

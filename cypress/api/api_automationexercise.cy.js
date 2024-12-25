@@ -21,7 +21,7 @@ describe('API tests for the site automationexercise.com', ()=> {
     })
   })
 
-  it.skip('API 1(3): __Mocked_DATA__ Get All Products List', () => {
+  it('API 1(3): __Mocked_DATA__ Get All Products List', () => {
     cy.intercept('GET', '/api/productsList', {
       statusCode: 201,
       body: {
