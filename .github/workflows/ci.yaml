@@ -32,10 +32,8 @@ jobs:
           npm install express
           npm install cypress
 
-      - name: Install Allure commandline
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y allure
+      - name: Install Allure commandline via NPM
+        run: npm install -g allure-commandline --save-dev
 
       - name: Start Express server for mock test
         run: |
