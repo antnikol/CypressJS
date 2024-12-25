@@ -7,40 +7,12 @@ describe('API tests with mocked data', () => {
   })
 
   it('API 1(3): __Mocked_DATA__ Get All Products List', () => {
-    const htmlContent = `
-      <html>
-      <head>
-        <title>Mock Page</title>
-      </head>
-      <body>
-        <script>
-          fetch('/api/productsList')
-            .then(response => response.json())
-            .then(data => console.log(data));
-        </script>
-      </body>
-      </html>
-    `;
-    cy.writeFile('cypress/e2e/mockPage.html', htmlContent)
-    // cy.visit('/cypress/api/mockPage.html')
-
-    cy.intercept('GET', '/api/productsList', (req) => {
-      console.log('Intercepted request:', req); 
-      req.reply({
-        statusCode: 201,
-        body: {
-          products: [{ name: message.mocked }],
-        },
-      });
+    cy.intercept('GET', '/api/productsList', { 
+      statusCode: 201, 
+      body: { products: [{ name: message.mocked }] }
     }).as('mockProdList');
   
-    cy.log('Before visiting the page')
     cy.visit('/mockPage.html')
-    // cy.visit('/cypress/public/mockPage.html')
-      .then(() => {
-        console.log('Page loaded'); 
-      });
-    cy.log('After visiting the page')
   
     cy.wait('@mockProdList').then((interception) => {
       console.log('Intercepted response:', interception.response); 
@@ -49,7 +21,6 @@ describe('API tests with mocked data', () => {
     });
   });
   
-
   afterEach(() => {
     Cypress.config('baseUrl', baseUrl)
   })
