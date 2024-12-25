@@ -77,6 +77,17 @@ jobs:
           name: cypress-screenshots
           path: ./cypress/screenshots
 
+      - name: Create gh-pages branch if not exists
+        run: |
+          if ! git ls-remote --exit-code origin gh-pages; then
+            git checkout --orphan gh-pages
+            git rm -rf .
+            echo "Placeholder for GitHub Pages" > index.html
+            git add index.html
+            git commit -m "Initialize gh-pages branch"
+            git push origin gh-pages
+          fi
+
       - name: Deploy Allure report to GitHub Pages
         if: success()
         run: |
