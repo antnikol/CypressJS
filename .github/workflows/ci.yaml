@@ -49,7 +49,17 @@ jobs:
             console.log('Mock server is running at http://localhost:' + port);
           });
           " > server.js
-          nohup node server.js &
+
+          # Запуск сервера та перевірка логу
+          node server.js &
+
+          # Очікування серверу з логуванням
+          echo "Waiting for the mock server to start..."
+          until curl --silent --head --fail http://localhost:3000; do
+            echo "Waiting for server..."
+            sleep 1
+          done
+          echo "Mock server is up!"
 
       - name: Wait for mock server to be ready
         run: |
