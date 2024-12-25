@@ -22,20 +22,26 @@ describe('API tests for the site automationexercise.com', ()=> {
   })
 
   it('API 1(3): __Mocked_DATA__ Get All Products List', () => {
+    const originalBaseUrl = Cypress.config('baseUrl')
+    Cypress.config('baseUrl', 'http://localhost:3000')
+  
     cy.intercept('GET', '/api/productsList', {
       statusCode: 201,
       body: {
-        products: [ { name: message.mocked } ],
-      }
+        products: [{ name: message.mocked }],
+      },
     }).as('mockProdList')
 
-    cy.visit(liveServerUrl);
+    cy.visit('/mockPage.html')
 
     cy.wait('@mockProdList').then((interception) => {
-      expect(interception.response.statusCode).to.eq(201)
-      expect(interception.response.body.products[0].name).to.eq(message.mocked)
+      expect(interception.response.statusCode).to.eq(201);
+      expect(interception.response.body.products[0].name).to.eq(message.mocked);
     })
-  })
+    
+    Cypress.config('baseUrl', originalBaseUrl);
+  });
+  
 
   it('API 2: POST To All Products List', () => {
     cy.request('POST', '/api/productsList').then((response) => {

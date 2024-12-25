@@ -33,7 +33,7 @@ jobs:
           npm install express
           npm install cypress
 
-      - name: Start Express server
+      - name: Start Express server for specific test
         run: |
           echo "
           const express = require('express');
@@ -42,7 +42,7 @@ jobs:
 
           app.use(express.static('public')); 
 
-          app.get('https://automationexercise.com/api/productsList', (req, res) => {
+          app.get('/api/productsList', (req, res) => {
             res.json({ products: [{ name: 'Product 1' }] });
           });
 
@@ -53,7 +53,7 @@ jobs:
 
           nohup node server.js &
 
-      - name: Run Cypress tests
+      - name: Run Cypress tests (including the one with mock server)
         run: |
           npx cypress run --config baseUrl=http://localhost:3000 --headless --env allure=true
 
