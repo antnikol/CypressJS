@@ -34,7 +34,7 @@ jobs:
 
       - name: Npx run tests
         run: |
-          npx cypress run --headless --config baseUrl=https://antnikol.github.io/CypressJS/ --env allure=true
+          npx cypress run --headless --config --env allure=true
 
       - name: Check Allure results
         run: |
