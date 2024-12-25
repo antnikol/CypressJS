@@ -68,13 +68,6 @@ jobs:
         run: |
           npx cypress run --headless --env allure=true
 
-      - name: Check Allure results
-        run: |
-          if [ ! -d "./allure-results" ] || [ -z "$(ls -A ./allure-results)" ]; then
-            echo "No Allure results found. Skipping report generation."
-            exit 1
-          fi
-
       - name: Generate Allure report
         run: |
           allure generate ./allure-results --clean
