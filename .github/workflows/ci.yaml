@@ -35,7 +35,7 @@ jobs:
       - name: Start Express server for mock test
         run: |
           echo "
-          import express from 'express';
+          const express = require('express');
           const app = express();
           const port = 3000;
 
@@ -50,14 +50,14 @@ jobs:
           });
           " > server.js
 
-          nohup node server.js &
+          node server.js &
 
       - name: Wait for the server to be ready
         run: |
           echo "Waiting for the mock server to start..."
           until curl --silent --head --fail http://localhost:3000/api/productsList; do
             echo "Waiting for server..."
-            sleep 1
+            sleep 5  # Збільшена затримка для стабільного старту сервера
           done
           echo "Mock server is up!"
 
