@@ -2,20 +2,27 @@
 import { liveServerUrl, message, baseUrl, gitHubActionsServerUrl } from '../fixtures/api.json'
 
 describe('API tests with mocked data', () => {
-  beforeEach(() => {
-    Cypress.config('baseUrl', 'http://localhost:3000')
-  })
+beforeEach(() => {
+  Cypress.config('baseUrl', 'http://localhost:3000');
+  cy.intercept('GET', '/api/productsList', (req) => {
+    console.log('Intercepted request:', req);
+    req.reply({
+      statusCode: 201,
+      body: { products: [{ name: message.mocked }] },
+    });
+  }).as('mockProdList');
+});
 
   it('API 1(3): __Mocked_DATA__ Get All Products List', () => {
-    cy.intercept('GET', '/api/productsList', (req) => {
-      console.log('Intercepted request:', req); 
-      req.reply({
-        statusCode: 201,
-        body: {
-          products: [{ name: message.mocked }],
-        },
-      });
-    }).as('mockProdList');
+    // cy.intercept('GET', '/api/productsList', (req) => {
+    //   console.log('Intercepted request:', req); 
+    //   req.reply({
+    //     statusCode: 201,
+    //     body: {
+    //       products: [{ name: message.mocked }],
+    //     },
+    //   });
+    // }).as('mockProdList');
   
     cy.visit('/cypress/fixtures/mockPage.html', { failOnStatusCode: false })
       .then(() => {
