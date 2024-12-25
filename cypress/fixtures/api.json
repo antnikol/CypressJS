@@ -1,5 +1,7 @@
 {
   "liveServerUrl": "https://antnikol.github.io/CypressJS/cypress/fixtures/mockPage.html",
+  "gitHubActionsServerUrl": "http://localhost:3000",
+  "baseUrl": "https://automationexercise.com",
 
   "searchTerms": [
     "top",
