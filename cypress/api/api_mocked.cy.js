@@ -7,6 +7,23 @@ describe('API tests with mocked data', () => {
   })
 
   it('API 1(3): __Mocked_DATA__ Get All Products List', () => {
+    const htmlContent = `
+      <html>
+      <head>
+        <title>Mock Page</title>
+      </head>
+      <body>
+        <script>
+          fetch('/api/productsList')
+            .then(response => response.json())
+            .then(data => console.log(data));
+        </script>
+      </body>
+      </html>
+    `;
+    cy.writeFile('cypress/api/mockPage.html', htmlContent)
+    cy.visit('/cypress/api/mockPage.html')
+
     cy.intercept('GET', '/api/productsList', (req) => {
       console.log('Intercepted request:', req); 
       req.reply({
@@ -18,7 +35,7 @@ describe('API tests with mocked data', () => {
     }).as('mockProdList');
   
     cy.log('Before visiting the page')
-    cy.visit('/cypress/fixtures/mockPage.html', { failOnStatusCode: false })
+    cy.visit('/cypress/public/mockPage.html')
       .then(() => {
         console.log('Page loaded'); 
       });

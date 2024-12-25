@@ -1,5 +1,5 @@
 {
-  "liveServerUrl": "https://antnikol.github.io/CypressJS/cypress/fixtures/mockPage.html",
+  "liveServerUrl": "http://127.0.0.1:55514/cypress/fixtures/mockPage.html",
   "gitHubActionsServerUrl": "http://localhost:3000",
   "baseUrl": "https://automationexercise.com",
 
