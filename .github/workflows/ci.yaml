@@ -46,6 +46,13 @@ jobs:
         run: |
           npx cypress run --headless --env allure=true
 
+      - name: Check Allure results
+        run: |
+          if [ ! -d "./allure-results" ] || [ -z "$(ls -A ./allure-results)" ]; then
+            echo "No Allure results found. Skipping report generation."
+            exit 1
+          fi
+
       - name: Generate Allure report
         run: |
           allure generate ./allure-results --clean
@@ -71,8 +78,14 @@ jobs:
           path: ./cypress/screenshots
 
       - name: Deploy Allure report to GitHub Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./allure-report
+        if: success()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git clone --branch gh-pages --single-branch https://github.com/${{ github.repository }} gh-pages
+          rm -rf gh-pages/*
+          cp -r ./allure-report/* gh-pages/
+          cd gh-pages
+          git add .
+          git commit -m "Update Allure report"
+          git push
