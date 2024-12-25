@@ -33,25 +33,33 @@ jobs:
           npm install express
           npm install cypress
 
-      - name: Start Mock Server for specific test
-        run: |
-          echo "
-          import express from 'express';
+          - name: Start Mock Server for specific test
+          run: |
+            echo "
+            import express from 'express';
 
-          const app = express();
-          const port = 3000;
+            const app = express();
+            const port = 3000;
 
-          // Мокування API для одного тесту
-          app.get('/api/productsList', (req, res) => {
-            res.json({ products: [{ name: 'Mocked Product' }] });
-          });
+            app.get('/api/productsList', (req, res) => {
+              res.json({ products: [{ name: 'Mocked Product' }] });
+            });
 
-          app.listen(port, () => {
-            console.log('Mock server is running at http://localhost:' + port);
-          });
-          " > server.js
+            app.listen(port, () => {
+              console.log('Mock server is running at http://localhost:' + port);
+            });
+            " > server.js
 
-          nohup node server.js &
+            nohup node server.js &
+
+            sleep 5
+
+            echo "Waiting for the mock server to start..."
+            while ! curl --silent --head --fail http://localhost:3000; do
+              echo "Waiting for server..."
+              sleep 1
+            done
+            echo "Mock server is up!"
 
       - name: Wait for the mock server to be ready
         run: |
