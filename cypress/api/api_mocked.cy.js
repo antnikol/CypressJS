@@ -22,7 +22,7 @@ describe('API tests with mocked data', () => {
       </html>
     `;
     cy.writeFile('cypress/api/mockPage.html', htmlContent)
-    cy.visit('/cypress/api/mockPage.html')
+    // cy.visit('/cypress/api/mockPage.html')
 
     cy.intercept('GET', '/api/productsList', (req) => {
       console.log('Intercepted request:', req); 
@@ -35,7 +35,8 @@ describe('API tests with mocked data', () => {
     }).as('mockProdList');
   
     cy.log('Before visiting the page')
-    cy.visit('/cypress/public/mockPage.html')
+    cy.visit('/cypress/api/mockPage.html')
+    // cy.visit('/cypress/public/mockPage.html')
       .then(() => {
         console.log('Page loaded'); 
       });
