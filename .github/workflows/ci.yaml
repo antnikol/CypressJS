@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  run-tests:
+  run-test:
     name: "Run tests"
     runs-on: ubuntu-latest
 
@@ -33,10 +33,11 @@ jobs:
           npm install express
           npm install cypress
 
-      - name: Start Express server for mock test
+      - name: Start Mock Server for specific test
         run: |
           echo "
-          const express = require('express');
+          import express from 'express';
+
           const app = express();
           const port = 3000;
 
@@ -50,18 +51,9 @@ jobs:
           });
           " > server.js
 
-          # Запуск сервера та перевірка логу
-          node server.js &
+          nohup node server.js &
 
-          # Очікування серверу з логуванням
-          echo "Waiting for the mock server to start..."
-          until curl --silent --head --fail http://localhost:3000; do
-            echo "Waiting for server..."
-            sleep 1
-          done
-          echo "Mock server is up!"
-
-      - name: Wait for mock server to be ready
+      - name: Wait for the mock server to be ready
         run: |
           echo "Waiting for the mock server to start..."
           while ! curl --silent --head --fail http://localhost:3000; do
@@ -70,13 +62,9 @@ jobs:
           done
           echo "Mock server is up!"
 
-      - name: Run mock test with Cypress
+      - name: Run Cypress tests (including the one with mock server)
         run: |
-          npx cypress run --config baseUrl=http://localhost:3000 --headless --env allure=true --spec "cypress/integration/mock_test_spec.js"
-
-      - name: Run other Cypress tests
-        run: |
-          npx cypress run --headless --env allure=true
+          npx cypress run --config baseUrl=http://localhost:3000 --headless --env allure=true
 
       - name: Check Allure results
         run: |
@@ -130,6 +118,6 @@ jobs:
           rm -rf gh-pages/*
           cp -r ./allure-report/* gh-pages/
           cd gh-pages
-          git add .
+          git add . 
           git commit -m "Update Allure report"
           git push
