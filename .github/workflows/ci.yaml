@@ -56,8 +56,9 @@ jobs:
       - name: Wait for the server to be ready
         run: |
           echo "Waiting for the server to start..."
-          while ! nc -z localhost 3000; do   
-            sleep 1
+          while ! curl --silent --head --fail http://localhost:3000; do
+            echo "Waiting for server..."
+            sleep 1  
           done
           echo "Server is up!"
 
