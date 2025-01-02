@@ -26,6 +26,7 @@
 import '@testing-library/cypress/add-commands'
 import 'cypress-real-events'
 import 'cypress-file-upload'
+import '@shelex/cypress-allure-plugin'
 import { user } from '../fixtures/api.json'
 import HomePage from '../pageObjects/HomePage'
 import LoginPage from '../pageObjects/LoginPage'

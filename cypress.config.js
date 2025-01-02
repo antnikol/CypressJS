@@ -1,6 +1,6 @@
 import { defineConfig } from "cypress";
 import { allureCypress } from "allure-cypress/reporter";
-import allureWriter from '@shelex/cypress-allure-plugin/writer.js'
+// import allureWriter from '@shelex/cypress-allure-plugin/writer.js'
 import * as os from "node:os";
 
 export default defineConfig({
@@ -9,7 +9,7 @@ export default defineConfig({
       allureCypress(on, config, {
         resultsDir: "allure-results",
       });
-      allureWriter(on, config);
+      // allureWriter(on, config);
       return config;
     },
     env: {
