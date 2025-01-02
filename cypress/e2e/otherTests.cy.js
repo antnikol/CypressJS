@@ -11,6 +11,9 @@ import text from "../fixtures/text.json"
 const homePage = new HomePage()
 const testCasesPage = new TestCasesPage()
 
+const browserName = Cypress.env('browserName')
+const browserVersion = Cypress.browser.version
+
 
 describe(`Browser: ${browserName} (${browserVersion}). Tests for the sections: Other tests`, ()=> {
 
