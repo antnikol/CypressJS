@@ -83,7 +83,9 @@ jobs:
         run: |
           TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
           mkdir -p ./allure-results/$TIMESTAMP
-          mv ./allure-results/* ./allure-results/$TIMESTAMP/
+          mv ./allure-results/*.xml ./allure-results/$TIMESTAMP/
+          mv ./allure-results/*.json ./allure-results/$TIMESTAMP/
+          mv ./allure-results/*.txt ./allure-results/$TIMESTAMP/
           allure generate ./allure-results/$TIMESTAMP --clean
 
       - name: Upload Allure report
