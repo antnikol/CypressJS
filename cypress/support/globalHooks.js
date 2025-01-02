@@ -3,7 +3,7 @@ import HomePage from "../pageObjects/HomePage"
 const homePage = new HomePage
 
 beforeEach(() => {
-  if (!Cypress.spec.name.includes('api_automationexercise')) {
+  if (!Cypress.spec.name.includes('api_')) {
     cy.visit('/');
     homePage.getPageUrl().should('eq', 'https://automationexercise.com/');
     homePage.getHeaderHomeIcon().should('have.css', 'color', 'rgb(255, 165, 0)');
