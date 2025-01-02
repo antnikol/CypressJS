@@ -83,9 +83,15 @@ jobs:
         run: |
           TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
           mkdir -p ./allure-results/$TIMESTAMP
-          mv ./allure-results/*.xml ./allure-results/$TIMESTAMP/
-          mv ./allure-results/*.json ./allure-results/$TIMESTAMP/
-          mv ./allure-results/*.txt ./allure-results/$TIMESTAMP/
+          if ls ./allure-results/*.xml 1> /dev/null 2>&1; then
+            mv ./allure-results/*.xml ./allure-results/$TIMESTAMP/
+          fi
+          if ls ./allure-results/*.json 1> /dev/null 2>&1; then
+            mv ./allure-results/*.json ./allure-results/$TIMESTAMP/
+          fi
+          if ls ./allure-results/*.txt 1> /dev/null 2>&1; then
+            mv ./allure-results/*.txt ./allure-results/$TIMESTAMP/
+          fi
           allure generate ./allure-results/$TIMESTAMP --clean
 
       - name: Upload Allure report
