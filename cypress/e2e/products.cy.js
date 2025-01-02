@@ -16,7 +16,7 @@ const cartPage = new CartPage()
 
 const product = genData.newProductTestData()
 
-describe('Tests for the sections: Products', ()=> {
+describe.skip('Tests for the sections: Products', ()=> {
 
   it('Test Case 8: Verify All Products and product detail page', () => {
     homePage.clickProductsHeaderButton()

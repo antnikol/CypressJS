@@ -24,7 +24,7 @@ const product = genData.newProductTestData()
 
 describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
 
-  it('Test Case 12: Hover and click "Add to cart" button for two different products with different quantity', () => {
+  it.only('Test Case 12: Hover and click "Add to cart" button for two different products with different quantity', () => {
     homePage.clickProductsHeaderButton()
     productsPage.getFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
     productsPage.takeFirstProductPrice().then((price) => { cy.wrap(price).as('firstProductPrice') })

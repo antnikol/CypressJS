@@ -79,9 +79,11 @@ jobs:
         run: npx cypress run --headless --env allure=true --browser electron
         continue-on-error: true
 
-      - name: Generate Allure report
+      - name: Save Allure results with timestamp
         run: |
-          allure generate ./allure-results --clean
+          mkdir -p ./allure-results/$(date +%Y-%m-%d_%H-%M-%S)
+          mv ./allure-results/* ./allure-results/$(date +%Y-%m-%d_%H-%M-%S)
+          allure generate ./allure-results/$(date +%Y-%m-%d_%H-%M-%S)
 
       - name: Upload Allure report
         uses: actions/upload-artifact@v4
@@ -107,7 +109,6 @@ jobs:
         run: |
           if ! git ls-remote --exit-code origin gh-pages; then
             git checkout --orphan gh-pages
-            git rm -rf . 
             echo "Placeholder for GitHub Pages" > index.html
             git add index.html
             git commit -m "Initialize gh-pages branch"
@@ -121,7 +122,6 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git clone --branch gh-pages --single-branch https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }} gh-pages
-          rm -rf gh-pages/*
           cp -r ./allure-report/* gh-pages/
           cd gh-pages
           git add .

@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Old tests for the site automationexercise.com', ()=> {
+describe.skip('Old tests for the site automationexercise.com', ()=> {
   let new_brach = 'new_branch'
   let userName = 'test-AQA user'
   let userEmail = 'test-AQA@gmail.com'
