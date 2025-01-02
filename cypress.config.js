@@ -8,7 +8,10 @@ export default defineConfig({
       allureCypress(on, config, {
         resultsDir: "allure-results",
       });
-      // allureWriter(on, config);
+      on('before:browser:launch', (browser = {}, launchOptions) => {
+        config.env.browserName = browser.name;
+        return launchOptions;
+      });
       return config;
     },
     env: {

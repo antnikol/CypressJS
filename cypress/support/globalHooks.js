@@ -4,7 +4,9 @@ const homePage = new HomePage
 
 beforeEach(() => {
   if (!Cypress.spec.name.includes('api_')) {
-    cy.addBrowserToAllure()
+    const browserName = Cypress.env('browserName')
+    cy.allure().parameter('Browser', browserName)
+    
     cy.visit('/')
     homePage.getPageUrl().should('eq', 'https://automationexercise.com/')
     homePage.getHeaderHomeIcon().should('have.css', 'color', 'rgb(255, 165, 0)')
