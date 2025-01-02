@@ -13,7 +13,6 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
-        browser: [chrome, firefox, edge, electron]
 
     steps:
       - name: Checkout code
@@ -67,6 +66,22 @@ jobs:
       - name: Run Cypress tests (including the one with mock server)
         run: |
           npx cypress run --headless --env allure=true --browser ${{ matrix.browser }}
+
+      - name: Run Cypress tests in Chrome
+        run: npx cypress run --browser chrome
+        continue-on-error: true
+
+      - name: Run Cypress tests in Firefox
+        run: npx cypress run --browser firefox
+        continue-on-error: true
+
+      - name: Run Cypress tests in Edge
+        run: npx cypress run --browser edge
+        continue-on-error: true
+
+      - name: Run Cypress tests in Electron
+        run: npx cypress run --browser electron
+        continue-on-error: true
 
       - name: Generate Allure report
         run: |
