@@ -102,3 +102,10 @@ Cypress.Commands.add('loginUser',(userEmail = USEREMAIL, pass = PASSWORD) => {
     .clickLoginButton()
   homePage.getListHeaderButtons().should('contain', `${user.name}`);
 });
+
+Cypress.Commands.add('addBrowserToAllure', () => {
+  const browserName = Cypress.browser.name;
+  const browserVersion = Cypress.browser.version;
+
+  cy.allure().parameter('Browser', `${browserName} (${browserVersion})`);
+});

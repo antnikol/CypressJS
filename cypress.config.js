@@ -8,7 +8,11 @@ export default defineConfig({
       allureCypress(on, config, {
         resultsDir: "allure-results",
       });
+      require('@shelex/cypress-allure-plugin/writer')(on, config)
       return config;
+    },
+    env: {
+      allure: true,
     },
     baseUrl: 'https://automationexercise.com',
     viewportWidth: 1920,
