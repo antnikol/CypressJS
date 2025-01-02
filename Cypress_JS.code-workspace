@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../Downloads/allure-report"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "allure-report"
+	}
+}
