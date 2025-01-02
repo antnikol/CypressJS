@@ -66,7 +66,7 @@ jobs:
 
       - name: Run Cypress tests (including the one with mock server)
         run: |
-          npx cypress run --headless --env allure=true
+          npx cypress run --headless --env allure=true --browser ${{ matrix.browser }}
 
       - name: Generate Allure report
         run: |
