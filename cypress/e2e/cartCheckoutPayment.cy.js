@@ -21,8 +21,11 @@ const paymentPage = new PaymentPage()
 const paymentDonePage = new PaymentDonePage()
 
 const product = genData.newProductTestData()
+const browserName = Cypress.env('browserName')
+const browserVersion = Cypress.browser.version
 
-describe('Tests for the sections: Cart, Checkout, Payment', ()=> {
+
+describe(`Browser: ${browserName} (${browserVersion}). Tests for the sections: Cart, Checkout, Payment`, ()=> {
 
   it.only('Test Case 12: Hover and click "Add to cart" button for two different products with different quantity', () => {
     homePage.clickProductsHeaderButton()
