@@ -63,24 +63,20 @@ jobs:
           done
           echo "Mock server is up!"
 
-      - name: Run Cypress tests (including the one with mock server)
-        run: |
-          npx cypress run --headless --env allure=true --browser ${{ matrix.browser }}
-
       - name: Run Cypress tests in Chrome
-        run: npx cypress run --browser chrome
+        run: npx cypress run --headless --env allure=true --browser chrome
         continue-on-error: true
 
       - name: Run Cypress tests in Firefox
-        run: npx cypress run --browser firefox
+        run: npx cypress run --headless --env allure=true --browser firefox
         continue-on-error: true
 
       - name: Run Cypress tests in Edge
-        run: npx cypress run --browser edge
+        run: npx cypress run --headless --env allure=true --browser edge
         continue-on-error: true
 
       - name: Run Cypress tests in Electron
-        run: npx cypress run --browser electron
+        run: npx cypress run --headless --env allure=true --browser electron
         continue-on-error: true
 
       - name: Generate Allure report
