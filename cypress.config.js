@@ -1,6 +1,6 @@
 import { defineConfig } from "cypress";
 import { allureCypress } from "allure-cypress/reporter";
-import allureWriter from '@shelex/cypress-allure-plugin/writer'
+import allureWriter from '@shelex/cypress-allure-plugin/writer.js'
 import * as os from "node:os";
 
 export default defineConfig({
