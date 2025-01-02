@@ -19,6 +19,10 @@ export default defineConfig({
     specPattern: [
       'cypress/api/',
       'cypress/e2e/'
-    ]
+    ],
+    retries: {
+      runMode: 4,  
+      openMode: 0, 
+    },
   },
 });
