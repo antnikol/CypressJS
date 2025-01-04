@@ -26,8 +26,8 @@ const product = genData.newProductTestData()
 const browserName = Cypress.browser.name
 const browserVersion = Cypress.browser.version
 
-describe(`Browser: ${browserName} (${browserVersion}). Tests for the sections: Cart, Checkout, Payment`, ()=> {
-  it.only('Test Case 12: Hover and click "Add to cart" button for two different products with different quantity', () => {
+describe(`${browserName}. Tests for the sections: Cart, Checkout, Payment`, ()=> {
+  it('Test Case 12: Hover and click "Add to cart" button for two different products with different quantity', () => {
     homePage.clickProductsHeaderButton()
     productsPage.getFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
     productsPage.takeFirstProductPrice().then((price) => { cy.wrap(price).as('firstProductPrice') })

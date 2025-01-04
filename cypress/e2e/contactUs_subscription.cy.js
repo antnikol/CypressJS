@@ -15,7 +15,7 @@ const cartPage = new CartPage()
 const testData = genData.newProductTestData()
 
 
-describe.skip('Tests for the sections: Contact Us, Subscriptions', ()=> {
+describe('Tests for the sections: Contact Us, Subscriptions', ()=> {
 
   it('Test Case 6: Contact Us Form', () => {
     homePage.clickContactUsButton()
