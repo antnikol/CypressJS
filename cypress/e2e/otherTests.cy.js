@@ -11,7 +11,7 @@ import text from "../fixtures/text.json"
 const homePage = new HomePage()
 const testCasesPage = new TestCasesPage()
 
-const browserName = Cypress.env('browserName')
+const browserName = Cypress.browser.name
 const browserVersion = Cypress.browser.version
 
 
