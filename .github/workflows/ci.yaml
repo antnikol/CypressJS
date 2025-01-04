@@ -60,7 +60,7 @@ jobs:
           echo "Mock server is up!"
 
       - name: Run Cypress tests in Chrome
-        run: npx cypress run --headless --env allure=true --browser chrome
+        run: npx cypress run --headless --env allure=true --browser=chrome
         continue-on-error: true
 
       #      - name: Run Cypress tests in Firefox

@@ -9,6 +9,7 @@ export default defineConfig({
         resultsDir: "allure-results",
       });
       on('before:browser:launch', (browser = {}, launchOptions) => {
+        console.log('Browser name!!!:', browser.name)
         config.env.browserName = browser.name;
         return launchOptions;
       });
