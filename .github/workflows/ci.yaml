@@ -63,19 +63,19 @@ jobs:
           echo "Mock server is up!"
 
       - name: Run Cypress tests in Chrome
-        run: npx cypress run --headless --env allure=true --browser Chrome
+        run: npx cypress run --headless --env allure=true --browser chrome
         continue-on-error: true
 
       - name: Run Cypress tests in Firefox
-        run: npx cypress run --headless --env allure=true --browser Firefox
+        run: npx cypress run --headless --env allure=true --browser firefox
         continue-on-error: true
 
       - name: Run Cypress tests in Edge
-        run: npx cypress run --headless --env allure=true --browser Edge
+        run: npx cypress run --headless --env allure=true --browser edge
         continue-on-error: true
 
       - name: Run Cypress tests in Electron
-        run: npx cypress run --headless --env allure=true --browser Electron
+        run: npx cypress run --headless --env allure=true --browser electron
         continue-on-error: true
 
       - name: Load test report history
