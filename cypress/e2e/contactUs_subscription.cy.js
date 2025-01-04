@@ -13,6 +13,8 @@ const contactUsPage = new ContactUsPage()
 const cartPage = new CartPage()
 
 const testData = genData.newProductTestData()
+const browserName = Cypress.browser.name
+const browserVersion = Cypress.browser.version
 
 
 describe(`${browserName}. Tests for the sections: Contact Us, Subscriptions`, ()=> {

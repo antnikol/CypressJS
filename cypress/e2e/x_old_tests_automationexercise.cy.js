@@ -1,5 +1,8 @@
 /// <reference types="cypress" />
 
+const browserName = Cypress.browser.name
+const browserVersion = Cypress.browser.version
+
 describe(`${browserName}. Old tests for the site automationexercise.com`, ()=> {
   let new_brach = 'new_branch'
   let userName = 'test-AQA user'

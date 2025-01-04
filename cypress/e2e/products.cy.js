@@ -15,6 +15,8 @@ const productDetailsPage = new ProductDetailsPage()
 const cartPage = new CartPage()
 
 const product = genData.newProductTestData()
+const browserName = Cypress.browser.name
+const browserVersion = Cypress.browser.version
 
 describe(`${browserName}. Tests for the sections: Products`, ()=> {
 

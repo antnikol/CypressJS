@@ -11,6 +11,9 @@ const signupPage = new SignUpPage()
 const homePage = new HomePage()
 const loginPage = new LoginPage()
 
+const browserName = Cypress.browser.name
+const browserVersion = Cypress.browser.version
+
 describe(`${browserName}. Tests for the sections: Sign Up, Login`, ()=> {
 
   it('Test Case 1: Register User', () => {
