@@ -70,8 +70,8 @@ getFirstProductName() {
 
 clickFirstProductAddToCartButton() {
   this.getAllSingleProductsSection().first().scrollIntoView()
-  .realHover().find('.product-overlay a.btn')
-  .click({ animationDistanceThreshold: 40 })
+  .trigger('mouseover').find('.product-overlay a.btn')
+  .click({ force: true, animationDistanceThreshold: 40 })
   this.counterClickFirstProductAddToCartButton += 1
   return this
 }
@@ -83,8 +83,8 @@ clickContinueShoppingButton() {
 
 clickSecondProductAddToCartButton() {
   this.getAllSingleProductsSection().eq(1).scrollIntoView()
-  .realHover().find('.product-overlay a.btn')
-  .click({ animationDistanceThreshold: 40 })
+  .trigger('mouseover').find('.product-overlay a.btn')
+  .click({ force: true, animationDistanceThreshold: 40 })
   return this
 }
 

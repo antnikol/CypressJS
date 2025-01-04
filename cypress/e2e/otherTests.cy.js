@@ -15,7 +15,7 @@ const browserName = Cypress.browser.name
 const browserVersion = Cypress.browser.version
 
 
-describe(`Browser: ${browserName} (${browserVersion}). Tests for the sections: Other tests`, ()=> {
+describe(`${browserName}. Tests for the sections: Other tests`, ()=> {
 
   it('Test Case 7: Verify Test Cases Page', () => {
     homePage.clickTestCasesHeaderMenuButton()

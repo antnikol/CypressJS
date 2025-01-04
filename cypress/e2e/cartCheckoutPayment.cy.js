@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+import "cypress-real-events/support"
 
 import HomePage from "../pageObjects/HomePage"
 import ProductsPage from "../pageObjects/ProductsPage"

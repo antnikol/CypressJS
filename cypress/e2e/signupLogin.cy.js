@@ -11,7 +11,7 @@ const signupPage = new SignUpPage()
 const homePage = new HomePage()
 const loginPage = new LoginPage()
 
-describe('Tests for the sections: Sign Up, Login', ()=> {
+describe(`${browserName}. Tests for the sections: Sign Up, Login`, ()=> {
 
   it('Test Case 1: Register User', () => {
     cy.deleteUser()
