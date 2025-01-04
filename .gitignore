@@ -2,3 +2,4 @@ node_modules/
 allure-results/
 screenshots/
 allure-report/
+.codegpt

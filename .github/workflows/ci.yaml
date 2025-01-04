@@ -40,18 +40,14 @@ jobs:
           import express from 'express';
           const app = express();
           const port = 3000;
-
           app.use(express.static('cypress'));
-
           app.get('/api/productsList', (req, res) => {
             res.json({ products: [{ name: 'Mocked Product' }] });
           });
-
           app.listen(port, () => {
             console.log('Mock server is running at http://localhost:' + port);
           });
           " > server.js
-
           nohup node server.js &
 
       - name: Wait for the server to be ready
@@ -79,33 +75,35 @@ jobs:
         run: npx cypress run --headless --env allure=true --browser electron
         continue-on-error: true
 
-      - name: Save Allure results with timestamp
-        run: |
-          TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
-          mkdir -p ./allure-results/$TIMESTAMP
-          if ls ./allure-results/*.xml 1> /dev/null 2>&1; then
-            mv ./allure-results/*.xml ./allure-results/$TIMESTAMP/
-          fi
-          if ls ./allure-results/*.json 1> /dev/null 2>&1; then
-            mv ./allure-results/*.json ./allure-results/$TIMESTAMP/
-          fi
-          if ls ./allure-results/*.txt 1> /dev/null 2>&1; then
-            mv ./allure-results/*.txt ./allure-results/$TIMESTAMP/
-          fi
-          allure generate ./allure-results/$TIMESTAMP --clean
+      - name: Load test report history
+        uses: actions/checkout@v4
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: allure-history
+
+      - name: Build Allure report
+        uses: simple-elf/allure-report-action@v1.7
+        if: always()
+        with:
+          gh_pages: allure-history
+          allure_results: allure-results
+          allure_history: allure-history
+
+      - name: Publish Allure report
+        uses: peaceiris/actions-gh-pages@v3
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
 
       - name: Upload Allure report
         uses: actions/upload-artifact@v4
         with:
           name: allure-report
           path: ./allure-report
-
-      - name: Publish Allure results
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: allure-results
-          path: ./allure-results
 
       - name: Upload Cypress screenshots (on failure)
         uses: actions/upload-artifact@v4
@@ -114,25 +112,10 @@ jobs:
           name: cypress-screenshots
           path: ./cypress/screenshots
 
-      - name: Create gh-pages branch if not exists
+      - name: Stop mock server
         run: |
-          if ! git ls-remote --exit-code origin gh-pages; then
-            git checkout --orphan gh-pages
-            echo "Placeholder for GitHub Pages" > index.html
-            git add index.html
-            git commit -m "Initialize gh-pages branch"
-            git push origin gh-pages
+          if pgrep -f "server.js"; then
+            pkill -f server.js
+          else
+            echo "Mock server already stopped."
           fi
-
-      - name: Configure GitHub token for authentication
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git clone --branch gh-pages --single-branch https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }} gh-pages
-          cp -r ./allure-report/* gh-pages/
-          cd gh-pages
-          git add .
-          git commit -m "Update Allure report"
-          git push
