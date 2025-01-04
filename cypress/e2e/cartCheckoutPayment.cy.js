@@ -22,12 +22,11 @@ const paymentDonePage = new PaymentDonePage()
 
 const product = genData.newProductTestData()
 
-cy.then(() => {
-const browserName = Cypress.env('browserName')
+// const browserName = Cypress.env('browserName')
+const browserName = Cypress.browser.name
 const browserVersion = Cypress.browser.version
 
 describe(`Browser: ${browserName} (${browserVersion}). Tests for the sections: Cart, Checkout, Payment`, ()=> {
-
   it.only('Test Case 12: Hover and click "Add to cart" button for two different products with different quantity', () => {
     homePage.clickProductsHeaderButton()
     productsPage.getFirstProductName().then((name) => { cy.wrap(name).as('firstProductName') })
@@ -295,5 +294,4 @@ describe(`Browser: ${browserName} (${browserVersion}). Tests for the sections: C
     homePage.clickDeleteAccountButton()
     homePage.getAccountDeletedConfirmMessage().should('contain', text.homePage.accountDeleted)
   })
-})
 })
