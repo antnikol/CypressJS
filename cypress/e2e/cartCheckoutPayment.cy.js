@@ -21,9 +21,10 @@ const paymentPage = new PaymentPage()
 const paymentDonePage = new PaymentDonePage()
 
 const product = genData.newProductTestData()
+
+cy.then(() => {
 const browserName = Cypress.env('browserName')
 const browserVersion = Cypress.browser.version
-
 
 describe(`Browser: ${browserName} (${browserVersion}). Tests for the sections: Cart, Checkout, Payment`, ()=> {
 
@@ -294,4 +295,5 @@ describe(`Browser: ${browserName} (${browserVersion}). Tests for the sections: C
     homePage.clickDeleteAccountButton()
     homePage.getAccountDeletedConfirmMessage().should('contain', text.homePage.accountDeleted)
   })
+})
 })
