@@ -16,6 +16,7 @@ export default defineConfig({
     },
     env: {
       allure: true,
+      EXTRA_BASE_URL: process.env.CI ? 'http://localhost:3000' : 'http://127.0.0.1:5500',
     },
     baseUrl: 'https://automationexercise.com',
     viewportWidth: 1920,
