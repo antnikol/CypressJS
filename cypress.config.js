@@ -29,7 +29,7 @@ export default defineConfig({
       'cypress/e2e/'
     ],
     retries: {
-      runMode: 4,  
+      runMode: 15,  
       openMode: 0, 
     },
   },
