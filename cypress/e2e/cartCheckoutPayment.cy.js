@@ -12,7 +12,6 @@ import PaymentDonePage from "../pageObjects/PaymentDonePage.cy"
 import { user } from '../fixtures/api.json'
 import text from "../fixtures/text.json"
 
-
 const homePage = new HomePage()
 const productsPage = new ProductsPage()
 const cartPage = new CartPage()
@@ -22,10 +21,9 @@ const paymentPage = new PaymentPage()
 const paymentDonePage = new PaymentDonePage()
 
 const product = genData.newProductTestData()
-
-// const browserName = Cypress.env('browserName')
 const browserName = Cypress.browser.name
 const browserVersion = Cypress.browser.version
+
 
 describe(`${browserName}. Tests for the sections: Cart, Checkout, Payment`, ()=> {
   it('Test Case 12: Hover and click "Add to cart" button for two different products with different quantity', () => {

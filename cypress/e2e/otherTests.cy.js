@@ -7,7 +7,6 @@ import TestCasesPage from "../pageObjects/TestCasesPage"
 import { user } from '../fixtures/api.json'
 import text from "../fixtures/text.json"
 
-
 const homePage = new HomePage()
 const testCasesPage = new TestCasesPage()
 

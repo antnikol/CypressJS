@@ -8,7 +8,6 @@ import genData from "../fixtures/genData"
 import { searchTerms, user } from '../fixtures/api.json'
 import text from "../fixtures/text.json"
 
-
 const homePage = new HomePage()
 const productsPage = new ProductsPage()
 const productDetailsPage = new ProductDetailsPage()
@@ -17,6 +16,7 @@ const cartPage = new CartPage()
 const product = genData.newProductTestData()
 const browserName = Cypress.browser.name
 const browserVersion = Cypress.browser.version
+
 
 describe(`${browserName}. Tests for the sections: Products`, ()=> {
 

@@ -7,7 +7,6 @@ import genData from "../fixtures/genData"
 import { user } from '../fixtures/api.json'
 import text from "../fixtures/text.json"
 
-
 const homePage = new HomePage()
 const contactUsPage = new ContactUsPage()
 const cartPage = new CartPage()
